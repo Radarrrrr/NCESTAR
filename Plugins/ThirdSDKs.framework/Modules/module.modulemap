@@ -1,0 +1,6 @@
+framework module ThirdSDKs {
+  umbrella header "ThirdSDKs.h"
+
+  export *
+  module * { export * }
+}
