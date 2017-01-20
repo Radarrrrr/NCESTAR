@@ -38,6 +38,16 @@
 		0CA506531E31FE31000A23EB /* UIButton+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5064F1E31FE31000A23EB /* UIButton+Color.m */; };
 		0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506501E31FE31000A23EB /* UIImage+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA506551E31FE31000A23EB /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506511E31FE31000A23EB /* UIImage+Color.m */; };
+		0CA5065B1E31FFA4000A23EB /* DDFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506591E31FFA4000A23EB /* DDFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA5065C1E31FFA4000A23EB /* DDFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5065A1E31FFA4000A23EB /* DDFunction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CA506661E320034000A23EB /* DDEffectView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5065E1E320034000A23EB /* DDEffectView.h */; };
+		0CA506671E320034000A23EB /* DDEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5065F1E320034000A23EB /* DDEffectView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506601E320034000A23EB /* DDMoveShowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA506691E320034000A23EB /* DDMoveShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506611E320034000A23EB /* DDMoveShowView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CA5066A1E320034000A23EB /* DDSlideLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506621E320034000A23EB /* DDSlideLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506631E320034000A23EB /* DDSlideLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506641E320034000A23EB /* UIImage+ImageEffects.h */; };
+		0CA5066D1E320034000A23EB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506651E320034000A23EB /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +84,16 @@
 		0CA5064F1E31FE31000A23EB /* UIButton+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Color.m"; sourceTree = "<group>"; };
 		0CA506501E31FE31000A23EB /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		0CA506511E31FE31000A23EB /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		0CA506591E31FFA4000A23EB /* DDFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFunction.h; sourceTree = "<group>"; };
+		0CA5065A1E31FFA4000A23EB /* DDFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFunction.m; sourceTree = "<group>"; };
+		0CA5065E1E320034000A23EB /* DDEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDEffectView.h; sourceTree = "<group>"; };
+		0CA5065F1E320034000A23EB /* DDEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDEffectView.m; sourceTree = "<group>"; };
+		0CA506601E320034000A23EB /* DDMoveShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoveShowView.h; sourceTree = "<group>"; };
+		0CA506611E320034000A23EB /* DDMoveShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoveShowView.m; sourceTree = "<group>"; };
+		0CA506621E320034000A23EB /* DDSlideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSlideLayer.h; sourceTree = "<group>"; };
+		0CA506631E320034000A23EB /* DDSlideLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSlideLayer.m; sourceTree = "<group>"; };
+		0CA506641E320034000A23EB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		0CA506651E320034000A23EB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +126,8 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0CA5065D1E320034000A23EB /* DDSliderLayer */,
+				0CA506581E31FFA4000A23EB /* DDFunction */,
 				0CA5064D1E31FE31000A23EB /* Categorys */,
 				0CA506371E31F4AF000A23EB /* JSONKit */,
 				0CA506081E308559000A23EB /* RDUserNotifyCenter */,
@@ -182,6 +204,30 @@
 			path = Categorys;
 			sourceTree = "<group>";
 		};
+		0CA506581E31FFA4000A23EB /* DDFunction */ = {
+			isa = PBXGroup;
+			children = (
+				0CA506591E31FFA4000A23EB /* DDFunction.h */,
+				0CA5065A1E31FFA4000A23EB /* DDFunction.m */,
+			);
+			path = DDFunction;
+			sourceTree = "<group>";
+		};
+		0CA5065D1E320034000A23EB /* DDSliderLayer */ = {
+			isa = PBXGroup;
+			children = (
+				0CA506621E320034000A23EB /* DDSlideLayer.h */,
+				0CA506631E320034000A23EB /* DDSlideLayer.m */,
+				0CA5065E1E320034000A23EB /* DDEffectView.h */,
+				0CA5065F1E320034000A23EB /* DDEffectView.m */,
+				0CA506601E320034000A23EB /* DDMoveShowView.h */,
+				0CA506611E320034000A23EB /* DDMoveShowView.m */,
+				0CA506641E320034000A23EB /* UIImage+ImageEffects.h */,
+				0CA506651E320034000A23EB /* UIImage+ImageEffects.m */,
+			);
+			path = DDSliderLayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -190,15 +236,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */,
+				0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */,
 				0CA5063E1E31F872000A23EB /* Constants.h in Headers */,
 				0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */,
+				0CA5066A1E320034000A23EB /* DDSlideLayer.h in Headers */,
 				0CA505DF1E307070000A23EB /* NWPushFeedback.h in Headers */,
+				0CA5065B1E31FFA4000A23EB /* DDFunction.h in Headers */,
 				0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */,
+				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
 				0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */,
 				0CA505E81E307070000A23EB /* RDPushSimuVC.h in Headers */,
 				0CA5060B1E308559000A23EB /* RDUserNotifyCenter.h in Headers */,
 				0CA505DD1E307070000A23EB /* NWPusher.h in Headers */,
+				0CA506661E320034000A23EB /* DDEffectView.h in Headers */,
 				0CA505E51E307070000A23EB /* NWType.h in Headers */,
 				0CA505D71E307070000A23EB /* NWHub.h in Headers */,
 				0CA505DB1E307070000A23EB /* NWNotification.h in Headers */,
@@ -296,13 +347,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA505E21E307070000A23EB /* NWSecTools.m in Sources */,
+				0CA506691E320034000A23EB /* DDMoveShowView.m in Sources */,
+				0CA5066D1E320034000A23EB /* UIImage+ImageEffects.m in Sources */,
 				0CA505D91E307070000A23EB /* NWLCore.c in Sources */,
 				0CA5063B1E31F4AF000A23EB /* JSONKit.m in Sources */,
+				0CA5065C1E31FFA4000A23EB /* DDFunction.m in Sources */,
 				0CA505E61E307070000A23EB /* NWType.m in Sources */,
 				0CA505E01E307070000A23EB /* NWPushFeedback.m in Sources */,
 				0CA505DE1E307070000A23EB /* NWPusher.m in Sources */,
 				0CA505EB1E307070000A23EB /* RDPushTool.m in Sources */,
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
+				0CA506671E320034000A23EB /* DDEffectView.m in Sources */,
+				0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */,
 				0CA505DC1E307070000A23EB /* NWNotification.m in Sources */,
 				0CA506551E31FE31000A23EB /* UIImage+Color.m in Sources */,
 				0CA506531E31FE31000A23EB /* UIButton+Color.m in Sources */,

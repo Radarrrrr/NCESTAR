@@ -24,3 +24,8 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 #import <ThirdSDKs/Constants.h>
 #import <ThirdSDKs/UIButton+Color.h>
 #import <ThirdSDKs/UIImage+Color.h>
+#import <ThirdSDKs/DDFunction.h>
+#import <ThirdSDKs/DDSlideLayer.h>
+
+
+
