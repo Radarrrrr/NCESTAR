@@ -34,6 +34,10 @@
 		0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506381E31F4AF000A23EB /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA5063B1E31F4AF000A23EB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506391E31F4AF000A23EB /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CA5063E1E31F872000A23EB /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5063D1E31F872000A23EB /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5064E1E31FE31000A23EB /* UIButton+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA506531E31FE31000A23EB /* UIButton+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5064F1E31FE31000A23EB /* UIButton+Color.m */; };
+		0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506501E31FE31000A23EB /* UIImage+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CA506551E31FE31000A23EB /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506511E31FE31000A23EB /* UIImage+Color.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,10 @@
 		0CA506381E31F4AF000A23EB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		0CA506391E31F4AF000A23EB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		0CA5063D1E31F872000A23EB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0CA5064E1E31FE31000A23EB /* UIButton+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Color.h"; sourceTree = "<group>"; };
+		0CA5064F1E31FE31000A23EB /* UIButton+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Color.m"; sourceTree = "<group>"; };
+		0CA506501E31FE31000A23EB /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		0CA506511E31FE31000A23EB /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,7 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0CA5064D1E31FE31000A23EB /* Categorys */,
 				0CA506371E31F4AF000A23EB /* JSONKit */,
 				0CA506081E308559000A23EB /* RDUserNotifyCenter */,
 				0CA505C01E307070000A23EB /* RDPushTool */,
@@ -162,6 +171,17 @@
 			path = JSONKit;
 			sourceTree = "<group>";
 		};
+		0CA5064D1E31FE31000A23EB /* Categorys */ = {
+			isa = PBXGroup;
+			children = (
+				0CA5064E1E31FE31000A23EB /* UIButton+Color.h */,
+				0CA5064F1E31FE31000A23EB /* UIButton+Color.m */,
+				0CA506501E31FE31000A23EB /* UIImage+Color.h */,
+				0CA506511E31FE31000A23EB /* UIImage+Color.m */,
+			);
+			path = Categorys;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -171,7 +191,9 @@
 			files = (
 				0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */,
 				0CA5063E1E31F872000A23EB /* Constants.h in Headers */,
+				0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */,
 				0CA505DF1E307070000A23EB /* NWPushFeedback.h in Headers */,
+				0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
 				0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */,
 				0CA505E81E307070000A23EB /* RDPushSimuVC.h in Headers */,
@@ -282,6 +304,8 @@
 				0CA505EB1E307070000A23EB /* RDPushTool.m in Sources */,
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
 				0CA505DC1E307070000A23EB /* NWNotification.m in Sources */,
+				0CA506551E31FE31000A23EB /* UIImage+Color.m in Sources */,
+				0CA506531E31FE31000A23EB /* UIButton+Color.m in Sources */,
 				0CA505D81E307070000A23EB /* NWHub.m in Sources */,
 				0CA5060C1E308559000A23EB /* RDUserNotifyCenter.m in Sources */,
 				0CA505E41E307070000A23EB /* NWSSLConnection.m in Sources */,

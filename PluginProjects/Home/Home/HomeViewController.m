@@ -28,7 +28,7 @@
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
     self.navigationItem.rightBarButtonItem = addItem;
     
-    
+
     
 }
 

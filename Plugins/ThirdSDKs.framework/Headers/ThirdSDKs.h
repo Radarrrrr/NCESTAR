@@ -22,3 +22,5 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 #import <ThirdSDKs/RDUserNotifyCenter.h>
 #import <ThirdSDKs/JSONKit.h>
 #import <ThirdSDKs/Constants.h>
+#import <ThirdSDKs/UIButton+Color.h>
+#import <ThirdSDKs/UIImage+Color.h>
