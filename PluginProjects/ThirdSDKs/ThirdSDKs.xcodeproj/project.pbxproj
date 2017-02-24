@@ -72,6 +72,8 @@
 		0CA5069F1E32046D000A23EB /* UITableView+ISRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5068F1E32046D000A23EB /* UITableView+ISRefreshControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CA506A01E32046D000A23EB /* UITableViewController+ISRefreshControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506901E32046D000A23EB /* UITableViewController+ISRefreshControl.h */; };
 		0CA506A11E32046D000A23EB /* UITableViewController+ISRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506911E32046D000A23EB /* UITableViewController+ISRefreshControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE1FFC01E60200500CDA679 /* DDScrollButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE1FFC31E60200500CDA679 /* DDScrollButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1FFC11E60200500CDA679 /* DDScrollButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +144,8 @@
 		0CA5068F1E32046D000A23EB /* UITableView+ISRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+ISRefreshControl.m"; sourceTree = "<group>"; };
 		0CA506901E32046D000A23EB /* UITableViewController+ISRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+ISRefreshControl.h"; sourceTree = "<group>"; };
 		0CA506911E32046D000A23EB /* UITableViewController+ISRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+ISRefreshControl.m"; sourceTree = "<group>"; };
+		0CE1FFC01E60200500CDA679 /* DDScrollButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScrollButton.h; sourceTree = "<group>"; };
+		0CE1FFC11E60200500CDA679 /* DDScrollButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScrollButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0CE1FFBF1E60200500CDA679 /* DDScrollButton */,
 				0CA5066E1E320390000A23EB /* DDTableView */,
 				0CA5065D1E320034000A23EB /* DDSliderLayer */,
 				0CA506581E31FFA4000A23EB /* DDFunction */,
@@ -332,6 +337,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		0CE1FFBF1E60200500CDA679 /* DDScrollButton */ = {
+			isa = PBXGroup;
+			children = (
+				0CE1FFC01E60200500CDA679 /* DDScrollButton.h */,
+				0CE1FFC11E60200500CDA679 /* DDScrollButton.m */,
+			);
+			path = DDScrollButton;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -353,6 +367,7 @@
 				0CA506981E32046D000A23EB /* ISRefreshControl.h in Headers */,
 				0CA5067A1E320390000A23EB /* DDTLogoView.h in Headers */,
 				0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */,
+				0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
 				0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */,
@@ -473,6 +488,7 @@
 				0CA5065C1E31FFA4000A23EB /* DDFunction.m in Sources */,
 				0CA505E61E307070000A23EB /* NWType.m in Sources */,
 				0CA5069D1E32046D000A23EB /* UIColor+ISRefreshControl.m in Sources */,
+				0CE1FFC31E60200500CDA679 /* DDScrollButton.m in Sources */,
 				0CA506791E320390000A23EB /* DDTableView.m in Sources */,
 				0CA5069F1E32046D000A23EB /* UITableView+ISRefreshControl.m in Sources */,
 				0CA505E01E307070000A23EB /* NWPushFeedback.m in Sources */,

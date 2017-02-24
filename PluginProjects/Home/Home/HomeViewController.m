@@ -28,10 +28,14 @@
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
     self.navigationItem.rightBarButtonItem = addItem;
     
-    //TO DO: 添加聊天列表
     
+    //TO DO: 添加聊天列表
+    //DDTableView *
     
     //TO DO: 添加右侧滑动条操作键盘
+    
+    
+    //TO DO: 添加好友菜单
     
     
 }
