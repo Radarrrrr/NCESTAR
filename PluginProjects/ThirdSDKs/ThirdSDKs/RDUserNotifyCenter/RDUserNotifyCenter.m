@@ -11,7 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 
 
+#define RDUserNotifyCenter_payload_savelist_filename @"payloads.array"     //用来存储payload在group中存储的列表array的文件名
+
+
 #define UNCSTRVALID(str)   [RDUserNotifyCenter checkStringValid:str]   //检查一个字符串是否有效
+
 
 
 @interface RDUserNotifyCenter () 
@@ -19,9 +23,18 @@
 @property (nonatomic, strong) NSMutableDictionary *bindingActionsDic; //数据结构：@{@"categoryID":@[action1, action2, ....], ....}
 
 + (NSString *)fileExtForURL:(NSString *)dataUrl;
-+ (NSString *)notifyIdforNotification:(id)notify; //从通知中获取对应的notifyId，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是字符串，方法内会自动检测
++ (NSString *)notifyIdforNotification:(id)notify;   //从通知中获取对应的notifyId，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是字符串，方法内会自动检测
++ (NSDictionary*)payLoadForNotification:(id)notify; //从通知中获取对应的payload，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是userInfo本身，方法内会自动检测
++ (id)loadDataFromGroup:(NSString*)urlorKey;        //根据key来读取group中存储的数据
+
+//用NSFileManager的方式存储数据到Group里边，目前这个方法暂不成熟，仅供内部使用
+//PS: fileName文件名必须带如下四种后缀之一： .string .array .dictionary .data 如果不带或者带错，里边会存取错误, 注意必须小写
+//PS: fileData比如是如下四种类型之一： NSString NSArray NSDictionary NSData四种类型
++ (BOOL)saveFileDataToGroup:(id)fileData forName:(NSString*)fileName;   //存储文件数据到group
++ (id)loadFileDataFromeGroupForName:(NSString *)fileName;               //从group里边取出文件数据
 
 @end
+
 
 
 @implementation RDUserNotifyCenter
@@ -995,6 +1008,32 @@
     return notifyId;
 }
 
++ (NSDictionary*)payLoadForNotification:(id)notify
+{
+    if(!notify) return nil;
+    
+    //notify 可以是 UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent，也可以是userInfo字典本身
+    NSDictionary *payload = nil;
+    
+    if([notify isKindOfClass:[UNNotificationRequest class]])
+    {
+        payload = [(UNNotificationRequest*)notify content].userInfo;
+    }
+    else if([notify isKindOfClass:[UNNotificationContent class]])
+    {
+        payload = [(UNNotificationContent*)notify userInfo];
+    }
+    else if([notify isKindOfClass:[UNNotification class]])
+    {
+        payload = [(UNNotification*)notify request].content.userInfo;
+    }
+    else if([notify isKindOfClass:[NSDictionary class]])
+    {
+        payload = (NSDictionary*)notify;
+    }
+    
+    return payload;
+}
 
 
 
@@ -1242,6 +1281,152 @@
     [shared removeObjectForKey:key];
     [shared synchronize];
 }
+
+
+
+
+
+#pragma mark - 通过NSFileManage来共享Group数据
++ (NSURL *)getGroupContainerURLForFileName:(NSString *)fileName
+{
+    if(!UNCSTRVALID(fileName)) return nil;
+    
+    NSString *compoStr = [NSString stringWithFormat:@"Library/Caches/%@", fileName];
+    
+    NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:RDUserNotifyCenter_app_group_suite];  
+    containerURL = [containerURL URLByAppendingPathComponent:compoStr];  
+    
+    return containerURL;
+}
++ (BOOL)saveFileDataToGroup:(id)fileData forName:(NSString *)fileName 
+{
+    //NSString NSArray NSDictionary NSData四种类型，都可以支持写
+    //PS: fileName文件名必须带如下四种后缀之一： .string .array .dictionary .data 如果不带或者带错，里边会存取错误
+    
+    if(!UNCSTRVALID(fileName)) return NO;
+    if(!fileData) return NO;
+    if(![fileData isKindOfClass:[NSString class]] && 
+       ![fileData isKindOfClass:[NSArray class]] &&
+       ![fileData isKindOfClass:[NSDictionary class]] &&
+       ![fileData isKindOfClass:[NSData class]])
+    {
+        return NO;
+    }
+    
+    //存储地址
+    NSURL *containerURL = [self getGroupContainerURLForFileName:fileName];
+    
+    //获取类型并做类型校验
+    BOOL result = NO;
+    
+    if([fileName hasSuffix:@".array"] && [fileData isKindOfClass:[NSArray class]])
+    {
+        result  = [(NSArray*)fileData writeToURL:containerURL atomically:YES];
+    }
+    else if([fileName hasSuffix:@".dictionary"] && [fileData isKindOfClass:[NSDictionary class]])
+    {
+        result  = [(NSDictionary*)fileData writeToURL:containerURL atomically:YES];
+    }
+    else if([fileName hasSuffix:@".data"] && [fileData isKindOfClass:[NSData class]])
+    {
+        result  = [(NSData*)fileData writeToURL:containerURL atomically:YES];
+    }
+    else if([fileName hasSuffix:@".string"] && [fileData isKindOfClass:[NSString class]])
+    {
+        result = [(NSString*)fileData writeToURL:containerURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    return result;
+}
++ (id)loadFileDataFromeGroupForName:(NSString *)fileName
+{
+    if(!UNCSTRVALID(fileName)) return nil;
+    
+    NSURL *containerURL = [self getGroupContainerURLForFileName:fileName];
+    
+    id value = nil;
+    
+    if([fileName hasSuffix:@".array"])
+    {
+        value = [NSArray arrayWithContentsOfURL:containerURL];
+    }
+    else if([fileName hasSuffix:@".dictionary"])
+    {
+        value = [NSDictionary dictionaryWithContentsOfURL:containerURL];
+    }
+    else if([fileName hasSuffix:@".data"])
+    {
+        value = [NSData dataWithContentsOfURL:containerURL];
+    }
+    else if([fileName hasSuffix:@".string"])
+    {
+        value = [NSString stringWithContentsOfURL:containerURL encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    return value;
+}
+
+
+
+
+
+
+#pragma mark - 对于payload的整体存取方法
++ (void)savePayloadToGroupForNotify:(id)notify
+{
+    //获取notifyid
+    NSString *notifyId = [self notifyIdforNotification:notify];
+    if(!UNCSTRVALID(notifyId)) return;
+    
+    //获取payload
+    NSDictionary *payload = [self payLoadForNotification:notify];
+    if(!payload || ![payload isKindOfClass:[NSDictionary class]] || [payload count] == 0) return;
+        
+    //获取当前时间点
+    NSString *dateStr = [self stringFromDate:[NSDate date] useFormat:@"YY-MM-dd HH:mm:ss"];
+    if(!UNCSTRVALID(dateStr)) return;
+    
+    //做当前notify的存储字典 {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
+    NSMutableDictionary *notiDic = [[NSMutableDictionary alloc] init];
+    [notiDic setObject:notifyId forKey:@"notifyid"];
+    [notiDic setObject:dateStr forKey:@"receivetime"];
+    [notiDic setObject:payload forKey:@"payload"];
+    
+    //做payloads表，根据时间先后存储
+    NSMutableArray *payloadsArray = [[NSMutableArray alloc] init];
+    
+    NSArray *payloads = [self loadFileDataFromeGroupForName:RDUserNotifyCenter_payload_savelist_filename];
+    if(payloads && [payloads isKindOfClass:[NSArray class]] && payloads.count != 0)
+    {
+        [payloadsArray setArray:payloads];
+    }
+    
+    //把notiDic添加在payloads表后边，并保存
+    [payloadsArray addObject:notiDic];
+    
+    //重新保存payloads表
+    [self saveFileDataToGroup:payloadsArray forName:RDUserNotifyCenter_payload_savelist_filename];
+
+}
++ (NSArray*)loadPayloadsFromGroup
+{    
+    //获取现有list
+    NSArray *payloads = [self loadFileDataFromeGroupForName:RDUserNotifyCenter_payload_savelist_filename];
+    
+    //使用空数组来覆盖清空存储的list
+    NSMutableArray *emptyArray = [[NSMutableArray alloc] init];
+    [self saveFileDataToGroup:emptyArray forName:RDUserNotifyCenter_payload_savelist_filename];
+    
+    //返回存储的payloads
+    return payloads;
+}
+
+
+
+
+
+
+
 
 
 

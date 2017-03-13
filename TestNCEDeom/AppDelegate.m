@@ -48,6 +48,10 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     
+    //获取存储在group里边的通知payloads
+    //TO DO: 本地做数据库，存储所有的信息列表，按照Payload里边的source进行分表单存储
+    //NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
+    
     return YES;
 }
 

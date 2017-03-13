@@ -38,6 +38,10 @@
     NSString *dataUrl = [self dataUrlForLink:link]; 
     NSLog(@"dataUrl: %@", dataUrl);
     
+    
+    //把payload存下来
+    [RDUserNotifyCenter savePayloadToGroupForNotify:request];
+    
     //获取attachment并且存入group
     [RDUserNotifyCenter downAndSaveAttachmentForNotifyRequest:request completion:^(UNNotificationAttachment *attach) {
         

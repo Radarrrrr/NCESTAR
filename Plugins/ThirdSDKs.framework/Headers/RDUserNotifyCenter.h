@@ -136,6 +136,7 @@
 
 
 
+
 @protocol RDUserNotifyCenterDelegate <NSObject>
 @optional
 
@@ -269,7 +270,7 @@
 
 
 
-#pragma mark - Extension间数据读取及共享相关方法
+#pragma mark - Extension间数据读取及共享相关方法 使用RDUserNotifyCenter_app_group_suite
 //数据下载和存储
 + (void)downLoadData:(NSString*)dataUrl completion:(void(^)(id data))completion;            //用dataUrl下载对应的数据并返回
 + (void)saveDataToGroup:(id)data forKey:(NSString*)key;                                     //根据通知的id存储数据到group里边
@@ -297,6 +298,12 @@
 //数据移除
 + (void)removeDataFromGroupForKey:(NSString*)key;   //根据key从group里边移除对应的数据
 
+
+
+
+#pragma mark - 对于payload的整体存取方法
++ (void)savePayloadToGroupForNotify:(id)notify; //存储该通知对应的payload信息到group里边  //PS:notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以是userInfo字典本身，方法内会自动检测
++ (NSArray*)loadPayloadsFromGroup;  //从group里边取出存储的payload信息。返回数组结构 [{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
 
 
 
