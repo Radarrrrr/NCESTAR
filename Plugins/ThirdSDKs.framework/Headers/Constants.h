@@ -27,6 +27,7 @@
 #pragma mark - 
 #pragma mark 字体和颜色相关
 
+
 //颜色和字体相关的宏
 #define RGB(r, g, b)        [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 #define RGBS(x)             [UIColor colorWithRed:x/255.0 green:x/255.0 blue:x/255.0 alpha:1.0]
@@ -82,6 +83,7 @@
 #define IS_FAST_DEVICE      [DDUIUtils checkIsFastDevice]       //用来判断是否是快机器
 #define STRVALID(str)       [DDFunction checkStringValid:str]   //检查一个字符串是否有效
 #define ARRAYVALID(array)   [DDFunction checkArrayValid:array]  //检查一个数组是否有效
+#define DICTIONARYVALID(dict)   [DDFunction checkDictionaryValid:dict]  //检查一个数组是否有效
 #define CHECKINARRAY(index, array) [DDFunction checkInArrayOfIndex:index ofArray:array] //检查一个index是否在数组的区域内
 
 //从mainBundle中 拿图片

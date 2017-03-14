@@ -500,6 +500,14 @@
     
     return YES;
 }
++ (BOOL)checkDictionaryValid:(NSDictionary *)dictionary
+{
+    if(!dictionary) return NO;
+    if(![dictionary isKindOfClass:[NSDictionary class]]) return NO;
+    if([dictionary count] == 0) return NO;
+    
+    return YES;
+}
 
 + (BOOL)checkInArrayOfIndex:(NSInteger)index ofArray:(NSArray *)array
 {

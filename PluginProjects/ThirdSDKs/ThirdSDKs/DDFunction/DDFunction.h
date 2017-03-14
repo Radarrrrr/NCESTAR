@@ -81,6 +81,7 @@
 
 + (BOOL)checkStringValid:(NSString *)string; //检查一个字符串是否有效
 + (BOOL)checkArrayValid:(NSArray *)array;    //检查一个数组是否有效
++ (BOOL)checkDictionaryValid:(NSDictionary *)dictionary; //检查一个字典是否有效
 + (BOOL)checkInArrayOfIndex:(NSInteger)index ofArray:(NSArray *)array; //检查一个index是否在数组的区域内
 
 + (NSString *)getDeviceType; //获得设备型号

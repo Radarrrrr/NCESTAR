@@ -10,6 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "ViewController.h"
 #import <Home/Home.h>
+#import "DataCenter.h"
 
 
 @interface AppDelegate ()
@@ -49,8 +50,8 @@
     
     
     //获取存储在group里边的通知payloads
-    //TO DO: 本地做数据库，存储所有的信息列表，按照Payload里边的source进行分表单存储
-    //NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
+    [[DataCenter sharedCenter] collectGroupMessages];
+    
     
     return YES;
 }
@@ -69,7 +70,10 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    //获取存储在group里边的通知payloads
+    [[DataCenter sharedCenter] collectGroupMessages];
+    
 }
 
 

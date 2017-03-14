@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		09A57D5D221752107DC0FE31 /* libPods-NotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 379070FF0C574A19223EF709 /* libPods-NotificationService.a */; };
+		0C119B291E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
+		0C119B2A1E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
+		0C119B2B1E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
 		0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */; };
 		0C1771441E2F4ABA002FC539 /* Dylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; };
 		0C1771461E2F4B11002FC539 /* Dylib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -99,6 +102,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C119B271E77C1A6002ED007 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
+		0C119B281E77C1A6002ED007 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		0C17713D1E2F47C0002FC539 /* PluginPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPlatformManager.h; sourceTree = "<group>"; };
 		0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPlatformManager.m; sourceTree = "<group>"; };
 		0C17713F1E2F47C0002FC539 /* PluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginProtocol.h; sourceTree = "<group>"; };
@@ -280,6 +285,8 @@
 				0C17713C1E2F47C0002FC539 /* PluginPlatform */,
 				0C879BBD1DD468CF00C3E86E /* AppDelegate.h */,
 				0C879BBE1DD468CF00C3E86E /* AppDelegate.m */,
+				0C119B271E77C1A6002ED007 /* DataCenter.h */,
+				0C119B281E77C1A6002ED007 /* DataCenter.m */,
 				0C879BC01DD468CF00C3E86E /* ViewController.h */,
 				0C879BC11DD468CF00C3E86E /* ViewController.m */,
 				0C22ACDD1E126E46004648A2 /* Other Sources */,
@@ -660,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */,
+				0C119B291E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */,
 				0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */,
 				0C879BBC1DD468CF00C3E86E /* main.m in Sources */,
@@ -670,6 +678,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C119B2B1E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C879BDE1DD4692900C3E86E /* NotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -678,6 +687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C119B2A1E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C8B17BB1DED5E3800FC3305 /* NotificationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
