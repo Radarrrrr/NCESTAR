@@ -10,8 +10,9 @@
 #import <ThirdSDKs/ThirdSDKs.h>
 
 
-
 @interface HomeViewController ()
+
+@property (nonatomic, copy) NSMutableArray *messageArray; //所有的消息数据
 
 @end
 
