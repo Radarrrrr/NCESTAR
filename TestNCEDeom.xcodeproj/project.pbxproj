@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		09A57D5D221752107DC0FE31 /* libPods-NotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 379070FF0C574A19223EF709 /* libPods-NotificationService.a */; };
-		0C119B291E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
-		0C119B2A1E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
-		0C119B2B1E77C1A6002ED007 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B281E77C1A6002ED007 /* DataCenter.m */; };
+		0C119B511E7930D6002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
+		0C119B521E7930D6002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
+		0C119B531E793137002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
+		0C119B541E793137002ED007 /* Engine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */; };
 		0C1771441E2F4ABA002FC539 /* Dylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; };
 		0C1771461E2F4B11002FC539 /* Dylib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -43,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0C119B481E79243A002ED007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C119B441E792439002ED007 /* Engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0C119B391E792439002ED007;
+			remoteInfo = Engine;
+		};
 		0C1771621E2F51E6002FC539 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0C17715E1E2F51E5002FC539 /* Home.xcodeproj */;
@@ -82,6 +90,7 @@
 			files = (
 				0C1771461E2F4B11002FC539 /* Dylib.framework in Embed Frameworks */,
 				0CA505F01E30718D000A23EB /* ThirdSDKs.framework in Embed Frameworks */,
+				0C119B541E793137002ED007 /* Engine.framework in Embed Frameworks */,
 				0C17716C1E2F53C1002FC539 /* Home.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -102,8 +111,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C119B271E77C1A6002ED007 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
-		0C119B281E77C1A6002ED007 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
+		0C119B441E792439002ED007 /* Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Engine.xcodeproj; path = Engine/Engine.xcodeproj; sourceTree = "<group>"; };
+		0C119B4F1E7930D6002ED007 /* Engine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Engine.framework; sourceTree = "<group>"; };
 		0C17713D1E2F47C0002FC539 /* PluginPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPlatformManager.h; sourceTree = "<group>"; };
 		0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPlatformManager.m; sourceTree = "<group>"; };
 		0C17713F1E2F47C0002FC539 /* PluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginProtocol.h; sourceTree = "<group>"; };
@@ -158,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C119B531E793137002ED007 /* Engine.framework in Frameworks */,
 				778C3BEE8CE8D7D77849F22C /* libPods-TestNCEDeom.a in Frameworks */,
 				0C1771441E2F4ABA002FC539 /* Dylib.framework in Frameworks */,
 				0C17716B1E2F53C1002FC539 /* Home.framework in Frameworks */,
@@ -171,6 +181,7 @@
 			files = (
 				0C879BDA1DD4692900C3E86E /* UserNotificationsUI.framework in Frameworks */,
 				0C879BD81DD4692900C3E86E /* UserNotifications.framework in Frameworks */,
+				0C119B521E7930D6002ED007 /* Engine.framework in Frameworks */,
 				8AD0BB7683015B469198E2BA /* libPods-NotificationViewController.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C119B511E7930D6002ED007 /* Engine.framework in Frameworks */,
 				09A57D5D221752107DC0FE31 /* libPods-NotificationService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,10 +211,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		0C119B451E792439002ED007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C119B491E79243A002ED007 /* Engine.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0C17713A1E2F4797002FC539 /* PluginProjects */ = {
 			isa = PBXGroup;
 			children = (
 				0C17715E1E2F51E5002FC539 /* Home.xcodeproj */,
+				0C119B441E792439002ED007 /* Engine.xcodeproj */,
 				0CA505BA1E306F84000A23EB /* ThirdSDKs.xcodeproj */,
 			);
 			path = PluginProjects;
@@ -211,6 +232,7 @@
 		0C17713B1E2F4797002FC539 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				0C119B4F1E7930D6002ED007 /* Engine.framework */,
 				0CA505ED1E307184000A23EB /* ThirdSDKs.framework */,
 				0C1771691E2F539C002FC539 /* Home.framework */,
 				0C1771431E2F4ABA002FC539 /* Dylib.framework */,
@@ -285,8 +307,6 @@
 				0C17713C1E2F47C0002FC539 /* PluginPlatform */,
 				0C879BBD1DD468CF00C3E86E /* AppDelegate.h */,
 				0C879BBE1DD468CF00C3E86E /* AppDelegate.m */,
-				0C119B271E77C1A6002ED007 /* DataCenter.h */,
-				0C119B281E77C1A6002ED007 /* DataCenter.m */,
 				0C879BC01DD468CF00C3E86E /* ViewController.h */,
 				0C879BC11DD468CF00C3E86E /* ViewController.m */,
 				0C22ACDD1E126E46004648A2 /* Other Sources */,
@@ -484,6 +504,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 0C119B451E792439002ED007 /* Products */;
+					ProjectRef = 0C119B441E792439002ED007 /* Engine.xcodeproj */;
+				},
+				{
 					ProductGroup = 0C17715F1E2F51E5002FC539 /* Products */;
 					ProjectRef = 0C17715E1E2F51E5002FC539 /* Home.xcodeproj */;
 				},
@@ -502,6 +526,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0C119B491E79243A002ED007 /* Engine.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Engine.framework;
+			remoteRef = 0C119B481E79243A002ED007 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		0C1771631E2F51E6002FC539 /* Home.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -667,7 +698,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */,
-				0C119B291E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */,
 				0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */,
 				0C879BBC1DD468CF00C3E86E /* main.m in Sources */,
@@ -678,7 +708,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C119B2B1E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C879BDE1DD4692900C3E86E /* NotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,7 +716,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C119B2A1E77C1A6002ED007 /* DataCenter.m in Sources */,
 				0C8B17BB1DED5E3800FC3305 /* NotificationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -879,6 +907,10 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationViewController/NotificationViewController.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTW9XPA927;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plugins",
+				);
 				INFOPLIST_FILE = NotificationViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dangdang.unc.NotificationViewController;
@@ -895,6 +927,10 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationViewController/NotificationViewController.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTW9XPA927;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plugins",
+				);
 				INFOPLIST_FILE = NotificationViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dangdang.unc.NotificationViewController;
@@ -911,6 +947,10 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTW9XPA927;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plugins",
+				);
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -928,6 +968,10 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTW9XPA927;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plugins",
+				);
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

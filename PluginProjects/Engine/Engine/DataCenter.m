@@ -43,10 +43,10 @@
 #pragma mark - 数据收集&获取
 - (void)collectGroupMessages
 {
-    NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
-    if(!ARRAYVALID(payloads)) return;
-    
-    [_allMessages addObjectsFromArray:payloads];
+//    NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
+//    if(!ARRAYVALID(payloads)) return;
+//    
+//    [_allMessages addObjectsFromArray:payloads];
 }
 
 

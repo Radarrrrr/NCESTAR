@@ -9,8 +9,6 @@
 #import "AppDelegate.h"
 #import <UserNotifications/UserNotifications.h>
 #import "ViewController.h"
-#import <Home/Home.h>
-#import "DataCenter.h"
 
 
 @interface AppDelegate ()

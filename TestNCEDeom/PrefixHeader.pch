@@ -17,6 +17,9 @@
 #import <Foundation/Foundation.h>
 
 #import <ThirdSDKs/ThirdSDKs.h>
+#import <Home/Home.h>
+#import <Engine/Engine.h>
+
 
 
 #endif /* PrefixHeader_pch */
