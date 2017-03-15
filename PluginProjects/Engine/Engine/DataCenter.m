@@ -46,8 +46,8 @@
 {
     NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
     if(!ARRAYVALID(payloads)) return;
-//    
-//    [_allMessages addObjectsFromArray:payloads];
+    
+    [_allMessages addObjectsFromArray:payloads];
     
 }
 
