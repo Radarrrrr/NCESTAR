@@ -6,6 +6,8 @@
 //  Copyright © 2017年 Radar. All rights reserved.
 //
 
+// ThirdSDKs里边放工具相关的内容，联合编译顺序在所有工程之前
+
 #import <UIKit/UIKit.h>
 
 //! Project version number for ThirdSDKs.

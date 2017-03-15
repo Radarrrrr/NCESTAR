@@ -9,6 +9,7 @@
 #import "DataCenter.h"
 
 
+
 @interface DataCenter ()
 
 @property (nonatomic, strong) NSMutableArray *allMessages; //所有的消息数据，目前未有数据库，所以暂时只存储开启一次从group里边获取到的全部消息
@@ -43,10 +44,11 @@
 #pragma mark - 数据收集&获取
 - (void)collectGroupMessages
 {
-//    NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
-//    if(!ARRAYVALID(payloads)) return;
+    NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
+    if(!ARRAYVALID(payloads)) return;
 //    
 //    [_allMessages addObjectsFromArray:payloads];
+    
 }
 
 

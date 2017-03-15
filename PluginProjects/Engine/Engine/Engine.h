@@ -6,6 +6,9 @@
 //  Copyright © 2017年 Radar. All rights reserved.
 //
 
+// Engine里边放业务相关的内容，主要处理数据和网络，联合编译顺序在ThirdSDKs之后，主工程之前
+
+
 #import <UIKit/UIKit.h>
 
 //! Project version number for Engine.

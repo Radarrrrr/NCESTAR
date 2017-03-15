@@ -28,6 +28,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0C119B381E792439002ED007"
+               BuildableName = "Engine.framework"
+               BlueprintName = "Engine"
+               ReferencedContainer = "container:PluginProjects/Engine/Engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "0C879BB61DD468CF00C3E86E"
                BuildableName = "TestNCEDeom.app"
                BlueprintName = "TestNCEDeom"
