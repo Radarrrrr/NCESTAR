@@ -12,6 +12,7 @@
 		0C119B521E7930D6002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
 		0C119B531E793137002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
 		0C119B541E793137002ED007 /* Engine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0C119B651E7A3BDD002ED007 /* DDRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C119B641E7A3BDD002ED007 /* DDRouter.m */; };
 		0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */; };
 		0C1771441E2F4ABA002FC539 /* Dylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; };
 		0C1771461E2F4B11002FC539 /* Dylib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -113,6 +114,8 @@
 /* Begin PBXFileReference section */
 		0C119B441E792439002ED007 /* Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Engine.xcodeproj; path = Engine/Engine.xcodeproj; sourceTree = "<group>"; };
 		0C119B4F1E7930D6002ED007 /* Engine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Engine.framework; sourceTree = "<group>"; };
+		0C119B631E7A3BDD002ED007 /* DDRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRouter.h; sourceTree = "<group>"; };
+		0C119B641E7A3BDD002ED007 /* DDRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRouter.m; sourceTree = "<group>"; };
 		0C17713D1E2F47C0002FC539 /* PluginPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPlatformManager.h; sourceTree = "<group>"; };
 		0C17713E1E2F47C0002FC539 /* PluginPlatformManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPlatformManager.m; sourceTree = "<group>"; };
 		0C17713F1E2F47C0002FC539 /* PluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginProtocol.h; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				0C17713C1E2F47C0002FC539 /* PluginPlatform */,
 				0C879BBD1DD468CF00C3E86E /* AppDelegate.h */,
 				0C879BBE1DD468CF00C3E86E /* AppDelegate.m */,
+				0C119B631E7A3BDD002ED007 /* DDRouter.h */,
+				0C119B641E7A3BDD002ED007 /* DDRouter.m */,
 				0C879BC01DD468CF00C3E86E /* ViewController.h */,
 				0C879BC11DD468CF00C3E86E /* ViewController.m */,
 				0C22ACDD1E126E46004648A2 /* Other Sources */,
@@ -700,6 +705,7 @@
 				0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */,
 				0C1771401E2F47C0002FC539 /* PluginPlatformManager.m in Sources */,
 				0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */,
+				0C119B651E7A3BDD002ED007 /* DDRouter.m in Sources */,
 				0C879BBC1DD468CF00C3E86E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
