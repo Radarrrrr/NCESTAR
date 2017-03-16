@@ -24,6 +24,8 @@
     self.navigationItem.title = @"HOME";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    //在做页面渲染前，获取一下数据源列表
+    self.messageArray = [[DataCenter sharedCenter] getAllMessages];
     
     //右上角添加写推送按钮
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
@@ -49,4 +51,22 @@
     
 }
 
+
+//- (void)syncAllMessages
+//{
+//    //此方法内部和DataCenter保持完全一致，并且以DataCenter为准
+//    self.messageArray = [[DataCenter sharedCenter] getAllMessages];
+//}
+
+
+
 @end
+
+
+
+
+
+
+
+
+

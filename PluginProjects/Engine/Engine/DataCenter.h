@@ -21,16 +21,8 @@
 
 
 
-#pragma mark - 数据主动下发
-//- (void)sendData:(id)data toModule:(id)module byMethod:(SEL)action;
-
-
-#pragma mark - 数据请求下发
-//- (id)requestDataFromModule:(id)module byMethod:(SEL)action;
-
-
-#pragma mark - 数据请求更改
-
+#pragma mark - 数据请求
+- (NSMutableArray *)getAllMessages; //获取所有已经存储的messages
 
 
 

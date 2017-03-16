@@ -57,8 +57,11 @@
 
 
 
-#pragma mark - 数据请求处理
-
+#pragma mark - 数据请求
+- (NSMutableArray *)getAllMessages
+{
+    return _allMessages;
+}
 
 
 
