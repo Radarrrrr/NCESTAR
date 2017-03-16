@@ -10,4 +10,6 @@
 
 @interface DDRouter : NSObject
 
++ (void)action;
+
 @end

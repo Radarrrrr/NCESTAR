@@ -10,4 +10,10 @@
 
 @implementation DDRouter
 
+
++ (void)action
+{
+    NSLog(@"engine start !!!!!!!");
+}
+
 @end

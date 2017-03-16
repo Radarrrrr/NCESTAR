@@ -14,5 +14,6 @@
 
 #import <ThirdSDKs/ThirdSDKs.h>
 #import <Engine/Engine.h>
+#import "DDRouter.h"
 
 #endif /* PrefixHeader_pch */
