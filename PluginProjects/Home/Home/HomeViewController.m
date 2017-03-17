@@ -15,6 +15,7 @@
 
 @end
 
+
 @implementation HomeViewController
 
 - (void)viewDidLoad {
@@ -43,7 +44,6 @@
     
 }
 
-
 - (void)addMsgAction:(id)sender
 {
     RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
@@ -52,11 +52,7 @@
 }
 
 
-//- (void)syncAllMessages
-//{
-//    //此方法内部和DataCenter保持完全一致，并且以DataCenter为准
-//    self.messageArray = [[DataCenter sharedCenter] getAllMessages];
-//}
+
 
 
 

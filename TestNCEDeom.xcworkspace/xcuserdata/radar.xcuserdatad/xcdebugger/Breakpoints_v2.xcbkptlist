@@ -99,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PluginProjects/Home/Home/HomeViewController.m"
-            timestampString = "511351517.422658"
+            filePath = "TestNCEDeom/ViewController.m"
+            timestampString = "511415823.940422"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-pushSimuAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,5 +1,5 @@
 //
-//  StatusCell.h
+//  MessageCell.h
 //  Radar Use
 //
 //  Created by Radar on 11-5-3.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface StatusCell : UITableViewCell {
+@interface MessageCell : UITableViewCell {
 
 	UILabel *_tLabel;
 }

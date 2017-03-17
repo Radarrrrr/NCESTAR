@@ -1,15 +1,15 @@
 //
-//  StatusCell.m
+//  MessageCell.m
 //  Radar Use
 //
 //  Created by Radar on 11-5-3.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "StatusCell.h"
+#import "MessageCell.h"
 
 
-@implementation StatusCell
+@implementation MessageCell
 
 
 
@@ -43,11 +43,6 @@
 }
 
 
-- (void)dealloc {
-
-	[_tLabel release];
-    [super dealloc];
-}
 
 
 

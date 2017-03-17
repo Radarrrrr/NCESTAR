@@ -11,6 +11,5 @@
 @interface HomeViewController : UIViewController
 
 
-//- (void)syncAllMessages; //从DataCenter里边同步当前所有的消息数据
 
 @end
