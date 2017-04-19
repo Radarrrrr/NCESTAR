@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C17AD551EA744B700238D29 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C17AD541EA744B700238D29 /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505B21E306F84000A23EB /* ThirdSDKs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA505D71E307070000A23EB /* NWHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505C21E307070000A23EB /* NWHub.h */; };
 		0CA505D81E307070000A23EB /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA505C31E307070000A23EB /* NWHub.m */; };
@@ -33,7 +34,6 @@
 		0CA5060C1E308559000A23EB /* RDUserNotifyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5060A1E308559000A23EB /* RDUserNotifyCenter.m */; };
 		0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506381E31F4AF000A23EB /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA5063B1E31F4AF000A23EB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506391E31F4AF000A23EB /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0CA5063E1E31F872000A23EB /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5063D1E31F872000A23EB /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5064E1E31FE31000A23EB /* UIButton+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA506531E31FE31000A23EB /* UIButton+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA5064F1E31FE31000A23EB /* UIButton+Color.m */; };
 		0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506501E31FE31000A23EB /* UIImage+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C17AD541EA744B700238D29 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0CA505AF1E306F84000A23EB /* ThirdSDKs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdSDKs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA505B21E306F84000A23EB /* ThirdSDKs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdSDKs.h; sourceTree = "<group>"; };
 		0CA505B31E306F84000A23EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		0CA5060A1E308559000A23EB /* RDUserNotifyCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDUserNotifyCenter.m; sourceTree = "<group>"; };
 		0CA506381E31F4AF000A23EB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		0CA506391E31F4AF000A23EB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		0CA5063D1E31F872000A23EB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0CA5064E1E31FE31000A23EB /* UIButton+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Color.h"; sourceTree = "<group>"; };
 		0CA5064F1E31FE31000A23EB /* UIButton+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Color.m"; sourceTree = "<group>"; };
 		0CA506501E31FE31000A23EB /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				0CA506081E308559000A23EB /* RDUserNotifyCenter */,
 				0CA505C01E307070000A23EB /* RDPushTool */,
 				0CA505B21E306F84000A23EB /* ThirdSDKs.h */,
-				0CA5063D1E31F872000A23EB /* Constants.h */,
+				0C17AD541EA744B700238D29 /* Constants.h */,
 				0CA505B31E306F84000A23EB /* Info.plist */,
 			);
 			path = ThirdSDKs;
@@ -353,9 +353,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C17AD551EA744B700238D29 /* Constants.h in Headers */,
 				0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */,
 				0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */,
-				0CA5063E1E31F872000A23EB /* Constants.h in Headers */,
 				0CA506961E32046D000A23EB /* ISMethodSwizzling.h in Headers */,
 				0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */,
 				0CA5066A1E320034000A23EB /* DDSlideLayer.h in Headers */,

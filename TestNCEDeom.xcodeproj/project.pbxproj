@@ -880,6 +880,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Plugins",
 				);
+				GCC_PREFIX_HEADER = TestNCEDeom/PrefixHeader.pch;
 				INFOPLIST_FILE = TestNCEDeom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dangdang.unc;
@@ -900,6 +901,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Plugins",
 				);
+				GCC_PREFIX_HEADER = TestNCEDeom/PrefixHeader.pch;
 				INFOPLIST_FILE = TestNCEDeom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dangdang.unc;

@@ -9,9 +9,10 @@
 #import "HomeViewController.h"
 
 
-@interface HomeViewController ()
+@interface HomeViewController () <DDTableViewDelegate>
 
-@property (nonatomic, copy) NSMutableArray *messageArray; //所有的消息数据
+@property (nonatomic, copy)     NSMutableArray *messageArray; //所有的消息数据
+@property (nonatomic, strong)   DDTableView *listTable;
 
 @end
 
@@ -31,10 +32,22 @@
     //右上角添加写推送按钮
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
     self.navigationItem.rightBarButtonItem = addItem;
-    
-    
+
     //TO DO: 添加聊天列表
-    //DDTableView *
+    self.listTable = [[DDTableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
+    _listTable.delegate = self;
+    _listTable.loadMoreStyle = LoadMoreStyleAuto;
+    _listTable.refreshStyle = RefreshStyleDrag;
+    _listTable.tableView.backgroundColor = [UIColor redColor];
+    _listTable.tableView.separatorColor = [UIColor redColor];
+    [self.view addSubview:_listTable];
+    
+    //设定list属性
+    _listTable.tableView.backgroundColor = [UIColor whiteColor];             
+    _listTable.tableView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
+    _listTable.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _listTable.tableView.separatorColor = [UIColor redColor];
+    
     
     //TO DO: 添加右侧滑动条操作键盘
 
