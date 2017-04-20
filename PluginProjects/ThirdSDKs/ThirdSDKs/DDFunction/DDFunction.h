@@ -24,6 +24,9 @@
 //PS: 使用的时候，必须手动控制data和path内部的结构，否则会出错，如果解析有问题，请检查path和data的结构是否对应
 + (id)valueOfData:(id)data byPath:(NSString *)path;
 
+//在data数据源里，找到key对应的数据value，并返回 //PS: data只能是字典或数组类型，且只能支持data里边只有唯一的一个key，如果出现了两个，则只取第一个
++ (id)getValueForKey:(NSString*)key inData:(id)data;
+
 //在data数据源里，找到所有的相同的key对应的数据value，并组成数组返回
 //PS: data只能是字典或数组类型
 + (NSArray *)findValuesForKey:(NSString *)key inData:(id)data;

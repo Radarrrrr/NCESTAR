@@ -11,7 +11,7 @@
 
 @interface HomeViewController () <DDTableViewDelegate>
 
-@property (nonatomic, copy)     NSMutableArray *messageArray; //所有的消息数据
+@property (nonatomic, copy)     NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
 @property (nonatomic, strong)   DDTableView *listTable;
 
 @end
@@ -38,8 +38,6 @@
     _listTable.delegate = self;
     _listTable.loadMoreStyle = LoadMoreStyleAuto;
     _listTable.refreshStyle = RefreshStyleDrag;
-    _listTable.tableView.backgroundColor = [UIColor redColor];
-    _listTable.tableView.separatorColor = [UIColor redColor];
     [self.view addSubview:_listTable];
     
     //设定list属性
@@ -55,13 +53,24 @@
     //TO DO: 添加好友菜单
     
     
+    //延时刷新聊天列表
+    [self performSelector:@selector(refreshMsgList) withObject:nil afterDelay:2];
 }
 
 - (void)addMsgAction:(id)sender
 {
     RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
     [self.navigationController pushViewController:simuVC animated:YES];
+}
+
+- (void)refreshMsgList //刷新聊天列表
+{
+    //准备数据源
     
+    
+    //刷新列表
+    [_listTable appendDataArray:_messageArray useCell:@"MessageCell" toSection:0];
+    [_listTable refreshTable];
 }
 
 

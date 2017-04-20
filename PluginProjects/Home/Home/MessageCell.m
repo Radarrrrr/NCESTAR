@@ -56,14 +56,16 @@
 #pragma mark out use functions
 -(void)setCellData:(id)data
 {
-	NSString *tString = (NSString*)data;
-	if(tString == nil || [tString compare:@""] == NSOrderedSame) return;
-	
-	_tLabel.text = tString;
+    NSString *msg = (NSString*)[DDFunction getValueForKey:@"body" inData:data];
+    if(!STRVALID(msg)) return;
+
+	_tLabel.text = msg;
 	
 	//设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
 	float height = 44.0;
 	
+    
+    //最下面这段用来给DDTableView容器使用，无须更改。
 	CGRect newRect = self.contentView.frame;
 	newRect.size.height = height;
 	

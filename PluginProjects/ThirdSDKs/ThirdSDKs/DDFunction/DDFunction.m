@@ -168,6 +168,55 @@
     
     return values;
 }
+
+//在data数据源里，找到key对应的数据value，并返回 //PS: data只能是字典或数组类型，且只能支持data里边只有唯一的一个key，如果出现了两个，则只取第一个
++ (id)getValueForKey:(NSString*)key inData:(id)data
+{
+    if(!data) return nil;
+    if(!key || [key isEqualToString:@""]) return nil;
+    if(![data isKindOfClass:[NSDictionary class]] && ![data isKindOfClass:[NSArray class]]) return nil;
+    
+    id value = nil;
+    
+    //开始解析
+    if([data isKindOfClass:[NSDictionary class]])
+    {
+        NSArray *keys = [data allKeys];
+        for(NSString *akey in keys)
+        {
+            if([akey compare:key] == NSOrderedSame)
+            {
+                value = [data objectForKey:key];
+                break;
+            }
+            else
+            {
+                id adata = [data objectForKey:akey];
+                id avalue = [self getValueForKey:key inData:adata];
+                if(avalue)
+                {
+                    value = avalue;
+                    break;
+                }
+            }
+        }
+    }
+    else if([data isKindOfClass:[NSArray class]])
+    {
+        for(id adata in data)
+        {
+            id avalue = [self getValueForKey:key inData:adata];
+            if(avalue)
+            {
+                value = avalue;
+                break;
+            }
+        }
+    }
+    
+    return value;
+}
+
     
 + (BOOL)isPureInt:(NSString *)string
 {
