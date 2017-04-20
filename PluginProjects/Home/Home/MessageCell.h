@@ -35,10 +35,8 @@
 
 @interface MessageCell : UITableViewCell {
 
-	UILabel *_tLabel;
+	
 }
-
-
 
 #pragma mark -
 #pragma mark in use functions

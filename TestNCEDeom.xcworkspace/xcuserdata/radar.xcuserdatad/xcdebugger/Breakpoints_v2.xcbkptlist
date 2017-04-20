@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PluginProjects/ThirdSDKs/ThirdSDKs/RDUserNotifyCenter/RDUserNotifyCenter.m"
-            timestampString = "511090953.961175"
+            timestampString = "514366367.847623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1433"
-            endingLineNumber = "1433"
+            startingLineNumber = "1434"
+            endingLineNumber = "1434"
             landmarkName = "@implementation RDUserNotifyCenter"
             landmarkType = "3">
          </BreakpointContent>
@@ -112,32 +112,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PluginProjects/Home/Home/HomeViewController.m"
-            timestampString = "514285683.560615"
+            filePath = "PluginProjects/ThirdSDKs/ThirdSDKs/RDUserNotifyCenter/RDUserNotifyCenter.m"
+            timestampString = "514366342.591913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PluginProjects/Home/Home/MessageCell.m"
-            timestampString = "514285807.896742"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-setCellData:"
+            startingLineNumber = "1418"
+            endingLineNumber = "1418"
+            landmarkName = "+loadPayloadsFromGroup"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

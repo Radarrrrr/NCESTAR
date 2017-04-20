@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09A57D5D221752107DC0FE31 /* libPods-NotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 379070FF0C574A19223EF709 /* libPods-NotificationService.a */; };
+		0C0FE3091EA8AA2D00D74708 /* img_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C0FE3081EA8AA2D00D74708 /* img_back.jpg */; };
 		0C119B511E7930D6002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
 		0C119B521E7930D6002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
 		0C119B531E793137002ED007 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C119B4F1E7930D6002ED007 /* Engine.framework */; };
@@ -112,6 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C0FE3081EA8AA2D00D74708 /* img_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_back.jpg; sourceTree = "<group>"; };
 		0C119B441E792439002ED007 /* Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Engine.xcodeproj; path = Engine/Engine.xcodeproj; sourceTree = "<group>"; };
 		0C119B4F1E7930D6002ED007 /* Engine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Engine.framework; sourceTree = "<group>"; };
 		0C119B631E7A3BDD002ED007 /* DDRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRouter.h; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		0C35221A1DEFD54300D9DBEF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0C0FE3081EA8AA2D00D74708 /* img_back.jpg */,
 				0C3522441DF5586800D9DBEF /* attach_image.png */,
 				0C35221B1DEFD54300D9DBEF /* launch_image@2x.jpg */,
 			);
@@ -559,6 +562,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0FE3091EA8AA2D00D74708 /* img_back.jpg in Resources */,
 				0CA506311E3094E0000A23EB /* NOTE.txt in Resources */,
 				0C3522451DF5586800D9DBEF /* attach_image.png in Resources */,
 				0C35221C1DEFD54300D9DBEF /* launch_image@2x.jpg in Resources */,

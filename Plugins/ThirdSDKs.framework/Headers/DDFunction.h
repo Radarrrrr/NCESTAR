@@ -108,8 +108,6 @@
 + (double)randomFrom:(double)numMin to:(double)numMax; //从numMin-numMax之间随机生成一个数 注: numMin 必须小于 numMax
 
 
-
-
 #pragma mark -
 #pragma mark 时间解析相关
 + (NSDate *)dateFromString:(NSString *)dateString useFormat:(NSString *)format; //从时间字符串转化成NSDate, fromat=@"yyyy-MM-dd HH:mm:ss", 需要根据实际情况更换格式

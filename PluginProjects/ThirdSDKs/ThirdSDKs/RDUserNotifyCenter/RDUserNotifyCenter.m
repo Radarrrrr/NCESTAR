@@ -1413,9 +1413,10 @@
     //获取现有list
     NSArray *payloads = [self loadFileDataFromeGroupForName:RDUserNotifyCenter_payload_savelist_filename];
     
-    //使用空数组来覆盖清空存储的list
-    NSMutableArray *emptyArray = [[NSMutableArray alloc] init];
-    [self saveFileDataToGroup:emptyArray forName:RDUserNotifyCenter_payload_savelist_filename];
+    //TO DO: @Radar 这里暂时注释掉，为了调试方便，以后完成再放开注释回复清空
+//    //使用空数组来覆盖清空存储的list
+//    NSMutableArray *emptyArray = [[NSMutableArray alloc] init];
+//    [self saveFileDataToGroup:emptyArray forName:RDUserNotifyCenter_payload_savelist_filename];
     
     //返回存储的payloads
     return payloads;

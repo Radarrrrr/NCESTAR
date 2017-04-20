@@ -28,5 +28,16 @@
     return img;
 }
 
++ (UIImage*)imageNamed:(NSString *)name forUser:(id)user
+{
+    if(!name || [name isEqualToString:@""]) return nil;
+    if(!user) return nil;
+    
+    NSBundle *bundle = [NSBundle bundleForClass:[user class]];
+    UIImage *image = [UIImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil]; 
+    
+    return image;
+}
+
 
 @end
