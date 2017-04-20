@@ -1,12 +1,10 @@
 //
-//  Constants.h
-//  ddDemo
+//  DDMacros.h
+//  ThirdSDKs
 //
-//  Created by Radar on 13-3-25.
-//  Copyright (c) 2013年 DangDang. All rights reserved.
+//  Created by Radar on 2017/4/20.
+//  Copyright © 2017年 Radar. All rights reserved.
 //
-
-
 
 #pragma mark -
 #pragma mark 一些通用的宏，用来全局使用，统一改动
@@ -26,7 +24,6 @@
 
 #pragma mark - 
 #pragma mark 字体和颜色相关
-
 
 //颜色和字体相关的宏
 #define RGB(r, g, b)        [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
@@ -94,3 +91,10 @@
 #define SCR_WIDTH  [UIScreen mainScreen].bounds.size.width
 
 
+
+
+#import <Foundation/Foundation.h>
+
+@interface DDMacros : NSObject
+
+@end

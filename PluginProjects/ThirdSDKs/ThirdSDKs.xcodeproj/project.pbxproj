@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C17AD551EA744B700238D29 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C17AD541EA744B700238D29 /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C17AD601EA88C8D00238D29 /* DDMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C17AD5E1EA88C8D00238D29 /* DDMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17AD5F1EA88C8D00238D29 /* DDMacros.m */; };
 		0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505B21E306F84000A23EB /* ThirdSDKs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA505D71E307070000A23EB /* NWHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505C21E307070000A23EB /* NWHub.h */; };
 		0CA505D81E307070000A23EB /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA505C31E307070000A23EB /* NWHub.m */; };
@@ -77,7 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C17AD541EA744B700238D29 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0C17AD5E1EA88C8D00238D29 /* DDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMacros.h; sourceTree = "<group>"; };
+		0C17AD5F1EA88C8D00238D29 /* DDMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMacros.m; sourceTree = "<group>"; };
 		0CA505AF1E306F84000A23EB /* ThirdSDKs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdSDKs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA505B21E306F84000A23EB /* ThirdSDKs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdSDKs.h; sourceTree = "<group>"; };
 		0CA505B31E306F84000A23EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -187,7 +189,8 @@
 				0CA506081E308559000A23EB /* RDUserNotifyCenter */,
 				0CA505C01E307070000A23EB /* RDPushTool */,
 				0CA505B21E306F84000A23EB /* ThirdSDKs.h */,
-				0C17AD541EA744B700238D29 /* Constants.h */,
+				0C17AD5E1EA88C8D00238D29 /* DDMacros.h */,
+				0C17AD5F1EA88C8D00238D29 /* DDMacros.m */,
 				0CA505B31E306F84000A23EB /* Info.plist */,
 			);
 			path = ThirdSDKs;
@@ -353,7 +356,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C17AD551EA744B700238D29 /* Constants.h in Headers */,
 				0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */,
 				0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */,
 				0CA506961E32046D000A23EB /* ISMethodSwizzling.h in Headers */,
@@ -367,6 +369,7 @@
 				0CA506981E32046D000A23EB /* ISRefreshControl.h in Headers */,
 				0CA5067A1E320390000A23EB /* DDTLogoView.h in Headers */,
 				0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */,
+				0C17AD601EA88C8D00238D29 /* DDMacros.h in Headers */,
 				0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
@@ -498,6 +501,7 @@
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
 				0CA506671E320034000A23EB /* DDEffectView.m in Sources */,
 				0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */,
+				0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */,
 				0CA506A11E32046D000A23EB /* UITableViewController+ISRefreshControl.m in Sources */,
 				0CA506971E32046D000A23EB /* ISMethodSwizzling.m in Sources */,
 				0CA5067F1E320390000A23EB /* DDTRefreshCoverView.m in Sources */,

@@ -19,11 +19,11 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <ThirdSDKs/PublicHeader.h>
 
 
+#import <ThirdSDKs/DDMacros.h>
 #import <ThirdSDKs/RDPushTool.h>
 #import <ThirdSDKs/RDPushSimuVC.h>
 #import <ThirdSDKs/RDUserNotifyCenter.h>
 #import <ThirdSDKs/JSONKit.h>
-#import <ThirdSDKs/Constants.h>
 #import <ThirdSDKs/UIButton+Color.h>
 #import <ThirdSDKs/UIImage+Color.h>
 #import <ThirdSDKs/DDFunction.h>
