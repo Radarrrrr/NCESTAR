@@ -39,7 +39,7 @@
     
     
     //在做页面渲染前，获取一下数据源列表
-    self.messageArray = [[DataCenter sharedCenter] getAllMessages];
+    [self syncAllMessagesFromDataCenter];
     
     //右上角添加写推送按钮
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
@@ -86,6 +86,16 @@
 {
     RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
     [self.navigationController pushViewController:simuVC animated:YES];
+}
+
+- (void)syncAllMessagesFromDataCenter
+{
+    //从数据中心获取所有的消息，并做一下倒序转换，把最新的放在第一个
+    NSMutableArray *allMsgs = [[DataCenter sharedCenter] getAllMessages];
+    if(!ARRAYVALID(allMsgs)) return;
+    
+    NSArray* reversedArray = [[allMsgs reverseObjectEnumerator] allObjects];
+    self.messageArray = [NSMutableArray arrayWithArray:reversedArray];
 }
 
 - (void)refreshMsgList //刷新聊天列表

@@ -22,7 +22,7 @@
 
 
 #pragma mark - 数据请求
-- (NSMutableArray *)getAllMessages; //获取所有已经存储的messages
+- (NSMutableArray *)getAllMessages; //获取所有已经存储的messages 返回顺序为时间正序，最新的在最后面
 
 
 
