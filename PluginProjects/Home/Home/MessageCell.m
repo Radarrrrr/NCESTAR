@@ -9,6 +9,7 @@
 
 #define MessageCell_default_cell_height 200
 #define MessageCell_face_width 50
+#define MessageCell_limit_msglabel_height 50
 
 
 #import "MessageCell.h"
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) UILabel *msgLabel;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIImageView *faceView;
+@property (nonatomic, strong) UIView *line;
 
 @end
 
@@ -48,9 +50,9 @@
         [self.contentView addSubview:_faceView];
         
 		//add _tLabel
-		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+2, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-4-MessageCell_face_width)];
+		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+8, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-10-MessageCell_face_width)];
 		_msgLabel.backgroundColor = [UIColor clearColor];
-		_msgLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		_msgLabel.font = DDFONT(15);
 		_msgLabel.textColor = DDCOLOR_TEXT_A;
         _msgLabel.textAlignment = NSTextAlignmentCenter;
         _msgLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -64,10 +66,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         //add line
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8, CGRectGetMinY(_faceView.frame)+14, CGRectGetWidth(_backView.frame)-24-MessageCell_face_width-2, 0.5)];
-        line.userInteractionEnabled = NO;
-        line.backgroundColor = RGBS(200);
-        [self.contentView addSubview:line];
+        self.line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8, CGRectGetMinY(_faceView.frame)+14, CGRectGetWidth(_backView.frame)-24-MessageCell_face_width-2, 0.5)];
+        _line.userInteractionEnabled = NO;
+        _line.backgroundColor = RGBS(200);
+        [self.contentView addSubview:_line];
         
     }
     return self;
@@ -100,16 +102,33 @@
 
 	_msgLabel.text = msg;
 	
-	//设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
-	float height = MessageCell_default_cell_height;
+	
     
-    //改变背景高度
-//    CGRect bframe = _backView.frame;
-//    bframe.size.height = 150;
-//    _backView.frame = bframe;
-//    
-//    height = 160;
     
+    //获取文字高度
+    float msgHeight = [DDFunction getHeightForString:msg font:DDFONT(15) width:CGRectGetWidth(_msgLabel.frame)];
+    if(msgHeight < MessageCell_limit_msglabel_height)
+    {
+        msgHeight = MessageCell_limit_msglabel_height;
+    }
+    
+    //修改各个组件高度
+    [DDFunction changeHeightForView:_msgLabel to:msgHeight];
+    
+    float backHeight = msgHeight+8+2+MessageCell_face_width+8;
+    [DDFunction changeHeightForView:_backView to:backHeight];
+    
+    CGRect fframe = _faceView.frame;
+    fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
+    _faceView.frame = fframe;
+    
+    CGRect lframe = _line.frame;
+    lframe.origin.y = CGRectGetMinY(_faceView.frame)+14;
+    _line.frame = lframe;
+    
+    
+    //设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
+    float height = backHeight + 8;
     
     //最下面这段用来给DDTableView容器使用，无须更改。
 	CGRect newRect = self.contentView.frame;

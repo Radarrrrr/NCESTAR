@@ -107,6 +107,8 @@
 
 + (double)randomFrom:(double)numMin to:(double)numMax; //从numMin-numMax之间随机生成一个数 注: numMin 必须小于 numMax
 
++ (void)changeHeightForView:(UIView *)view to:(float)toHeight; //把view的frame高度改为toHeight指定的高度 //PS:不带动画，如果需要 在外面套一层 animateWithDuration 方法即可
+
 
 #pragma mark -
 #pragma mark 时间解析相关

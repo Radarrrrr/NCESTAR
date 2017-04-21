@@ -740,6 +740,14 @@
     return(a/10000.0);
 }
 
++ (void)changeHeightForView:(UIView *)view to:(float)toHeight
+{
+    if(!view) return;
+    
+    CGRect nframe = view.frame;
+    nframe.size.height = toHeight;
+    view.frame = nframe;
+}
 
 
 
