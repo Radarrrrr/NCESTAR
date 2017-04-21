@@ -6,7 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define default_cell_height 200
+
+#define MessageCell_default_cell_height 200
+#define MessageCell_face_width 50
+
 
 #import "MessageCell.h"
 
@@ -30,26 +33,29 @@
         // Initialization code.
         
         //添加一个背景框
-        self.backView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, SCR_WIDTH-16, default_cell_height-8)];
-        _backView.backgroundColor = [UIColor whiteColor];
-        _backView.alpha = 0.25;
+        self.backView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, SCR_WIDTH-16, MessageCell_default_cell_height-8)];
+        _backView.backgroundColor = RGBS(240);
+        _backView.alpha = 0.8;
         _backView.userInteractionEnabled = NO;
-        [DDFunction addRadiusToView:_backView radius:25];
+        [DDFunction addRadiusToView:_backView radius:14];
         [self.contentView addSubview:_backView];
         
         //添加头像
-        self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, 16, 60, 60)];
+        self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width, MessageCell_face_width, MessageCell_face_width)];
         _faceView.backgroundColor = [UIColor clearColor];
-        [DDFunction addRadiusToView:_faceView radius:25];
+        [DDFunction addRadiusToView:_faceView radius:18];
         _faceView.image = [UIImage imageNamed:@"face_ma.png" forUser:self];
         [self.contentView addSubview:_faceView];
         
 		//add _tLabel
-		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+2, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-4-MessageCell_face_width)];
 		_msgLabel.backgroundColor = [UIColor clearColor];
-		_msgLabel.textAlignment = NSTextAlignmentCenter;
-		_msgLabel.font = [UIFont boldSystemFontOfSize:16.0];
-		_msgLabel.textColor = [UIColor redColor];
+		_msgLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		_msgLabel.textColor = DDCOLOR_TEXT_A;
+        _msgLabel.textAlignment = NSTextAlignmentCenter;
+        _msgLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        _msgLabel.numberOfLines = 0;
+        _msgLabel.userInteractionEnabled = NO;
 		[self.contentView addSubview:_msgLabel];
 		
         self.backgroundColor = [UIColor clearColor];
@@ -58,7 +64,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         //add line
-        //[DDFunction addLineToViewBottom:self.contentView useColor:DDCOLOR_LINE_B];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8, CGRectGetMinY(_faceView.frame)+14, CGRectGetWidth(_backView.frame)-24-MessageCell_face_width-2, 0.5)];
+        line.userInteractionEnabled = NO;
+        line.backgroundColor = RGBS(200);
+        [self.contentView addSubview:line];
         
     }
     return self;
@@ -92,7 +101,7 @@
 	_msgLabel.text = msg;
 	
 	//设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
-	float height = default_cell_height;
+	float height = MessageCell_default_cell_height;
     
     //改变背景高度
 //    CGRect bframe = _backView.frame;

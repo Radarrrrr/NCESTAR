@@ -11,6 +11,6 @@
 
 @interface HomeViewController : UIViewController 
 
-
+//@property (nonatomic, copy) 
 
 @end
