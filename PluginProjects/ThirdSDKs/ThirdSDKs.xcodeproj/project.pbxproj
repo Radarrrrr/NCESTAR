@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0FE3181EA9E41A00D74708 /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0FE3161EA9E41A00D74708 /* UIImage+ImageEffects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C0FE3191EA9E41A00D74708 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0FE3171EA9E41A00D74708 /* UIImage+ImageEffects.m */; };
 		0C17AD601EA88C8D00238D29 /* DDMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C17AD5E1EA88C8D00238D29 /* DDMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17AD5F1EA88C8D00238D29 /* DDMacros.m */; };
 		0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505B21E306F84000A23EB /* ThirdSDKs.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,8 +49,6 @@
 		0CA506691E320034000A23EB /* DDMoveShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506611E320034000A23EB /* DDMoveShowView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CA5066A1E320034000A23EB /* DDSlideLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506621E320034000A23EB /* DDSlideLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506631E320034000A23EB /* DDSlideLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506641E320034000A23EB /* UIImage+ImageEffects.h */; };
-		0CA5066D1E320034000A23EB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506651E320034000A23EB /* UIImage+ImageEffects.m */; };
 		0CA506781E320390000A23EB /* DDTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA5066F1E320390000A23EB /* DDTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA506791E320390000A23EB /* DDTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506701E320390000A23EB /* DDTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CA5067A1E320390000A23EB /* DDTLogoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA506721E320390000A23EB /* DDTLogoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0FE3161EA9E41A00D74708 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		0C0FE3171EA9E41A00D74708 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0C17AD5E1EA88C8D00238D29 /* DDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMacros.h; sourceTree = "<group>"; };
 		0C17AD5F1EA88C8D00238D29 /* DDMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMacros.m; sourceTree = "<group>"; };
 		0CA505AF1E306F84000A23EB /* ThirdSDKs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdSDKs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,8 +122,6 @@
 		0CA506611E320034000A23EB /* DDMoveShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoveShowView.m; sourceTree = "<group>"; };
 		0CA506621E320034000A23EB /* DDSlideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSlideLayer.h; sourceTree = "<group>"; };
 		0CA506631E320034000A23EB /* DDSlideLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSlideLayer.m; sourceTree = "<group>"; };
-		0CA506641E320034000A23EB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		0CA506651E320034000A23EB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0CA5066F1E320390000A23EB /* DDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTableView.h; sourceTree = "<group>"; };
 		0CA506701E320390000A23EB /* DDTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTableView.m; sourceTree = "<group>"; };
 		0CA506721E320390000A23EB /* DDTLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTLogoView.h; sourceTree = "<group>"; };
@@ -253,6 +253,8 @@
 		0CA5064D1E31FE31000A23EB /* Categorys */ = {
 			isa = PBXGroup;
 			children = (
+				0C0FE3161EA9E41A00D74708 /* UIImage+ImageEffects.h */,
+				0C0FE3171EA9E41A00D74708 /* UIImage+ImageEffects.m */,
 				0CA5064E1E31FE31000A23EB /* UIButton+Color.h */,
 				0CA5064F1E31FE31000A23EB /* UIButton+Color.m */,
 				0CA506501E31FE31000A23EB /* UIImage+Color.h */,
@@ -279,8 +281,6 @@
 				0CA5065F1E320034000A23EB /* DDEffectView.m */,
 				0CA506601E320034000A23EB /* DDMoveShowView.h */,
 				0CA506611E320034000A23EB /* DDMoveShowView.m */,
-				0CA506641E320034000A23EB /* UIImage+ImageEffects.h */,
-				0CA506651E320034000A23EB /* UIImage+ImageEffects.m */,
 			);
 			path = DDSliderLayer;
 			sourceTree = "<group>";
@@ -357,7 +357,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */,
-				0CA5066C1E320034000A23EB /* UIImage+ImageEffects.h in Headers */,
 				0CA506961E32046D000A23EB /* ISMethodSwizzling.h in Headers */,
 				0CA506541E31FE31000A23EB /* UIImage+Color.h in Headers */,
 				0CA5066A1E320034000A23EB /* DDSlideLayer.h in Headers */,
@@ -368,6 +367,7 @@
 				0CA5067E1E320390000A23EB /* DDTRefreshCoverView.h in Headers */,
 				0CA506981E32046D000A23EB /* ISRefreshControl.h in Headers */,
 				0CA5067A1E320390000A23EB /* DDTLogoView.h in Headers */,
+				0C0FE3181EA9E41A00D74708 /* UIImage+ImageEffects.h in Headers */,
 				0CA506521E31FE31000A23EB /* UIButton+Color.h in Headers */,
 				0C17AD601EA88C8D00238D29 /* DDMacros.h in Headers */,
 				0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */,
@@ -481,9 +481,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0FE3191EA9E41A00D74708 /* UIImage+ImageEffects.m in Sources */,
 				0CA505E21E307070000A23EB /* NWSecTools.m in Sources */,
 				0CA506691E320034000A23EB /* DDMoveShowView.m in Sources */,
-				0CA5066D1E320034000A23EB /* UIImage+ImageEffects.m in Sources */,
 				0CA505D91E307070000A23EB /* NWLCore.c in Sources */,
 				0CA5067B1E320390000A23EB /* DDTLogoView.m in Sources */,
 				0CA5063B1E31F4AF000A23EB /* JSONKit.m in Sources */,

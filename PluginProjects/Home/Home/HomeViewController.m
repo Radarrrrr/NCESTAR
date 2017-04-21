@@ -29,9 +29,14 @@
     
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
-    _backImgView.backgroundColor = DDCOLOR_BACK_GROUND;
-    _backImgView.image = [UIImage imageNamed:@"img_back.jpg"];
+    _backImgView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_backImgView];
+    
+    UIImage *backImg = [UIImage imageNamed:@"img_back.jpg"];
+    UIImage *effectImg = [backImg applyLightEffect];
+    _backImgView.image = effectImg;
+    
+    
     
     //在做页面渲染前，获取一下数据源列表
     self.messageArray = [[DataCenter sharedCenter] getAllMessages];
@@ -54,9 +59,9 @@
     _listTable.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     //设定header和footer
-    [_listTable setSection:0 headerHeight:0 footerHeight:10];
+    [_listTable setSection:0 headerHeight:0 footerHeight:8];
     
-    UIView *fview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 10)];
+    UIView *fview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 8)];
     fview.backgroundColor = [UIColor clearColor];
     [_listTable setSection:0 headerView:nil footerView:fview];
     
@@ -69,6 +74,12 @@
     
     //延时刷新聊天列表
     [self performSelector:@selector(refreshMsgList) withObject:nil afterDelay:0];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+//    CGRect frame = self.view.frame;
+//    int i=0;
 }
 
 - (void)addMsgAction:(id)sender
