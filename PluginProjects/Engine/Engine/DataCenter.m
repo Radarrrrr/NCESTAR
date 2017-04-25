@@ -6,6 +6,10 @@
 //  Copyright © 2017年 Radar. All rights reserved.
 //
 
+
+#define DataCenter_all_messages_save_list @"DataCenter all messages save list"
+
+
 #import "DataCenter.h"
 
 
@@ -44,11 +48,28 @@
 #pragma mark - 数据收集&获取
 - (void)collectGroupMessages
 {
+    //先从userdefault里边取出以前存储的
+    if([_allMessages count] == 0)
+    {
+        NSArray *savedArr = (NSArray*)[[NSUserDefaults standardUserDefaults] objectForKey:DataCenter_all_messages_save_list];
+        if(ARRAYVALID(savedArr))
+        {
+            [_allMessages addObjectsFromArray:savedArr];
+        }
+    }
+    
+    //获取到通知group里边还未取出来过的
     NSArray *payloads = [RDUserNotifyCenter loadPayloadsFromGroup];
     if(!ARRAYVALID(payloads)) return;
     
+    //把group里边的添加到总列表里边
     [_allMessages addObjectsFromArray:payloads];
     
+    //TO DO: 限定最多数量，超出的删掉不保存
+    
+    //保存列表
+    [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -63,7 +84,23 @@
     return _allMessages;
 }
 
-
+- (NSDictionary *)getNotiDataForNotifyid:(NSString*)notifyid
+{
+    if(!STRVALID(notifyid)) return nil;
+    if(!ARRAYVALID(_allMessages)) return nil;
+    
+    //遍历循环所有的消息，找到notifyid对应的那个并返回
+    for(NSDictionary *notiDic in _allMessages)
+    {
+        NSString *nid = [notiDic objectForKey:@"notifyid"];
+        if(STRVALID(nid) && [nid isEqualToString:notifyid])
+        {
+            return notiDic;
+        }
+    }
+    
+    return nil;
+}
 
 
 @end

@@ -13,6 +13,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) HomeViewController *homeVC;
+
 @end
 
 @implementation AppDelegate
@@ -22,8 +24,8 @@
     // Override point for customization after application launch.
 
     //创建框架
-    HomeViewController *mainVC = [[HomeViewController alloc] init];
-    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    self.homeVC = [[HomeViewController alloc] init];
+    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:_homeVC];
     mainNav.navigationBarHidden = NO;
     mainNav.navigationBar.translucent = NO; //不要导航条模糊，为了让页面从导航条下部是0开始，如果为YES，则从屏幕顶部开始是0
     self.window.rootViewController = mainNav;
@@ -136,7 +138,31 @@
         NSLog(@"点击自定义Action按钮进来的 actionID: %@", actionID);
     }
 }
-
+- (void)didReceiveNotificationAtForground:(UNNotification *)notification isLocal:(BOOL)blocal
+{
+    //前台收到通知事件
+    if(!blocal)
+    {
+        //获取存储在group里边的通知payloads
+        [[DataCenter sharedCenter] collectGroupMessages];
+        
+        //获取这条新消息的消息id
+        NSString *notifyid = [RDUserNotifyCenter notifyIdforNotification:notification];
+        if(!STRVALID(notifyid)) return;
+        
+        //去DataCenter里边获取到该条消息的data
+        NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForNotifyid:notifyid];
+        
+        //根据获取到的消息数据，做增加消息的列表
+        [_homeVC insertMessage:notiDic];
+        
+    }
+    else
+    {
+        //本地通知做别的事情。。。
+        
+    }
+}
 
 
 

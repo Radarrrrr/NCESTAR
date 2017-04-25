@@ -23,7 +23,6 @@
 @property (nonatomic, strong) NSMutableDictionary *bindingActionsDic; //数据结构：@{@"categoryID":@[action1, action2, ....], ....}
 
 + (NSString *)fileExtForURL:(NSString *)dataUrl;
-+ (NSString *)notifyIdforNotification:(id)notify;   //从通知中获取对应的notifyId，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是字符串，方法内会自动检测
 + (NSDictionary*)payLoadForNotification:(id)notify; //从通知中获取对应的payload，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是userInfo本身，方法内会自动检测
 + (id)loadDataFromGroup:(NSString*)urlorKey;        //根据key来读取group中存储的数据
 
@@ -162,17 +161,32 @@
     //此方法用于处理在前台和后台接受到了通知以后，不同的UI样式和功能。
     //不过目前希望前台和后台接收到是处于相同的样式和内容。所以暂时不考虑此方法的扩展。
     
+    BOOL blocal = YES;
+    
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         NSLog(@"前台收到远程通知");
+        blocal = NO;
     }
     else {
         //判断为本地通知
         NSLog(@"前台收到本地通知");
+        blocal = YES;
+    }
+    
+    //返回给代理
+    if(_delegate && [_delegate respondsToSelector:@selector(didReceiveNotificationAtForground:isLocal:)])
+    {
+        [_delegate didReceiveNotificationAtForground:notification isLocal:blocal];
     }
     
     //需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
     //前台接收到通知以后，默认只提示声音和UI提醒，不做icon的红点提示。因为大部分app都是在进入app的时候会清理掉红点，这时候再加上，会有逻辑错误。
-    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); 
+    
+    //TO DO: 暂时保留一下这种情况，以后需要把这个属性和后台接到通知的状态改成由外面设定属性的方式
+    //completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); 
+    
+    //什么都不提示，如果需要其他提示，在代理方法里边自己做
+    completionHandler(UNNotificationPresentationOptionNone); 
     
 }
 
@@ -1413,10 +1427,9 @@
     //获取现有list
     NSArray *payloads = [self loadFileDataFromeGroupForName:RDUserNotifyCenter_payload_savelist_filename];
     
-    //TO DO: @Radar 这里暂时注释掉，为了调试方便，以后完成再放开注释回复清空
-//    //使用空数组来覆盖清空存储的list
-//    NSMutableArray *emptyArray = [[NSMutableArray alloc] init];
-//    [self saveFileDataToGroup:emptyArray forName:RDUserNotifyCenter_payload_savelist_filename];
+    //使用空数组来覆盖清空存储的list
+    NSMutableArray *emptyArray = [[NSMutableArray alloc] init];
+    [self saveFileDataToGroup:emptyArray forName:RDUserNotifyCenter_payload_savelist_filename];
     
     //返回存储的payloads
     return payloads;

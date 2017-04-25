@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestNCEDeom/AppDelegate.m"
-            timestampString = "511261512.488378"
+            timestampString = "514812988.119906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-didReceiveNotificationResponse:content:isLocal:"
             landmarkType = "7">
          </BreakpointContent>
@@ -67,38 +67,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PluginProjects/ThirdSDKs/ThirdSDKs/RDUserNotifyCenter/RDUserNotifyCenter.m"
-            timestampString = "514366367.847623"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1434"
-            endingLineNumber = "1434"
-            landmarkName = "@implementation RDUserNotifyCenter"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PluginProjects/ThirdSDKs/ThirdSDKs/RDUserNotifyCenter/RDUserNotifyCenter.m"
-            timestampString = "511091005.455988"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1396"
-            endingLineNumber = "1396"
-            landmarkName = "+savePayloadToGroupForNotify:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TestNCEDeom/ViewController.m"
             timestampString = "511415823.940422"
             startingColumnNumber = "9223372036854775807"
@@ -112,16 +80,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PluginProjects/ThirdSDKs/ThirdSDKs/RDUserNotifyCenter/RDUserNotifyCenter.m"
-            timestampString = "514366342.591913"
+            filePath = "TestNCEDeom/AppDelegate.m"
+            timestampString = "514812988.119906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1418"
-            endingLineNumber = "1418"
-            landmarkName = "+loadPayloadsFromGroup"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-didReceiveNotificationResponse:content:isLocal:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

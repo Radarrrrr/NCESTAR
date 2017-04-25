@@ -37,10 +37,6 @@
     _backImgView.image = effectImg;
     
     
-    
-    //在做页面渲染前，获取一下数据源列表
-    [self syncAllMessagesFromDataCenter];
-    
     //右上角添加写推送按钮
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
     self.navigationItem.rightBarButtonItem = addItem;
@@ -95,17 +91,28 @@
     if(!ARRAYVALID(allMsgs)) return;
     
     NSArray* reversedArray = [[allMsgs reverseObjectEnumerator] allObjects];
+    
+    if(ARRAYVALID(_messageArray)) [_messageArray removeAllObjects];
     self.messageArray = [NSMutableArray arrayWithArray:reversedArray];
 }
 
 - (void)refreshMsgList //刷新聊天列表
 {
-    //准备数据源
-    
+    //在做页面渲染前，获取一下数据源列表
+    [self syncAllMessagesFromDataCenter];
     
     //刷新列表
     [_listTable appendDataArray:_messageArray useCell:@"MessageCell" toSection:0];
     [_listTable refreshTable];
+}
+
+- (void)insertMessage:(NSDictionary*)msgData
+{
+    if(!DICTIONARYVALID(msgData)) return;
+    
+    NSIndexPath *indexPath = [DDTableView indexPathWithSection:0 row:0];
+    [_listTable insertData:msgData useCell:@"MessageCell" toIndexPath:indexPath];
+    [_listTable refreshTableWithAnimation:UITableViewRowAnimationTop];
 }
 
 

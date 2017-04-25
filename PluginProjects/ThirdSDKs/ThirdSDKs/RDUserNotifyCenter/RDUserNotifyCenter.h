@@ -142,7 +142,10 @@
 
 //其他属性暂时不导出，这个地方直接返回response是因为里边带了太多信息，需要外面解析使用
 //主要使用content和blocal参数，如果还不够，就去response里边找。
-- (void)didReceiveNotificationResponse:(UNNotificationResponse*)response content:(UNNotificationContent*)content isLocal:(BOOL)blocal; 
+- (void)didReceiveNotificationResponse:(UNNotificationResponse*)response content:(UNNotificationContent*)content isLocal:(BOOL)blocal;  //通知的点击事件反馈
+
+- (void)didReceiveNotificationAtForground:(UNNotification *)notification isLocal:(BOOL)blocal; //前台收到通知事件
+
 
 @end
 
@@ -257,7 +260,7 @@
 //PS:notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以是userInfo字典本身，方法内会自动检测
 + (id)getValueForKey:(NSString*)key inNotification:(id)notify;   //从notification中获取key对应的value
 
-
++ (NSString *)notifyIdforNotification:(id)notify;   //从通知中获取对应的notifyId，notify可以是UNNotificationRequest类型，也可以是UNNotification，也可以是UNNotificationContent类型，也可以直接就是字符串，方法内会自动检测
 
 
 
