@@ -8,7 +8,7 @@
 
 
 #define DataCenter_all_messages_save_list       @"DataCenter all messages save list"
-#define DataCenter_saved_messages_limit_count   10
+#define DataCenter_saved_messages_limit_count   20
 
 
 #import "DataCenter.h"

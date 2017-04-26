@@ -14,6 +14,7 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) HomeViewController *homeVC;
+@property (nonatomic, strong) UINavigationController *mainNav;
 
 @end
 
@@ -25,10 +26,10 @@
 
     //创建框架
     self.homeVC = [[HomeViewController alloc] init];
-    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:_homeVC];
-    mainNav.navigationBarHidden = NO;
-    mainNav.navigationBar.translucent = NO; //不要导航条模糊，为了让页面从导航条下部是0开始，如果为YES，则从屏幕顶部开始是0
-    self.window.rootViewController = mainNav;
+    self.mainNav = [[UINavigationController alloc] initWithRootViewController:_homeVC];
+    _mainNav.navigationBarHidden = NO;
+    _mainNav.navigationBar.translucent = NO; //不要导航条模糊，为了让页面从导航条下部是0开始，如果为YES，则从屏幕顶部开始是0
+    self.window.rootViewController = _mainNav;
     
     
     //注册和使用通知相关-----------------------------------------------------------------------------------------------------
@@ -73,6 +74,13 @@
     
     //获取存储在group里边的通知payloads
     [[DataCenter sharedCenter] collectGroupMessages];
+    
+    //刷新一下列表
+    UIViewController *topVC = [_mainNav topViewController];
+    if([topVC isKindOfClass:[HomeViewController class]])
+    {
+        [_homeVC refreshMsgList];
+    }
     
 }
 

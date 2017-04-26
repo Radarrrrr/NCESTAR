@@ -12,7 +12,7 @@
 
 @interface HomeViewController () <DDTableViewDelegate>
 
-@property (nonatomic, copy)     NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
+@property (nonatomic, strong)   NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
 @property (nonatomic, strong)   DDTableView *listTable;
 @property (nonatomic, strong)   UIImageView *backImgView; //背景图片层
 
@@ -27,6 +27,7 @@
     
     self.navigationItem.title = @"HOME";
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
+    self.messageArray = [[NSMutableArray alloc] init];
     
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
@@ -93,8 +94,11 @@
     
     NSArray* reversedArray = [[allMsgs reverseObjectEnumerator] allObjects];
     
-    if(ARRAYVALID(_messageArray)) [_messageArray removeAllObjects];
-    self.messageArray = [NSMutableArray arrayWithArray:reversedArray];
+    if([_messageArray count] != 0) 
+    {
+        [_messageArray removeAllObjects];
+    }
+    [_messageArray addObjectsFromArray:reversedArray];
 }
 
 - (void)refreshMsgList //刷新聊天列表
@@ -103,6 +107,7 @@
     [self syncAllMessagesFromDataCenter];
     
     //刷新列表
+    [_listTable clearDatas];
     [_listTable appendDataArray:_messageArray useCell:@"MessageCell" toSection:0];
     [_listTable refreshTable];
 }

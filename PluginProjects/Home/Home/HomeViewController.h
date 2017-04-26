@@ -11,6 +11,7 @@
 
 @interface HomeViewController : UIViewController 
 
+- (void)refreshMsgList; //刷新聊天列表
 - (void)insertMessage:(NSDictionary*)msgData; //插入一行消息数据，在最前面插入
 
 @end
