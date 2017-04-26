@@ -8,8 +8,9 @@
 
 
 #define MessageCell_default_cell_height 200
-#define MessageCell_face_width 50
-#define MessageCell_limit_msglabel_height 50
+#define MessageCell_face_width 45
+#define MessageCell_limit_msglabel_height 30
+#define MessageCell_msg_font DDFONT(15)
 
 
 #import "MessageCell.h"
@@ -45,14 +46,14 @@
         //添加头像
         self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width, MessageCell_face_width, MessageCell_face_width)];
         _faceView.backgroundColor = [UIColor clearColor];
-        [DDFunction addRadiusToView:_faceView radius:18];
+        [DDFunction addRadiusToView:_faceView radius:15];
         _faceView.image = [UIImage imageNamed:@"face_ma.png" forUser:self];
         [self.contentView addSubview:_faceView];
         
 		//add _tLabel
 		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+8, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-10-MessageCell_face_width)];
 		_msgLabel.backgroundColor = [UIColor clearColor];
-		_msgLabel.font = DDFONT(15);
+		_msgLabel.font = MessageCell_msg_font;
 		_msgLabel.textColor = DDCOLOR_TEXT_A;
         _msgLabel.textAlignment = NSTextAlignmentCenter;
         _msgLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -102,20 +103,26 @@
 
 	_msgLabel.text = msg;
 	
-	
-    
-    
     //获取文字高度
-    float msgHeight = [DDFunction getHeightForString:msg font:DDFONT(15) width:CGRectGetWidth(_msgLabel.frame)];
+    float msgHeight = [DDFunction getHeightForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
     if(msgHeight < MessageCell_limit_msglabel_height)
     {
         msgHeight = MessageCell_limit_msglabel_height;
     }
     
+    float backDelta = 14.0;
+    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
+    NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
+    
+    if(lines<=1 && (msgWidth > CGRectGetWidth(_backView.frame)-8*2-MessageCell_face_width*2))
+    {
+        backDelta = 0.0;
+    }
+    
     //修改各个组件高度
     [DDFunction changeHeightForView:_msgLabel to:msgHeight];
     
-    float backHeight = msgHeight+8+2+MessageCell_face_width+8;
+    float backHeight = msgHeight+8+MessageCell_face_width+8-backDelta;
     [DDFunction changeHeightForView:_backView to:backHeight];
     
     CGRect fframe = _faceView.frame;
@@ -123,7 +130,7 @@
     _faceView.frame = fframe;
     
     CGRect lframe = _line.frame;
-    lframe.origin.y = CGRectGetMinY(_faceView.frame)+14;
+    lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
     _line.frame = lframe;
     
     
