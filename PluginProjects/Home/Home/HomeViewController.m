@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "MessageCell.h"
 
 
 @interface HomeViewController () <DDTableViewDelegate>
@@ -110,9 +111,15 @@
 {
     if(!DICTIONARYVALID(msgData)) return;
     
+    //插入一条信息到第一个位置
     NSIndexPath *indexPath = [DDTableView indexPathWithSection:0 row:0];
     [_listTable insertData:msgData useCell:@"MessageCell" toIndexPath:indexPath];
     [_listTable refreshTableWithAnimation:UITableViewRowAnimationTop];
+    
+    //改变第二个cell的状态
+    NSIndexPath *secondIndex = [DDTableView indexPathWithSection:0 row:1];
+    MessageCell *secondCell = [_listTable.tableView cellForRowAtIndexPath:secondIndex];
+    [secondCell recoverState];
 }
 
 

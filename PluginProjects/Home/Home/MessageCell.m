@@ -10,7 +10,7 @@
 #define MessageCell_default_cell_height 200
 #define MessageCell_face_width 45
 #define MessageCell_limit_msglabel_height 30
-#define MessageCell_msg_font DDFONT(15)
+#define MessageCell_msg_font        DDFONT(15)
 
 
 #import "MessageCell.h"
@@ -49,7 +49,7 @@
         [DDFunction addRadiusToView:_faceView radius:15];
         _faceView.image = [UIImage imageNamed:@"face_ma.png" forUser:self];
         [self.contentView addSubview:_faceView];
-        
+  
 		//add _tLabel
 		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+8, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-10-MessageCell_face_width)];
 		_msgLabel.backgroundColor = [UIColor clearColor];
@@ -96,30 +96,45 @@
 
 #pragma mark -
 #pragma mark out use functions
--(void)setCellData:(id)data
+-(void)setCellData:(id)data atIndexPath:(NSIndexPath*)indexPath
 {
     NSString *msg = (NSString*)[DDFunction getValueForKey:@"body" inData:data];
     if(!STRVALID(msg)) return;
 
 	_msgLabel.text = msg;
 	
-    //获取文字高度
+
+    //根据位置不同修改各个组件属性
+    if(indexPath.row == 0)
+    {
+        _backView.backgroundColor = RGB(255, 249, 206);
+        _line.backgroundColor = DDCOLOR_BLUE;
+    }
+    else
+    {
+        _backView.backgroundColor = RGBS(240);
+        _line.backgroundColor = RGBS(200);
+    }
+    
+
+    //获取文字高度和宽度
     float msgHeight = [DDFunction getHeightForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
     if(msgHeight < MessageCell_limit_msglabel_height)
     {
         msgHeight = MessageCell_limit_msglabel_height;
     }
     
-    float backDelta = 14.0;
     float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
     NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
     
+    
+    //修改各个组件高度
+    float backDelta = 14.0; //头像和背景之间的偏移量
     if(lines<=1 && (msgWidth > CGRectGetWidth(_backView.frame)-8*2-MessageCell_face_width*2))
     {
         backDelta = 0.0;
     }
     
-    //修改各个组件高度
     [DDFunction changeHeightForView:_msgLabel to:msgHeight];
     
     float backHeight = msgHeight+8+MessageCell_face_width+8-backDelta;
@@ -136,7 +151,9 @@
     
     //设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
     float height = backHeight + 8;
-    
+
+        
+        
     //最下面这段用来给DDTableView容器使用，无须更改。
 	CGRect newRect = self.contentView.frame;
 	newRect.size.height = height;
@@ -146,6 +163,14 @@
 }
 
 
+- (void)recoverState
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _backView.backgroundColor = RGBS(240);
+        _line.backgroundColor = RGBS(200);
+    }];
+    
+}
 
 
 @end

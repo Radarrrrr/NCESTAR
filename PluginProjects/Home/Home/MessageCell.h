@@ -45,8 +45,8 @@
 
 #pragma mark -
 #pragma mark out use functions
--(void)setCellData:(id)data; //{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
+-(void)setCellData:(id)data atIndexPath:(NSIndexPath*)indexPath; //{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
 
-
+- (void)recoverState; //第二条以后恢复原始状态
 
 @end

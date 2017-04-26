@@ -47,7 +47,7 @@
 
 #pragma mark - 数据收集&获取
 - (void)collectGroupMessages
-{
+{    
     //先从userdefault里边取出以前存储的
     if([_allMessages count] == 0)
     {

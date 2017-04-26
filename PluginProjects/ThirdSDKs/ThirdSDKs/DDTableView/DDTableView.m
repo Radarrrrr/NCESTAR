@@ -454,9 +454,9 @@
         //设定cell的data
         if(cell && [[cell class] isSubclassOfClass:[UITableViewCell class]])
         {
-            if([cell respondsToSelector:@selector(setCellData:)])
+            if([cell respondsToSelector:@selector(setCellData:atIndexPath:)])
             {
-                [cell performSelector:@selector(setCellData:) withObject:data];
+                [cell performSelector:@selector(setCellData:atIndexPath:) withObject:data withObject:indexPath];
             }
         }
         
@@ -521,10 +521,10 @@
     
 	if([[testcell class] isSubclassOfClass:[UITableViewCell class]])
     {
-        if([testcell respondsToSelector:@selector(setCellData:)])
+        if([testcell respondsToSelector:@selector(setCellData:atIndexPath:)])
         {
             id data = [self cellDataForIndexPath:indexPath];
-            [testcell performSelector:@selector(setCellData:) withObject:data];
+            [testcell performSelector:@selector(setCellData:atIndexPath:) withObject:data withObject:indexPath];
             
             height = testcell.contentView.frame.size.height;
         }
