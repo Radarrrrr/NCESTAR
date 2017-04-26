@@ -7,7 +7,8 @@
 //
 
 
-#define DataCenter_all_messages_save_list @"DataCenter all messages save list"
+#define DataCenter_all_messages_save_list       @"DataCenter all messages save list"
+#define DataCenter_saved_messages_limit_count   10
 
 
 #import "DataCenter.h"
@@ -65,7 +66,11 @@
     //把group里边的添加到总列表里边
     [_allMessages addObjectsFromArray:payloads];
     
-    //TO DO: 限定最多数量，超出的删掉不保存
+    //限定最多数量，超出的删掉不保存
+    if([_allMessages count] > DataCenter_saved_messages_limit_count)
+    {
+        [_allMessages removeObjectsInRange:NSMakeRange(0, [payloads count])];
+    }
     
     //保存列表
     [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
