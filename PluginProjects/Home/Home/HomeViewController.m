@@ -8,6 +8,10 @@
 
 #import "HomeViewController.h"
 #import "MessageCell.h"
+#import <AudioToolbox/AudioToolbox.h>
+
+
+static BOOL inputingON = NO;
 
 
 @interface HomeViewController () <DDTableViewDelegate>
@@ -46,8 +50,6 @@
     //TO DO: 添加聊天列表
     self.listTable = [[DDTableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
     _listTable.delegate = self;
-//    _listTable.loadMoreStyle = LoadMoreStyleAuto;
-//    _listTable.refreshStyle = RefreshStyleDrag;
     [self.view addSubview:_listTable];
     
     //设定list属性
@@ -62,6 +64,21 @@
     UIView *fview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 8)];
     fview.backgroundColor = [UIColor clearColor];
     [_listTable setSection:0 headerView:nil footerView:fview];
+    
+    
+    //设定下拉提示条
+    UIView *tipview = [[UIView alloc] initWithFrame:CGRectMake(0, -500, SCR_WIDTH, 500)];
+    tipview.backgroundColor = [UIColor clearColor];
+    [_listTable.tableView addSubview:tipview];
+    
+    UILabel *tipL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(tipview.frame)-40, SCR_WIDTH, 40)];
+    tipL.backgroundColor = [UIColor clearColor];
+    tipL.userInteractionEnabled = NO;
+    tipL.textAlignment = NSTextAlignmentCenter;
+    tipL.font = DDFONT(13);
+    tipL.textColor = DDCOLOR_TEXT_B;
+    tipL.text = @"下拉开始写信息";
+    [tipview addSubview:tipL];
     
 
     //TO DO: 添加右侧滑动条操作键盘
@@ -132,9 +149,44 @@
 }
 
 
+
+
+
 //DDTableViewDelegate
 - (void)DDTableViewDidSelectIndexPath:(NSIndexPath*)indexPath withData:(id)data ontable:(DDTableView*)table
 {
+    
+}
+
+- (void)DDTableViewDidScroll:(DDTableView*)table
+{
+    if(!inputingON && table.tableView.contentOffset.y <= -100)
+    {
+        NSLog(@"触发写信息");
+        
+        //先震动一下
+        //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        
+        //弹出输入框
+        UITextView *inputview = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 500)];
+        inputview.backgroundColor = DDCOLOR_RED;
+        [inputview becomeFirstResponder];   
+        
+        inputingON = YES;
+        
+        [[DDSlideLayer sharedLayer] callSlideLayerWithObject:inputview 
+                                                    position:positionDown 
+                                                   limitRect:CGRectZero //CGRectMake(0, 64, SCR_WIDTH, SCR_HEIGHT-64) 
+                                                   lockBlank:NO 
+                                                     lockPan:NO 
+                                                  completion:^{
+                                                      
+            inputingON = NO;
+                                                   
+        }];
+    
+        return;
+    }
     
 }
 
