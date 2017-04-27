@@ -47,6 +47,7 @@
 #pragma mark out use functions
 -(void)setCellData:(id)data atIndexPath:(NSIndexPath*)indexPath; //{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
 
-- (void)recoverState; //第二条以后恢复原始状态
+- (void)flashCell; //让cell闪动一下
+//- (void)recoverState; //第二条以后恢复原始状态
 
 @end

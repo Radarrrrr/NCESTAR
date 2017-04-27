@@ -105,17 +105,17 @@
 	
 
     //根据位置不同修改各个组件属性
-    if(indexPath.row == 0)
-    {
-        _backView.backgroundColor = RGB(255, 249, 206);
-        _line.backgroundColor = DDCOLOR_BLUE;
-    }
-    else
-    {
-        _backView.backgroundColor = RGBS(240);
-        _line.backgroundColor = RGBS(200);
-    }
-    
+//    if(indexPath.row == 0)
+//    {
+//        _backView.backgroundColor = RGB(255, 249, 206);
+//        _line.backgroundColor = DDCOLOR_BLUE;
+//    }
+//    else
+//    {
+//        _backView.backgroundColor = RGBS(240);
+//        _line.backgroundColor = RGBS(200);
+//    }
+//    
 
     //获取文字高度和宽度
     float msgHeight = [DDFunction getHeightForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
@@ -151,8 +151,6 @@
     
     //设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
     float height = backHeight + 8;
-
-        
         
     //最下面这段用来给DDTableView容器使用，无须更改。
 	CGRect newRect = self.contentView.frame;
@@ -162,15 +160,53 @@
 	self.frame = newRect;
 }
 
-
-- (void)recoverState
+- (void)flashCell
 {
-    [UIView animateWithDuration:0.25 animations:^{
-        _backView.backgroundColor = RGBS(240);
-        _line.backgroundColor = RGBS(200);
-    }];
-    
+    //让背景view闪动    
+    [UIView animateWithDuration:0.5 
+                     animations:^{
+                         //_backView.alpha = 0.0;
+                         _backView.backgroundColor = RGB(255, 249, 206);
+                     } 
+                     completion:^(BOOL finished) {
+                         
+                         [UIView animateWithDuration:0.5 
+                                          animations:^{
+                                              //_backView.alpha = 1.0;
+                                              _backView.backgroundColor = RGBS(240);
+                                          } 
+                                          completion:^(BOOL finished) {
+                                              
+                                              [UIView animateWithDuration:0.5 
+                                                               animations:^{
+                                                                   //_backView.alpha = 0.0;
+                                                                   _backView.backgroundColor = RGB(255, 249, 206);
+                                                               } 
+                                                               completion:^(BOOL finished) {
+                                                                   
+                                                                   [UIView animateWithDuration:0.5 
+                                                                                    animations:^{
+                                                                                        //_backView.alpha = 1.0;
+                                                                                        _backView.backgroundColor = RGBS(240);
+                                                                                    } 
+                                                                                    completion:^(BOOL finished) {
+                                                                                    }];
+                                                                   
+                                                               }];
+                                          }];
+                         
+                     }];
 }
+
+
+//- (void)recoverState
+//{
+//    [UIView animateWithDuration:0.25 animations:^{
+//        _backView.backgroundColor = RGBS(240);
+//        _line.backgroundColor = RGBS(200);
+//    }];
+//    
+//}
 
 
 @end
