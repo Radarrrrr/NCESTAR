@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "MessageCell.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "MsgInputView.h"
 
 
 static BOOL inputingON = NO;
@@ -168,21 +169,26 @@ static BOOL inputingON = NO;
         //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         //弹出输入框
-        UITextView *inputview = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 500)];
-        inputview.backgroundColor = DDCOLOR_RED;
-        [inputview becomeFirstResponder];   
+//        UITextView *inputview = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 400)];
+//        inputview.backgroundColor = DDCOLOR_RED;
+//        [inputview becomeFirstResponder];   
+//        
+//        inputingON = YES;
+//        
+//        [[DDSlideLayer sharedLayer] callSlideLayerWithObject:inputview 
+//                                                    position:positionDown 
+//                                                   limitRect:CGRectZero //CGRectMake(0, 64, SCR_WIDTH, SCR_HEIGHT-64) 
+//                                                   lockBlank:NO 
+//                                                     lockPan:NO 
+//                                                  completion:^{
+//                                                      
+//            inputingON = NO;
+//                                                   
+//        }];
         
-        inputingON = YES;
         
-        [[DDSlideLayer sharedLayer] callSlideLayerWithObject:inputview 
-                                                    position:positionDown 
-                                                   limitRect:CGRectZero //CGRectMake(0, 64, SCR_WIDTH, SCR_HEIGHT-64) 
-                                                   lockBlank:NO 
-                                                     lockPan:NO 
-                                                  completion:^{
-                                                      
+        [MsgInputView callMsgInputView:^{
             inputingON = NO;
-                                                   
         }];
     
         return;

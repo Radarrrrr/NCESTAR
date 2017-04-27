@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C0FE3101EA8B1E200D74708 /* face_ma.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C0FE30E1EA8B1E200D74708 /* face_ma.png */; };
 		0C0FE3111EA8B1E200D74708 /* face_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C0FE30F1EA8B1E200D74708 /* face_star.png */; };
+		0C0FE3251EB1FB1E00D74708 /* MsgInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0FE3231EB1FB1E00D74708 /* MsgInputView.h */; };
+		0C0FE3261EB1FB1E00D74708 /* MsgInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0FE3241EB1FB1E00D74708 /* MsgInputView.m */; };
 		0CA929A11E7BC36500F9EF9C /* Home.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA9299F1E7BC36500F9EF9C /* Home.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA929B11E7BC3D700F9EF9C /* HomeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA929AD1E7BC3D700F9EF9C /* HomeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA929B21E7BC3D700F9EF9C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA929AE1E7BC3D700F9EF9C /* HomeViewController.m */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		0C0FE30E1EA8B1E200D74708 /* face_ma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_ma.png; sourceTree = "<group>"; };
 		0C0FE30F1EA8B1E200D74708 /* face_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_star.png; sourceTree = "<group>"; };
+		0C0FE3231EB1FB1E00D74708 /* MsgInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgInputView.h; sourceTree = "<group>"; };
+		0C0FE3241EB1FB1E00D74708 /* MsgInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgInputView.m; sourceTree = "<group>"; };
 		0CA9299C1E7BC36500F9EF9C /* Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA9299F1E7BC36500F9EF9C /* Home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Home.h; sourceTree = "<group>"; };
 		0CA929A01E7BC36500F9EF9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 			children = (
 				0CA929AD1E7BC3D700F9EF9C /* HomeViewController.h */,
 				0CA929AE1E7BC3D700F9EF9C /* HomeViewController.m */,
+				0C0FE3231EB1FB1E00D74708 /* MsgInputView.h */,
+				0C0FE3241EB1FB1E00D74708 /* MsgInputView.m */,
 				0CA929AF1E7BC3D700F9EF9C /* MessageCell.h */,
 				0CA929B01E7BC3D700F9EF9C /* MessageCell.m */,
 				0CA9299F1E7BC36500F9EF9C /* Home.h */,
@@ -89,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA929BB1E7BFC8900F9EF9C /* PrefixHeader.pch in Headers */,
+				0C0FE3251EB1FB1E00D74708 /* MsgInputView.h in Headers */,
 				0CA929B31E7BC3D700F9EF9C /* MessageCell.h in Headers */,
 				0CA929B11E7BC3D700F9EF9C /* HomeViewController.h in Headers */,
 				0CA929A11E7BC36500F9EF9C /* Home.h in Headers */,
@@ -185,6 +192,7 @@
 			files = (
 				0CA929B21E7BC3D700F9EF9C /* HomeViewController.m in Sources */,
 				0CA929B41E7BC3D700F9EF9C /* MessageCell.m in Sources */,
+				0C0FE3261EB1FB1E00D74708 /* MsgInputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
