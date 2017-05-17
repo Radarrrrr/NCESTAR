@@ -12,8 +12,6 @@
 #import "MsgInputView.h"
 
 
-static BOOL inputingON = NO;
-
 
 @interface HomeViewController () <DDTableViewDelegate>
 
@@ -67,19 +65,13 @@ static BOOL inputingON = NO;
     [_listTable setSection:0 headerView:nil footerView:fview];
     
     
-    //设定下拉提示条
-    UIView *tipview = [[UIView alloc] initWithFrame:CGRectMake(0, -500, SCR_WIDTH, 500)];
-    tipview.backgroundColor = [UIColor clearColor];
-    [_listTable.tableView addSubview:tipview];
     
-    UILabel *tipL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(tipview.frame)-40, SCR_WIDTH, 40)];
-    tipL.backgroundColor = [UIColor clearColor];
-    tipL.userInteractionEnabled = NO;
-    tipL.textAlignment = NSTextAlignmentCenter;
-    tipL.font = DDFONT(13);
-    tipL.textColor = DDCOLOR_TEXT_B;
-    tipL.text = @"下拉开始写信息";
-    [tipview addSubview:tipL];
+    //添加写信息按钮
+    UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    writeBtn.frame = CGRectMake(SCR_WIDTH-70, SCR_HEIGHT-64-70, 70, 70);
+    [writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forUser:self] forState:UIControlStateNormal];
+    [writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:writeBtn];
     
 
     //TO DO: 添加右侧滑动条操作键盘
@@ -94,15 +86,29 @@ static BOOL inputingON = NO;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-//    CGRect frame = self.view.frame;
-//    int i=0;
+    
 }
+
+
+
+
 
 - (void)addMsgAction:(id)sender
 {
     RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
     [self.navigationController pushViewController:simuVC animated:YES];
 }
+
+- (void)writeMsgAction:(id)sender
+{
+    //弹出输入框
+    [[MsgInputView sharedInstance] callMsgInputView:^{
+        
+    }];
+}
+
+
+
 
 - (void)syncAllMessagesFromDataCenter
 {
@@ -161,38 +167,6 @@ static BOOL inputingON = NO;
 
 - (void)DDTableViewDidScroll:(DDTableView*)table
 {
-    if(!inputingON && table.tableView.contentOffset.y <= -100)
-    {
-        NSLog(@"触发写信息");
-        
-        //先震动一下
-        //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        
-        //弹出输入框
-//        UITextView *inputview = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 400)];
-//        inputview.backgroundColor = DDCOLOR_RED;
-//        [inputview becomeFirstResponder];   
-//        
-//        inputingON = YES;
-//        
-//        [[DDSlideLayer sharedLayer] callSlideLayerWithObject:inputview 
-//                                                    position:positionDown 
-//                                                   limitRect:CGRectZero //CGRectMake(0, 64, SCR_WIDTH, SCR_HEIGHT-64) 
-//                                                   lockBlank:NO 
-//                                                     lockPan:NO 
-//                                                  completion:^{
-//                                                      
-//            inputingON = NO;
-//                                                   
-//        }];
-        
-        
-        [MsgInputView callMsgInputView:^{
-            inputingON = NO;
-        }];
-    
-        return;
-    }
     
 }
 

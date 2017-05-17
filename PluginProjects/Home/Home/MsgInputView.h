@@ -10,6 +10,8 @@
 
 @interface MsgInputView : UIView
 
-+ (void)callMsgInputView:(void (^)(void))completion;
++ (instancetype)sharedInstance; //单实例
+
+- (void)callMsgInputView:(void (^)(void))completion;
 
 @end
