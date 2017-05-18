@@ -8,17 +8,22 @@
 
 
 #define MsgInputView_container_height       400
-#define MsgInputView_animation_duration     0.25
+
+#define MsgInputView_container_position_down    SCR_HEIGHT - MsgInputView_container_height
+#define MsgInputView_container_position_up      MsgInputView_container_position_down - 200
+
+
+static float inputLastPosition;
 
 
 #import "MsgInputView.h"
 
 
-@interface MsgInputView ()
+@interface MsgInputView () <DDMoveableViewDelegate>
 
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UIView *backView;
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) DDMoveableView *containerView;
 
 @end
 
@@ -57,8 +62,10 @@
         
         
         //添加输入内容浮层
-        self.containerView = [[UIView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, MsgInputView_container_height)];
+        self.containerView = [[DDMoveableView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, MsgInputView_container_height)];
         _containerView.backgroundColor = DDCOLOR_BLUE_GRAY_BACK_GROUND;
+        _containerView.verticalOnly = YES;
+        _containerView.delegate = self;
         [DDFunction addRadiusToView:_containerView radius:6];
         [self addSubview:_containerView];
         
@@ -82,6 +89,13 @@
     return self;
 }
 
+- (void)moveContainerViewToY:(float)toY
+{
+    CGRect cframe = _containerView.frame;
+    cframe.origin.y = toY;
+    _containerView.frame = cframe;
+}
+
 
 - (void)callMsgInputView:(void (^)(void))completion
 {
@@ -91,13 +105,12 @@
         [topWindow addSubview:self];
     }
     
-    [UIView animateWithDuration:MsgInputView_animation_duration animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         
         _backView.alpha = 0.5;
         
-        CGRect cframe = _containerView.frame;
-        cframe.origin.y = SCR_HEIGHT-MsgInputView_container_height;
-        _containerView.frame = cframe;
+        [self moveContainerViewToY:MsgInputView_container_position_down];
+        inputLastPosition = MsgInputView_container_position_down;
         
         [_inputField becomeFirstResponder];
         
@@ -110,13 +123,11 @@
 
 - (void)closeAction:(id)sender
 {
-    [UIView animateWithDuration:MsgInputView_animation_duration animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         
         _backView.alpha = 0.0;
         
-        CGRect cframe = _containerView.frame;
-        cframe.origin.y = SCR_HEIGHT;
-        _containerView.frame = cframe;
+        [self moveContainerViewToY:SCR_HEIGHT];
         
         [_inputField resignFirstResponder];
         
@@ -129,57 +140,50 @@
     }];
 }
 
+//DDMoveableViewDelegate
+- (void)DDMoveableViewTouchUp:(DDMoveableView*)theView
+{
+    if(!theView) return;
+    
+    
+    float moveToY;
+    
+    if(inputLastPosition == MsgInputView_container_position_down)
+    {
+        if(theView.frame.origin.y < MsgInputView_container_position_down-50)
+        {
+            //向上打开
+            moveToY = MsgInputView_container_position_up;
+        }
+        else
+        {
+            //恢复向下关闭
+            moveToY = MsgInputView_container_position_down;
+        }
+    }
+    else if(inputLastPosition == MsgInputView_container_position_up)
+    {
+        if(theView.frame.origin.y < MsgInputView_container_position_up+50)
+        {
+            //恢复向上打开
+            moveToY = MsgInputView_container_position_up;
+        }
+        else
+        {
+            //向下关闭
+            moveToY = MsgInputView_container_position_down;
+        }
+    }
+    
 
-
-
-//#pragma mark -
-//#pragma mark touches functions
-//- (void) touchesCanceled 
-//{
-//}
-//- (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event 
-//{
-//}
-//- (void) touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event 
-//{
-//}
-//- (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event 
-//{
-//    NSSet *allTouches = [event allTouches];
-//    
-//    switch ([allTouches count]) {
-//        case 1: 
-//        {
-//            UITouch *touch = [[allTouches allObjects] objectAtIndex:0];
-//            CGPoint tapPoint = [touch locationInView:self];
-//            
-//            switch (touch.tapCount) 
-//            {
-//                case 1: 
-//                {		
-//
-//                        BOOL bIn = CGRectContainsPoint(_canvasShowRect, tapPoint);
-//                        if(!bIn)
-//                        {
-//                            //发送消息通知，本类关闭
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:lib_notification_DDMoveShowView_need_close object:nil userInfo:nil];
-//                            
-//                            //关闭本类
-//                            [self close];
-//                        }
-//                    
-//                }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
+    [UIView animateWithDuration:0.15 animations:^{
+        
+        [self moveContainerViewToY:moveToY];
+        inputLastPosition = moveToY;
+        
+    }];
+    
+}
 
 
 
