@@ -102,7 +102,11 @@
 - (void)writeMsgAction:(id)sender
 {
     //弹出输入框
-    [[MsgInputView sharedInstance] callMsgInputView:^{
+    
+    //TO DO: 暂时先发给自己
+    NSString *toToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    
+    [[MsgInputView sharedInstance] callMsgInputToToken:toToken completion:^{
         
     }];
 }

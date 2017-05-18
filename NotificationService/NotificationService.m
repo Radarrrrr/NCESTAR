@@ -24,7 +24,7 @@
     
 
     //重写一些东西
-    self.bestAttemptContent.title = @"我是新标题，说明我拦截到通知了";
+//    self.bestAttemptContent.title = @"我是新标题，说明我拦截到通知了";
 //    self.bestAttemptContent.subtitle = @"我是子标题";
 //    self.bestAttemptContent.body = @"changed text hallo";
     

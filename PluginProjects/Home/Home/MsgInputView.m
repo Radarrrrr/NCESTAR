@@ -19,11 +19,13 @@ static float inputLastPosition;
 #import "MsgInputView.h"
 
 
-@interface MsgInputView () <DDMoveableViewDelegate>
+@interface MsgInputView () <DDMoveableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) DDMoveableView *containerView;
+
+@property (nonatomic, copy) NSString *pushToToken; //要发送到的devicetoken
 
 @end
 
@@ -76,6 +78,7 @@ static float inputLastPosition;
         _inputField.backgroundColor = DDCOLOR_BLUE;
         _inputField.borderStyle = UITextBorderStyleRoundedRect;
         _inputField.returnKeyType = UIReturnKeySend;
+        _inputField.delegate = self;
         [_containerView addSubview:_inputField];
         
         //添加拉动条
@@ -97,8 +100,11 @@ static float inputLastPosition;
 }
 
 
-- (void)callMsgInputView:(void (^)(void))completion
+- (void)callMsgInputToToken:(NSString*)toToken completion:(void (^)(void))completion
 {
+    if(!STRVALID(toToken)) return;
+    self.pushToToken = toToken;
+    
     UIWindow *topWindow = [UIApplication sharedApplication].keyWindow;
     if(![self superview])
     {
@@ -117,8 +123,6 @@ static float inputLastPosition;
     } completion:^(BOOL finished) {
         
     }];
-    
-    
 }
 
 - (void)closeAction:(id)sender
@@ -183,6 +187,67 @@ static float inputLastPosition;
         
     }];
     
+}
+
+
+//UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField.text && ![textField.text isEqualToString:@""])
+    {
+        NSString *message = textField.text;
+        NSDictionary *payload = [self assemblePayload:message attach:nil]; //表情可以当作attach发过来
+    
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            _inputField.text = nil;
+            
+        }];
+        
+        [self closeAction:nil];
+        
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+
+#pragma mark - payload相关
+- (NSDictionary *)assemblePayload:(NSString *)message attach:(NSString *)attach //attach就是一个url，无论上传了什么都是一个url
+{    
+    if(!STRVALID(message)) message = @"";
+    if(!STRVALID(attach)) attach = @"";
+    NSString *selfToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    
+    NSDictionary *payload = 
+    @{
+        @"aps":
+        @{
+            @"alert":
+            @{
+                @"title":@"",
+                @"subtitle":@"我是副标题",
+                @"body":message
+            },
+            @"badge":@"1",
+            @"sound":@"default",
+            @"mutable-content":@"1",
+            @"category":@"myNotificationCategory",
+            @"attach":attach,
+            @"from_token":selfToken,
+            @"from_avatar":@"idxxxx",
+            @"to_token":@"xxxxxxxx"
+        },
+        @"goto_page":@""
+    };
+
+    return payload;
 }
 
 

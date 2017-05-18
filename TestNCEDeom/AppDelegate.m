@@ -113,6 +113,11 @@
                                  stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"deviceTokenSt:%@",deviceTokenStr);
     
+    
+    //存储到userdefault里边，供全局使用
+    [[NSUserDefaults standardUserDefaults] setObject:deviceTokenStr forKey:SAVED_SELF_DEVICE_TOKEN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     //给推送模拟器存一份
     [RDPushSimuVC saveAppDeviceToken:deviceTokenStr];
 }

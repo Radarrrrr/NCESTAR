@@ -8,7 +8,7 @@
 
 #pragma mark -
 #pragma mark 一些通用的宏，用来全局使用，统一改动
-
+#define SAVED_SELF_DEVICE_TOKEN @"saved self device token"  //存储本机的devicetoken
 
 
 #pragma mark - 
