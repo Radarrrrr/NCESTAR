@@ -208,8 +208,6 @@ static float inputLastPosition;
         NSString *message = textField.text;
         NSDictionary *payload = [self assemblePayload:message attach:nil]; //表情可以当作attach发过来
     
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        
         [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
             
             if(_pushReportHandler)
@@ -219,7 +217,6 @@ static float inputLastPosition;
             
             if(report.status == PTPushReportStatusPushSuccess)
             {
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 _inputField.text = nil;
             }
         }];

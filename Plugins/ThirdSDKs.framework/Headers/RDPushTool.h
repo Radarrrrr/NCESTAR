@@ -68,9 +68,12 @@ typedef enum {
 #pragma mark -
 #pragma mark PTPushReport类  
 typedef enum {
-    PTPushReportStatusPushing       = 0,
-    PTPushReportStatusPushSuccess   = 1,
-    PTPushReportStatusPushFailure   = 2
+    PTPushReportStatusConnecting            = 0,
+    PTPushReportStatusConnectFailure        = 1,
+    PTPushReportStatusPushing               = 2,
+    PTPushReportStatusPushSuccess           = 3,
+    PTPushReportStatusPushFailure           = 4
+    
 } PTPushReportStatus;
 
 @interface PTPushReport : NSObject

@@ -434,7 +434,15 @@
             [sSelf connect:^(PTConnectReport *connectReport) {
                 
                 __strong RDPushTool *ssSelf = sSelf;
-                if(connectReport.status == PTConnectReportStatusConnectSuccess)
+                if(connectReport.status == PTConnectReportStatusConnecting)
+                {
+                    pushReport.status = PTPushReportStatusConnecting;
+                    if(completion)
+                    {
+                        completion(pushReport);
+                    }
+                }
+                else if(connectReport.status == PTConnectReportStatusConnectSuccess)
                 {
                     //如果重连成功，则再次推送，这次不管推送成功与否，都返回
                     [ssSelf pushThePayload:payloadDic toToken:deviceToken completion:^(PTPushReport *report) {
@@ -446,7 +454,8 @@
                 }
                 else if(connectReport.status == PTConnectReportStatusConnectFailure)
                 {
-                    //如果重连失败，则返回推送失败
+                    //如果重连失败，则返回连接失败
+                    pushReport.status = PTPushReportStatusConnectFailure;
                     if(completion)
                     {
                         completion(pushReport);

@@ -18,6 +18,8 @@
 @property (nonatomic, strong)   NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
 @property (nonatomic, strong)   DDTableView *listTable;
 @property (nonatomic, strong)   UIImageView *backImgView; //背景图片层
+@property (nonatomic, strong)   UIButton *writeBtn;
+@property (nonatomic, strong)   UIView *statusDot;
 
 @end
 
@@ -67,11 +69,19 @@
     
     
     //添加写信息按钮
-    UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    writeBtn.frame = CGRectMake(SCR_WIDTH-70, SCR_HEIGHT-64-70, 70, 70);
-    [writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forUser:self] forState:UIControlStateNormal];
-    [writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:writeBtn];
+    self.writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    _writeBtn.frame = CGRectMake(SCR_WIDTH-70, SCR_HEIGHT-64-70, 70, 70);
+    [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forUser:self] forState:UIControlStateNormal];
+    [_writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_writeBtn];
+    
+    //做状态圆点
+    self.statusDot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    _statusDot.center = CGPointMake(CGRectGetWidth(_writeBtn.frame)/2, CGRectGetHeight(_writeBtn.frame)/2);
+    _statusDot.userInteractionEnabled = NO;
+    _statusDot.backgroundColor = [UIColor clearColor];
+    [DDFunction addRadiusToView:_statusDot radius:5];
+    [_writeBtn addSubview:_statusDot];
     
 
     //TO DO: 添加右侧滑动条操作键盘
@@ -86,7 +96,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
 }
 
 
@@ -107,9 +116,46 @@
     NSString *toToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
         
     [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
-        NSLog(@"push status: %d", report.status);
+        
+        
+        switch (report.status) {
+            case PTPushReportStatusConnecting:
+            {
+                _statusDot.backgroundColor = [UIColor grayColor];  //正在连接 灰色
+                [_writeBtn startSpining];
+            }
+                break;
+            case PTPushReportStatusConnectFailure:
+            {
+                _statusDot.backgroundColor = [UIColor lightGrayColor];  //连接失败 浅灰色
+                [_writeBtn stopSpining];
+            }
+                break;
+            case PTPushReportStatusPushing:
+            {
+                _statusDot.backgroundColor = DDCOLOR_ORANGE;    //正在发送 橘色
+                [_writeBtn startSpining];
+            }
+                break;
+            case PTPushReportStatusPushSuccess:
+            {
+                _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
+                [_writeBtn stopSpining];
+            }
+                break;
+            case PTPushReportStatusPushFailure:
+            {
+                _statusDot.backgroundColor = DDCOLOR_RED;       //发送失败 红色
+                [_writeBtn stopSpining];
+            }
+                break;
+            default:
+                break;
+        }
+        
+        
     } completion:^{
-        NSLog(@"关闭输入框");
+        NSLog(@"输入浮层关闭");
     }];
 
 }
