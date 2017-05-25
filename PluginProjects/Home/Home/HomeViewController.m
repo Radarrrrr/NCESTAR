@@ -105,13 +105,14 @@
     
     //TO DO: 暂时先发给自己
     NSString *toToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
-    
-    [[MsgInputView sharedInstance] callMsgInputToToken:toToken completion:^{
         
+    [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
+        NSLog(@"push status: %d", report.status);
+    } completion:^{
+        NSLog(@"关闭输入框");
     }];
+
 }
-
-
 
 
 - (void)syncAllMessagesFromDataCenter

@@ -27,6 +27,9 @@ static float inputLastPosition;
 
 @property (nonatomic, copy) NSString *pushToToken; //要发送到的devicetoken
 
+@property (nonatomic, strong) void (^pushReportHandler)(PTPushReport *report);
+@property (nonatomic, strong) void (^closeHandler)(void);
+
 @end
 
 
@@ -99,9 +102,11 @@ static float inputLastPosition;
     _containerView.frame = cframe;
 }
 
-
-- (void)callMsgInputToToken:(NSString*)toToken completion:(void (^)(void))completion
+- (void)callMsgInputToToken:(NSString*)toToken pushReport:(void(^)(PTPushReport *report))pushReportHandler completion:(void (^)(void))closeHandler
 {
+    self.pushReportHandler = pushReportHandler;
+    self.closeHandler = closeHandler;
+    
     if(!STRVALID(toToken)) return;
     self.pushToToken = toToken;
     
@@ -140,6 +145,11 @@ static float inputLastPosition;
         if([self superview])
         {
             [self removeFromSuperview];
+        }
+        
+        if(_closeHandler)
+        {
+            _closeHandler();
         }
     }];
 }
@@ -202,9 +212,16 @@ static float inputLastPosition;
         
         [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
             
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            _inputField.text = nil;
+            if(_pushReportHandler)
+            {
+                _pushReportHandler(report);
+            }
             
+            if(report.status == PTPushReportStatusPushSuccess)
+            {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                _inputField.text = nil;
+            }
         }];
         
         [self closeAction:nil];
