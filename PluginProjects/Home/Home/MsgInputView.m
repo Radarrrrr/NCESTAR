@@ -216,14 +216,22 @@ static float inputLastPosition;
     
         [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
             
-            if(_pushReportHandler)
-            {
-                _pushReportHandler(report);
-            }
-            
             if(report.status == PTPushReportStatusPushSuccess)
             {
                 _inputField.text = nil;
+                
+                //存储发送成功的消息字典 {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
+                NSMutableDictionary *notiDic = [[NSMutableDictionary alloc] init];
+                [notiDic setObject:@"" forKey:@"notifyid"];
+                [notiDic setObject:@"" forKey:@"receivetime"];
+                [notiDic setObject:report.payload forKey:@"payload"];
+                
+                [[DataCenter sharedCenter] appendNotifyData:notiDic];
+            }
+            
+            if(_pushReportHandler)
+            {
+                _pushReportHandler(report);
             }
         }];
         

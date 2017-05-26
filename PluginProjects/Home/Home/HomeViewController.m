@@ -142,6 +142,18 @@
             {
                 _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
                 [_writeBtn stopSpining];
+                
+                //插入列表数据
+                //获取这条新消息的消息token
+                NSString *notifytoken = [DDFunction getValueForKey:@"notifytoken" inData:report.payload];
+                if(STRVALID(notifytoken))
+                {
+                    //去DataCenter里边获取到该条消息的data
+                    NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForToken:notifytoken];
+                    
+                    //根据获取到的消息数据，做增加消息的列表
+                    [self insertMessage:notiDic];
+                }
             }
                 break;
             case PTPushReportStatusPushFailure:

@@ -58,6 +58,7 @@
 #pragma mark - 数据收集&获取
 - (void)collectGroupMessages; //从group里边收集未展示的消息payloads
 
+- (void)appendNotifyData:(NSDictionary*)notiDic;//添加一条新的消息，到队列最后面
 
 
 #pragma mark - 数据请求
@@ -66,6 +67,9 @@
 - (NSDictionary *)getNotiDataForNotifyid:(NSString*)notifyid; //根据notifyid在数据中心的所有消息表中获取对应的消息字典
 
 - (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
+
+
+
 
 @end
 

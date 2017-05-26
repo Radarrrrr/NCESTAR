@@ -77,6 +77,23 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)appendNotifyData:(NSDictionary*)notiDic
+{
+    if(!DICTIONARYVALID(notiDic)) return;
+    
+    [_allMessages addObject:notiDic];
+    
+    //限定最多数量，超出的删掉不保存
+    if([_allMessages count] > DataCenter_saved_messages_limit_count)
+    {
+        [_allMessages removeObjectAtIndex:0];
+    }
+    
+    //保存列表
+    [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
 
 #pragma mark - 数据请求下发

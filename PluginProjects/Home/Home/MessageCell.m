@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIImageView *faceView;
 @property (nonatomic, strong) UIView *line;
+@property (nonatomic, copy)   NSString *selfDeviceToken; 
 
 @end
 
@@ -34,6 +35,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code.
+        
+        //保存一下本机的token，用来做判断
+        self.selfDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
         
         //添加一个背景框
         self.backView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, SCR_WIDTH-16, MessageCell_default_cell_height-8)];
@@ -103,20 +107,17 @@
 
 	_msgLabel.text = msg;
 	
-
-    //根据位置不同修改各个组件属性
-//    if(indexPath.row == 0)
-//    {
-//        _backView.backgroundColor = RGB(255, 249, 206);
-//        _line.backgroundColor = DDCOLOR_BLUE;
-//    }
-//    else
-//    {
-//        _backView.backgroundColor = RGBS(240);
-//        _line.backgroundColor = RGBS(200);
-//    }
-//    
-
+    
+    //判断是不是自己发出去的消息
+    BOOL isMymsg = NO;
+    
+    NSString *fromToken = (NSString*)[DDFunction getValueForKey:@"from_token" inData:data];
+    if(STRVALID(_selfDeviceToken) && STRVALID(fromToken) && [_selfDeviceToken isEqualToString:fromToken])
+    {
+        isMymsg = YES;
+    }
+    
+    
     //获取文字高度和宽度
     float msgHeight = [DDFunction getHeightForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
     if(msgHeight < MessageCell_limit_msglabel_height)
@@ -140,14 +141,30 @@
     float backHeight = msgHeight+8+MessageCell_face_width+8-backDelta;
     [DDFunction changeHeightForView:_backView to:backHeight];
     
-    CGRect fframe = _faceView.frame;
-    fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
-    _faceView.frame = fframe;
-    
-    CGRect lframe = _line.frame;
-    lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
-    _line.frame = lframe;
-    
+    if(!isMymsg)
+    {
+        CGRect fframe = _faceView.frame;
+        fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
+        fframe.origin.x = CGRectGetMinX(_backView.frame)+8;
+        _faceView.frame = fframe;
+        
+        CGRect lframe = _line.frame;
+        lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
+        lframe.origin.x = CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8;
+        _line.frame = lframe;
+    }
+    else
+    {
+        CGRect fframe = _faceView.frame;
+        fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
+        fframe.origin.x = CGRectGetMaxX(_backView.frame)-8-MessageCell_face_width;
+        _faceView.frame = fframe;
+        
+        CGRect lframe = _line.frame;
+        lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
+        lframe.origin.x = CGRectGetMinX(_faceView.frame)-8-lframe.size.width;
+        _line.frame = lframe;
+    }
     
     //设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
     float height = backHeight + 8;
