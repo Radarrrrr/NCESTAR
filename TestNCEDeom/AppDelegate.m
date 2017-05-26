@@ -159,12 +159,12 @@
         //获取存储在group里边的通知payloads
         [[DataCenter sharedCenter] collectGroupMessages];
         
-        //获取这条新消息的消息id
-        NSString *notifyid = [RDUserNotifyCenter notifyIdforNotification:notification];
-        if(!STRVALID(notifyid)) return;
+        //获取这条新消息的消息token
+        NSString *notifytoken = [RDUserNotifyCenter getValueForKey:@"notifytoken" inNotification:notification];
+        if(!STRVALID(notifytoken)) return;
         
         //去DataCenter里边获取到该条消息的data
-        NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForNotifyid:notifyid];
+        NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForToken:notifytoken];
         
         //根据获取到的消息数据，做增加消息的列表
         [_homeVC insertMessage:notiDic];

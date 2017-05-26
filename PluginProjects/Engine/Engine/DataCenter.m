@@ -106,7 +106,23 @@
     
     return nil;
 }
-
+- (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken
+{
+    if(!STRVALID(notifytoken)) return nil;
+    if(!ARRAYVALID(_allMessages)) return nil;
+    
+    //遍历循环所有的消息，找到notifytoken对应的那个并返回
+    for(NSDictionary *notiDic in _allMessages)
+    {
+        NSString *token = [DDFunction getValueForKey:@"notifytoken" inData:notiDic];
+        if(STRVALID(token) && [token isEqualToString:notifytoken])
+        {
+            return notiDic;
+        }
+    }
+    
+    return nil;
+}
 
 @end
 

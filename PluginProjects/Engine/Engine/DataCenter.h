@@ -31,13 +31,12 @@
         },
         "goto_page":"cms://page_id=14374",
         "sendtime":"17-04-19 16:53:32",          //发送时间
-        "msgtype":"message/confirm",             //消息类型，是message还是confirm，如果是message类型会存入DataCenter，confirm类型的不会存储
         
-        "confirm":                              //在confirm类型下面使用，用来返回各种确认信息
-        {
-            "verifycode":"xxxxxxxxxxxxxxx",          //本条消息的验证码，根据随时串做的唯一id，用于发送和接收两方验证消息是否已经收到
-            "confirm_notifyid":"xxxxxxxxxxx"         //接收到verifycode对应的那条消息的官方消息id
-        }
+        "notifytoken":"xxxxxxxxxxxxxxx",         //每条消息的唯一标识token，用from_token+to_token+sendtime做MD5生成, 消息的取用和显示都用这个来取
+ 
+        "msgtype":"message/confirm",             //消息类型，是message还是confirm，如果是message类型会存入DataCenter，confirm类型的不会存储
+        "confirm_notifyid":"xxxxxxxxxxx"         //接收到notifytoken对应的那条消息的官方消息id
+        
     },
     
     //以下信息是不发送给对方的，本地维护
@@ -66,5 +65,24 @@
 
 - (NSDictionary *)getNotiDataForNotifyid:(NSString*)notifyid; //根据notifyid在数据中心的所有消息表中获取对应的消息字典
 
+- (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

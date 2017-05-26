@@ -246,9 +246,9 @@ static float inputLastPosition;
     
     NSString *sendtime = [DDFunction stringFromDate:[NSDate date] useFormat:@"YY-MM-dd HH:mm:ss"];
     
-    //用selfToken+message+sendtime做MD5,生成验证码
-    NSString *verifyString = [NSString stringWithFormat:@"%@_%@_%@", _selfToken, message, sendtime];
-    NSString *verifyCode = [DDFunction md5FormString:verifyString];
+    //用from_token+to_token+sendtime做MD5,生成验证码
+    NSString *ntokenString = [NSString stringWithFormat:@"%@_%@_%@", _selfToken, _pushToToken, sendtime];
+    NSString *notifyToken = [DDFunction md5FormString:ntokenString];
     
     NSDictionary *payload = 
     @{
@@ -269,15 +269,13 @@ static float inputLastPosition;
             @"to_token":_pushToToken
         },
         @"goto_page":@"",
-        
         @"sendtime":sendtime,
-        @"msgtype":@"message",
         
-        @"confirm":
-        @{
-            @"verifycode":verifyCode, 
-            @"confirm_notifyid":@""
-        }
+        @"notifytoken":notifyToken, 
+        
+        @"msgtype":@"message",
+        @"confirm_notifyid":@""
+        
     };
 
     return payload;
