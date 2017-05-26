@@ -33,6 +33,40 @@
     //self.bestAttemptContent.categoryIdentifier = @"myNotificationCategory";
     
     
+    
+    
+    
+
+    //-测试确认接收功能--------------------------------------------------------------------------------------------------------------
+//    NSString *payloadStr = @"{\n\t\"aps\":\n\t{\n\t\t\"alert\":\n\t\t{\n\t\t\t\"title\":\"我接受到了一条新消息！！！\",\n\t\t\t\"subtitle\":\"我是副标题\",\n\t\t\t\"body\":\"it is a beautiful day\"\n\t\t},\n\t\t\"badge\":1,\n\t\t\"sound\":\"default\",\n\t\t\"mutable-content\":\"1\",\n\t\t\"category\":\"myNotificationCategory\",\n\t\t\"attach\":\"http://img3x2.ddimg.cn/29/14/1128514592-1_h_6.jpg\"\n\t},\n\t\"goto_page\":\"link://page=14374\"\n}";
+//
+//    payloadStr = [payloadStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    payloadStr = [payloadStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//    payloadStr = [payloadStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+//    payloadStr = [payloadStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+//    
+//    NSData *jsonData = [payloadStr dataUsingEncoding:NSUTF8StringEncoding];
+//    NSDictionary *payloadDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+//        
+//    [[RDPushTool sharedTool] pushPayload:payloadDictionary toToken:@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7" completion:^(PTPushReport *report) {
+//        
+//    }];
+    
+//    测试结果：
+//    568] Unable to read p12 file: PKCS12 data is empty
+//    2017-05-26 14:53:46.454081 NotificationService[8100:4413568] push failure...no connection with apns!
+//    2017-05-26 14:53:46.454629 NotificationService[8100:4413568] Disconnected
+//    2017-05-26 14:53:46.454850 NotificationService[8100:4413568] Connecting..
+//    2017-05-26 14:53:49.161287 NotificationService[8100:4413568] dataUrl: (null)
+//    2017-05-26 14:53:49.163707 NotificationService[8100:4413496] Unable to connect: (null)
+    //---------------------------------------------------------------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
     //截获attach和其他数据，下载并存储    
     NSString *link = [RDUserNotifyCenter getValueForKey:@"goto_page" inNotification:request];
     NSString *dataUrl = [self dataUrlForLink:link]; 

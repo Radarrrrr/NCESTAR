@@ -25,6 +25,7 @@ static float inputLastPosition;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) DDMoveableView *containerView;
 
+@property (nonatomic, copy) NSString *selfToken; //自己的devicetoken
 @property (nonatomic, copy) NSString *pushToToken; //要发送到的devicetoken
 
 @property (nonatomic, strong) void (^pushReportHandler)(PTPushReport *report);
@@ -109,6 +110,11 @@ static float inputLastPosition;
     
     if(!STRVALID(toToken)) return;
     self.pushToToken = toToken;
+    
+    NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    if(!STRVALID(myToken)) return;
+    self.selfToken = myToken;
+    
     
     UIWindow *topWindow = [UIApplication sharedApplication].keyWindow;
     if(![self superview])
@@ -237,7 +243,12 @@ static float inputLastPosition;
 {    
     if(!STRVALID(message)) message = @"";
     if(!STRVALID(attach)) attach = @"";
-    NSString *selfToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    
+    NSString *sendtime = [DDFunction stringFromDate:[NSDate date] useFormat:@"YY-MM-dd HH:mm:ss"];
+    
+    //用selfToken+message+sendtime做MD5,生成验证码
+    NSString *verifyString = [NSString stringWithFormat:@"%@_%@_%@", _selfToken, message, sendtime];
+    NSString *verifyCode = [DDFunction md5FormString:verifyString];
     
     NSDictionary *payload = 
     @{
@@ -246,7 +257,7 @@ static float inputLastPosition;
             @"alert":
             @{
                 @"title":@"",
-                @"subtitle":@"我是副标题",
+                @"subtitle":@"",
                 @"body":message
             },
             @"badge":@"1",
@@ -254,11 +265,19 @@ static float inputLastPosition;
             @"mutable-content":@"1",
             @"category":@"myNotificationCategory",
             @"attach":attach,
-            @"from_token":selfToken,
-            @"from_avatar":@"idxxxx",
-            @"to_token":@"xxxxxxxx"
+            @"from_token":_selfToken,
+            @"to_token":_pushToToken
         },
-        @"goto_page":@""
+        @"goto_page":@"",
+        
+        @"sendtime":sendtime,
+        @"msgtype":@"message",
+        
+        @"confirm":
+        @{
+            @"verifycode":verifyCode, 
+            @"confirm_notifyid":@""
+        }
     };
 
     return payload;

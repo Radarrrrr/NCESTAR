@@ -7,28 +7,7 @@
 //
 
 
-/* payload完整结构，这里只用一部分即可
-{
-    "aps":
-    {
-        "alert":
-        {
-            "title":"我是原装标题",
-            "subtitle":"我是副标题",
-            "body":"it is a beautiful day"
-        },
-        "badge":1,
-        "sound":"default",
-        "mutable-content":"1",
-        "category":"myNotificationCategory",
-        "attach":"https://picjumbo.imgix.net/HNCK8461.jpg?q=40&w=200&sharp=30",
-        "from_token" = "xxxxxxxx",
-        "from_avatar" = "idxxxx",
-        "to_token" = "xxxxxxxx"
-    },
-    "goto_page":"cms://page_id=14374"
-}
-*/        
+//data结构：在DataCenter.h里边看       
         
 
 #import <UIKit/UIKit.h>

@@ -109,6 +109,8 @@
 
 + (void)changeHeightForView:(UIView *)view to:(float)toHeight; //把view的frame高度改为toHeight指定的高度 //PS:不带动画，如果需要 在外面套一层 animateWithDuration 方法即可
 
++ (NSString *)md5FormString:(NSString *)string; //给一个字符串做MD5，输出MD5格式的串
+
 
 #pragma mark -
 #pragma mark 时间解析相关
