@@ -75,6 +75,8 @@
 		0CA506A11E32046D000A23EB /* UITableViewController+ISRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA506911E32046D000A23EB /* UITableViewController+ISRefreshControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CC237501ED404E500E65C5F /* UIButton+Spin.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC2374E1ED404E500E65C5F /* UIButton+Spin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC237511ED404E500E65C5F /* UIButton+Spin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2374F1ED404E500E65C5F /* UIButton+Spin.m */; };
+		0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC237561ED847DF00E65C5F /* UIView+Effect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CC237591ED847DF00E65C5F /* UIView+Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC237571ED847DF00E65C5F /* UIView+Effect.m */; };
 		0CC6D9D51ECC52C10055770C /* DDMoveableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC6D9D31ECC52C10055770C /* DDMoveableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC6D9D61ECC52C10055770C /* DDMoveableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6D9D41ECC52C10055770C /* DDMoveableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE1FFC01E60200500CDA679 /* DDScrollButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,6 +154,8 @@
 		0CA506911E32046D000A23EB /* UITableViewController+ISRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+ISRefreshControl.m"; sourceTree = "<group>"; };
 		0CC2374E1ED404E500E65C5F /* UIButton+Spin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Spin.h"; sourceTree = "<group>"; };
 		0CC2374F1ED404E500E65C5F /* UIButton+Spin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Spin.m"; sourceTree = "<group>"; };
+		0CC237561ED847DF00E65C5F /* UIView+Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effect.h"; sourceTree = "<group>"; };
+		0CC237571ED847DF00E65C5F /* UIView+Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effect.m"; sourceTree = "<group>"; };
 		0CC6D9D31ECC52C10055770C /* DDMoveableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoveableView.h; sourceTree = "<group>"; };
 		0CC6D9D41ECC52C10055770C /* DDMoveableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoveableView.m; sourceTree = "<group>"; };
 		0CE1FFC01E60200500CDA679 /* DDScrollButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScrollButton.h; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 		0CA5064D1E31FE31000A23EB /* Categorys */ = {
 			isa = PBXGroup;
 			children = (
+				0CC237561ED847DF00E65C5F /* UIView+Effect.h */,
+				0CC237571ED847DF00E65C5F /* UIView+Effect.m */,
 				0CC2374E1ED404E500E65C5F /* UIButton+Spin.h */,
 				0CC2374F1ED404E500E65C5F /* UIButton+Spin.m */,
 				0C0FE3161EA9E41A00D74708 /* UIImage+ImageEffects.h */,
@@ -393,6 +399,7 @@
 				0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */,
 				0CC6D9D51ECC52C10055770C /* DDMoveableView.h in Headers */,
 				0CC237501ED404E500E65C5F /* UIButton+Spin.h in Headers */,
+				0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
 				0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */,
@@ -503,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC237591ED847DF00E65C5F /* UIView+Effect.m in Sources */,
 				0C0FE3191EA9E41A00D74708 /* UIImage+ImageEffects.m in Sources */,
 				0CA505E21E307070000A23EB /* NWSecTools.m in Sources */,
 				0CA506691E320034000A23EB /* DDMoveShowView.m in Sources */,

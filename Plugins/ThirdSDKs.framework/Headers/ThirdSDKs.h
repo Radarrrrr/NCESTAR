@@ -33,6 +33,8 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 #import <ThirdSDKs/DDScrollButton.h>
 #import <ThirdSDKs/DDMoveableView.h>
 #import <ThirdSDKs/UIButton+Spin.h>
+#import <ThirdSDKs/UIView+Effect.h>
+
 
 
 
