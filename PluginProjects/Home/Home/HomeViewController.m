@@ -114,7 +114,8 @@
     //弹出输入框
     
     //TO DO: 暂时先发给自己
-    NSString *toToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    //[[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    NSString *toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678";
         
     [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
         
