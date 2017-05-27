@@ -11,6 +11,10 @@
 #define DataCenter_saved_messages_limit_count   20
 
 
+#define DataCenter_all_user_info_save_list  @"DataCenter all user info save list"
+
+
+
 #import "DataCenter.h"
 
 
@@ -18,6 +22,8 @@
 @interface DataCenter ()
 
 @property (nonatomic, strong) NSMutableArray *allMessages; //所有的消息数据，目前未有数据库，所以暂时只存储开启一次从group里边获取到的全部消息
+
+@property (nonatomic, strong) NSMutableDictionary *allUserInfos; //所有的用户信息
 
 @end
 
@@ -30,6 +36,7 @@
     if(self){
         //do something
         self.allMessages = [[NSMutableArray alloc] init];
+        self.allUserInfos = [self loadAllUserInfos];  //初始化就把所有的用户信息放在内存里
     }
     return self;
 }
@@ -123,7 +130,7 @@
     
     return nil;
 }
-- (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken
+- (NSDictionary *)getNotiDataForNotifyToken:(NSString*)notifytoken
 {
     if(!STRVALID(notifytoken)) return nil;
     if(!ARRAYVALID(_allMessages)) return nil;
@@ -140,6 +147,75 @@
     
     return nil;
 }
+
+
+
+#pragma mark - 个人信息相关数据
+- (NSMutableDictionary *)loadAllUserInfos
+{
+    NSMutableDictionary *allInfos = [[NSMutableDictionary alloc] init];
+    
+    NSDictionary *savedAllInfos = [[NSUserDefaults standardUserDefaults] objectForKey:DataCenter_all_user_info_save_list];
+    if(DICTIONARYVALID(savedAllInfos))
+    {
+        allInfos = [NSMutableDictionary dictionaryWithDictionary:savedAllInfos];
+    }
+    
+    return allInfos;
+}
+- (id)userInfoForToken:(NSString*)deviceToken item:(NSString*)itemName
+{
+    if(!STRVALID(deviceToken)) return nil;
+    if(!DICTIONARYVALID(_allUserInfos)) return nil;
+    
+    NSDictionary *userInfo = [_allUserInfos objectForKey:deviceToken];
+    if(!DICTIONARYVALID(userInfo)) return nil;
+    
+    //如果分项字段为nil，则返回整体用户信息
+    if(!STRVALID(itemName)) return userInfo;
+    
+    //如果分项字段存在，则返回分项信息
+    id item = [userInfo objectForKey:itemName];
+    return item;
+}
+
+- (void)addUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion
+{    
+    if(!DICTIONARYVALID(userInfoDic)) 
+    {
+        if(completion)
+        {
+            completion(NO);
+        }
+        return;
+    }
+    
+    //先拿到token
+    NSString *devicetoken = [userInfoDic objectForKey:@"device_token"];
+    if(!STRVALID(devicetoken))
+    {
+        if(completion)
+        {
+            completion(NO);
+        }
+        return;
+    }
+    
+    //存储userinfo
+    [_allUserInfos setObject:userInfoDic forKey:devicetoken];
+    
+    //存储到本地
+    [[NSUserDefaults standardUserDefaults] setObject:_allUserInfos forKey:DataCenter_all_user_info_save_list];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if(completion)
+    {
+        completion(YES);
+    }
+}
+
+
+
 
 @end
 

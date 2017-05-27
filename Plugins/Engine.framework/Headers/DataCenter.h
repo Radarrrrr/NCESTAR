@@ -66,11 +66,29 @@
 
 - (NSDictionary *)getNotiDataForNotifyid:(NSString*)notifyid; //根据notifyid在数据中心的所有消息表中获取对应的消息字典
 
-- (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
+- (NSDictionary *)getNotiDataForNotifyToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
+
+
 
 
 #pragma mark - 个人信息相关数据
-//- (void)user
+/* userInfos整体数据结构
+{
+    "devicetoken1":
+    {
+        "device_token":"xxxxx", 
+        "nick_name":"xxxx", 
+        "face_id": "xxxx", 
+        "introduce":"xxxxx"
+    },
+    "devicetoken2":{"":"", "":"", "": ""},
+    "devicetoken3":{"":"", "":"", "": ""}
+    ...
+}
+*/
+- (id)userInfoForToken:(NSString*)deviceToken item:(NSString*)itemName; //根据deviceToken获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
+
+- (void)addUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加一个用户信息到库里存储
 
 
 @end

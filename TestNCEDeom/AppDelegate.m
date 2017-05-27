@@ -164,7 +164,7 @@
         if(!STRVALID(notifytoken)) return;
         
         //去DataCenter里边获取到该条消息的data
-        NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForToken:notifytoken];
+        NSDictionary *notiDic = [[DataCenter sharedCenter] getNotiDataForNotifyToken:notifytoken];
         
         //根据获取到的消息数据，做增加消息的列表
         [_homeVC insertMessage:notiDic];
