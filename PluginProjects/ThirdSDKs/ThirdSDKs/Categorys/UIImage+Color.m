@@ -28,12 +28,12 @@
     return img;
 }
 
-+ (UIImage*)imageNamed:(NSString *)name forUser:(id)user
++ (UIImage*)imageNamed:(NSString *)name forme:(id)me
 {
     if(!name || [name isEqualToString:@""]) return nil;
-    if(!user) return nil;
+    if(!me) return nil;
     
-    NSBundle *bundle = [NSBundle bundleForClass:[user class]];
+    NSBundle *bundle = [NSBundle bundleForClass:[me class]];
     UIImage *image = [UIImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil]; 
     
     return image;

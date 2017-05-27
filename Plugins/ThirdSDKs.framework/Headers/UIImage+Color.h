@@ -11,6 +11,6 @@
 @interface UIImage (ColorImage)
 
 + (UIImage*)imageWithColor:(UIColor *)color andSize:(CGSize)size;  //根据颜色做图片
-+ (UIImage*)imageNamed:(NSString *)name forUser:(id)user;  //从user所在的framework的bundle里边，获取图片，user使用时必须写为self
++ (UIImage*)imageNamed:(NSString *)name forme:(id)me;  //从me所在的framework的bundle里边，获取图片，me使用时必须写为self
 
 @end

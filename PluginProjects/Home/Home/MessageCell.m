@@ -51,7 +51,7 @@
         self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width, MessageCell_face_width, MessageCell_face_width)];
         _faceView.backgroundColor = [UIColor clearColor];
         [DDFunction addRadiusToView:_faceView radius:15];
-        _faceView.image = [UIImage imageNamed:@"face_ma.png" forUser:self];
+        _faceView.image = [UIImage imageNamed:@"face_ma.png" forme:self];
         [self.contentView addSubview:_faceView];
   
 		//add _tLabel

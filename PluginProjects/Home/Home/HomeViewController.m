@@ -72,7 +72,7 @@
     //添加写信息按钮
     self.writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     _writeBtn.frame = CGRectMake(SCR_WIDTH-70, SCR_HEIGHT-64-70, 70, 70);
-    [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forUser:self] forState:UIControlStateNormal];
+    [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forme:self] forState:UIControlStateNormal];
     [_writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_writeBtn];
     

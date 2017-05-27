@@ -69,6 +69,8 @@
 - (NSDictionary *)getNotiDataForToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
 
 
+#pragma mark - 个人信息相关数据
+//- (void)user
 
 
 @end
