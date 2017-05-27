@@ -114,8 +114,9 @@
     //弹出输入框
     
     //TO DO: 暂时先发给自己
-    //[[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
-    NSString *toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678";
+    
+    NSString *toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机的
+    //NSString *toToken = @"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7"; //发给我手机的
         
     [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
         
@@ -211,7 +212,7 @@
     if(!DICTIONARYVALID(msgData)) return;
     
     //滚动到最顶
-    [_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self moveListPositionToTop];
     
     //插入一条信息到第一个位置
     NSIndexPath *indexPath = [DDTableView indexPathWithSection:0 row:0];
@@ -231,7 +232,8 @@
 - (void)moveListPositionToTop
 {
     //滚动到最顶
-    [_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [_listTable.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    //[_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 
