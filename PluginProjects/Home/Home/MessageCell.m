@@ -138,16 +138,16 @@
         msgHeight = MessageCell_limit_msglabel_height;
     }
     
-    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
-    NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
+//    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
+//    NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
     
     
     //修改各个组件高度
-    float backDelta = 14.0; //头像和背景之间的偏移量
-    if(lines<=1 && (msgWidth > CGRectGetWidth(_backView.frame)-8*2-MessageCell_face_width*2))
-    {
-        backDelta = 0.0;
-    }
+    float backDelta = 20.0; //头像和背景之间的偏移量
+//    if(lines<=1 && (msgWidth > CGRectGetWidth(_backView.frame)-8*2-MessageCell_face_width*2))
+//    {
+//        backDelta = 0.0;
+//    }
     
     [DDFunction changeHeightForView:_msgLabel to:msgHeight];
     
@@ -167,7 +167,7 @@
         _faceView.frame = fframe;
         
         CGRect lframe = _line.frame;
-        lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
+        lframe.origin.y = CGRectGetMinY(_faceView.frame)+30;
         lframe.origin.x = CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8;
         _line.frame = lframe;
     }
@@ -184,7 +184,7 @@
         _faceView.frame = fframe;
         
         CGRect lframe = _line.frame;
-        lframe.origin.y = CGRectGetMinY(_faceView.frame)+25;
+        lframe.origin.y = CGRectGetMinY(_faceView.frame)+30;
         lframe.origin.x = CGRectGetMinX(_faceView.frame)-8-lframe.size.width;
         _line.frame = lframe;
     }

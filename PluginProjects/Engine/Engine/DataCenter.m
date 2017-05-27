@@ -8,7 +8,7 @@
 
 
 #define DataCenter_all_messages_save_list       @"DataCenter all messages save list"
-#define DataCenter_saved_messages_limit_count   20
+#define DataCenter_saved_messages_limit_count   30
 
 
 #define DataCenter_all_user_info_save_list  @"DataCenter all user info save list"
