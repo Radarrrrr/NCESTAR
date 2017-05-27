@@ -148,6 +148,7 @@
     {
         //点击内容窗口进来的
         NSLog(@"点击内容窗口进来的");
+        [_homeVC moveListPositionToTop];
     }
     else
     {

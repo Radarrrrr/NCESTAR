@@ -55,7 +55,7 @@
         [self.contentView addSubview:_faceView];
   
 		//add _tLabel
-		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+8, CGRectGetWidth(_backView.frame)-8-8, CGRectGetHeight(_backView.frame)-8-10-MessageCell_face_width)];
+		self.msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMinY(_backView.frame)+8, CGRectGetWidth(_backView.frame)-8-8-MessageCell_face_width-5, CGRectGetHeight(_backView.frame)-8-10-MessageCell_face_width)];
 		_msgLabel.backgroundColor = [UIColor clearColor];
 		_msgLabel.font = MessageCell_msg_font;
 		_msgLabel.textColor = DDCOLOR_TEXT_A;
@@ -156,6 +156,11 @@
     
     if(!isMymsg)
     {
+        _msgLabel.textAlignment = NSTextAlignmentLeft;
+        CGRect mframe = _msgLabel.frame;
+        mframe.origin.x = CGRectGetMinX(_backView.frame)+8+MessageCell_face_width+5;
+        _msgLabel.frame = mframe;
+        
         CGRect fframe = _faceView.frame;
         fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
         fframe.origin.x = CGRectGetMinX(_backView.frame)+8;
@@ -168,6 +173,11 @@
     }
     else
     {
+        _msgLabel.textAlignment = NSTextAlignmentRight;
+        CGRect mframe = _msgLabel.frame;
+        mframe.origin.x = CGRectGetMinX(_backView.frame)+8;
+        _msgLabel.frame = mframe;
+        
         CGRect fframe = _faceView.frame;
         fframe.origin.y = CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width;
         fframe.origin.x = CGRectGetMaxX(_backView.frame)-8-MessageCell_face_width;

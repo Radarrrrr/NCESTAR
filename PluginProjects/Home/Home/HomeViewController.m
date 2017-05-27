@@ -210,6 +210,9 @@
 {
     if(!DICTIONARYVALID(msgData)) return;
     
+    //滚动到最顶
+    [_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
     //插入一条信息到第一个位置
     NSIndexPath *indexPath = [DDTableView indexPathWithSection:0 row:0];
     [_listTable insertData:msgData useCell:@"MessageCell" toIndexPath:indexPath];
@@ -225,7 +228,11 @@
 //    [secondCell recoverState];
 }
 
-
+- (void)moveListPositionToTop
+{
+    //滚动到最顶
+    [_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
 
 
 
