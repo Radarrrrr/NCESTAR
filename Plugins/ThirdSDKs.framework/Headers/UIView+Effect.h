@@ -11,9 +11,12 @@
 
 @interface UIView (EffectView)
 
-//扩展方法
+//扩展旋转方法
 - (void)startSpining;   //开始旋转
 - (void)stopSpining;    //停止旋转
 
+//扩展闪烁方法  //初始状态alpha为1
+- (void)startFlash; //开始闪烁
+- (void)stopFlash;  //停止闪烁
 
 @end

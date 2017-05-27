@@ -13,23 +13,8 @@
 
 
 //扩展方法
-- (void)startSpining
-{
-    if (!animating) {  
-        animating = YES;  
-        [self spinWithOptions: UIViewAnimationOptionCurveEaseIn];  
-    } 
-}
-- (void)stopSpining
-{
-    // set the flag to stop spinning after one last 90 degree increment  
-    animating = NO;  
-}
-
-
-
-static BOOL animating;  
-- (void) spinWithOptions: (UIViewAnimationOptions) options {  
+static BOOL spinAnimating; 
+- (void)spinWithOptions: (UIViewAnimationOptions)options {  
     // this spin completes 360 degrees every 2 seconds  
     [UIView animateWithDuration: 0.3f  
                           delay: 0.0f  
@@ -39,7 +24,7 @@ static BOOL animating;
                      }  
                      completion: ^(BOOL finished) {  
                          if (finished) {  
-                             if (animating) {  
+                             if (spinAnimating) {  
                                  // if flag still set, keep spinning with constant speed  
                                  [self spinWithOptions: UIViewAnimationOptionCurveLinear];  
                              } else if (options != UIViewAnimationOptionCurveEaseOut) {  
@@ -49,6 +34,54 @@ static BOOL animating;
                          }  
                      }];  
 }  
+
+- (void)startSpining
+{
+    if (!spinAnimating) {  
+        spinAnimating = YES;  
+        [self spinWithOptions: UIViewAnimationOptionCurveEaseIn];  
+    } 
+}
+- (void)stopSpining
+{
+    spinAnimating = NO;  
+}
+
+
+
+
+//扩展闪烁方法
+static BOOL flashAnimating; 
+- (void)flashRun {  
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.alpha = 0.0;
+        
+    } completion:^(BOOL finished) {
+        
+        self.alpha = 1.0;
+        
+        if(flashAnimating)
+        {
+            [self flashRun];
+        }
+        
+    }];
+}  
+- (void)startFlash
+{
+    if (!flashAnimating) {  
+        flashAnimating = YES;  
+        [self flashRun];  
+    } 
+}
+- (void)stopFlash
+{
+    flashAnimating = NO;
+}
+
+
 
 
 

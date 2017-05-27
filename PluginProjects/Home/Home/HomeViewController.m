@@ -124,24 +124,28 @@
             {
                 _statusDot.backgroundColor = [UIColor grayColor];  //正在连接 灰色
                 [_writeBtn startSpining];
+                [_statusDot startFlash];
             }
                 break;
             case PTPushReportStatusConnectFailure:
             {
                 _statusDot.backgroundColor = [UIColor lightGrayColor];  //连接失败 浅灰色
                 [_writeBtn stopSpining];
+                [_statusDot stopFlash];
             }
                 break;
             case PTPushReportStatusPushing:
             {
                 _statusDot.backgroundColor = DDCOLOR_ORANGE;    //正在发送 橘色
                 [_writeBtn startSpining];
+                [_statusDot startFlash];
             }
                 break;
             case PTPushReportStatusPushSuccess:
             {
                 _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
                 [_writeBtn stopSpining];
+                [_statusDot stopFlash];
                 
                 //插入列表数据
                 //获取这条新消息的消息token
@@ -160,6 +164,7 @@
             {
                 _statusDot.backgroundColor = DDCOLOR_RED;       //发送失败 红色
                 [_writeBtn stopSpining];
+                [_statusDot stopFlash];
             }
                 break;
             default:
