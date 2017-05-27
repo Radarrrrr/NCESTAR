@@ -51,7 +51,7 @@
         self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width, MessageCell_face_width, MessageCell_face_width)];
         _faceView.backgroundColor = [UIColor clearColor];
         [DDFunction addRadiusToView:_faceView radius:15];
-        _faceView.image = [UIImage imageNamed:@"face_ma.png" forme:self];
+        _faceView.image = [UIImage imageNamed:@"face_star.png" forme:self];
         [self.contentView addSubview:_faceView];
   
 		//add _tLabel
@@ -106,8 +106,8 @@
     if(!STRVALID(msg)) return;
 
 	_msgLabel.text = msg;
-	
     
+
     //判断是不是自己发出去的消息
     BOOL isMymsg = NO;
     
@@ -115,6 +115,19 @@
     if(STRVALID(_selfDeviceToken) && STRVALID(fromToken) && [_selfDeviceToken isEqualToString:fromToken])
     {
         isMymsg = YES;
+    }
+    
+    
+    //修改发送人的头像
+    if(STRVALID(fromToken))
+    {
+        NSString *faceid = [[DataCenter sharedCenter] userInfoForToken:fromToken item:@"face_id"];
+        NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
+        _faceView.image = [UIImage imageNamed:facepicN forme:self];
+    }
+    else
+    {
+        _faceView.image = [UIImage imageNamed:@"face_star.png" forme:self];
     }
     
     

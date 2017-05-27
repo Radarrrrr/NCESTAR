@@ -76,6 +76,7 @@
 {
     "devicetoken1":
     {
+        "user_id":"xxxxxx",
         "device_token":"xxxxx", 
         "nick_name":"xxxx", 
         "face_id": "xxxx", 

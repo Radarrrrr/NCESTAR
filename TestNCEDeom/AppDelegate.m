@@ -54,6 +54,10 @@
     [[DataCenter sharedCenter] collectGroupMessages];
     
     
+    //TO DO: 模拟两个用户数据，以后会换成正式的
+    [self createUsers];
+    
+    
     return YES;
 }
 
@@ -179,4 +183,46 @@
 
 
 
+//----模拟两份用户数据--------------------------------------------------------------------------------------------------------------------
+- (void)createUsers
+{
+    NSDictionary *userMe = 
+    @{
+        @"user_id":@"00001",
+        @"device_token":@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7", 
+        @"nick_name":@"天气不错", 
+        @"face_id":@"ma", 
+        @"introduce":@"今天天气不错"
+     };
+    
+    NSDictionary *userBao = 
+    @{
+        @"user_id":@"00000",
+        @"device_token":@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c8", 
+        @"nick_name":@"宁小盒", 
+        @"face_id":@"star", 
+        @"introduce":@"我是宁小盒，天天旺旺旺"
+     };
+    
+    [[DataCenter sharedCenter] addUserInfo:userMe completion:^(BOOL finish) {
+        
+    }];
+    
+    [[DataCenter sharedCenter] addUserInfo:userBao completion:^(BOOL finish) {
+        
+    }];
+    
+}
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+
 @end
+
+
+
+
+
+
+
+
