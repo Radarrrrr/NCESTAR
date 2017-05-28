@@ -233,19 +233,20 @@
     MessageCell *insertCell = [_listTable.tableView cellForRowAtIndexPath:indexPath];
     [insertCell flashCell];
     
-    //改变第二个cell的状态
-//    NSIndexPath *secondIndex = [DDTableView indexPathWithSection:0 row:1];
-//    MessageCell *secondCell = [_listTable.tableView cellForRowAtIndexPath:secondIndex];
-//    [secondCell recoverState];
 }
 
 - (void)moveListPositionToTop
 {
     //滚动到最顶
     [_listTable.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
-    //[_listTable.tableView scrollToRowAtIndexPath:[DDTableView indexPathWithSection:0 row:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
-
+- (void)flashFirstMessage
+{
+    //让第一条信息闪动一下
+    NSIndexPath *indexPath = [DDTableView indexPathWithSection:0 row:0];
+    MessageCell *insertCell = [_listTable.tableView cellForRowAtIndexPath:indexPath];
+    [insertCell flashCell];
+}
 
 
 //DDTableViewDelegate

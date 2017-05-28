@@ -122,6 +122,8 @@
     if(STRVALID(fromToken))
     {
         NSString *faceid = [[DataCenter sharedCenter] userInfoForToken:fromToken item:@"face_id"];
+        if(!STRVALID(faceid)) faceid = @"star";
+        
         NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
         _faceView.image = [UIImage imageNamed:facepicN forme:self];
     }
@@ -138,12 +140,12 @@
         msgHeight = MessageCell_limit_msglabel_height;
     }
     
-//    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
-//    NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
-    
-    
     //修改各个组件高度
     float backDelta = 20.0; //头像和背景之间的偏移量
+    
+    //计算消息文字宽高行数，暂时不删除
+//    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
+//    NSInteger lines = [DDFunction getLinesForString:msg font:MessageCell_msg_font width:CGRectGetWidth(_msgLabel.frame)];
 //    if(lines<=1 && (msgWidth > CGRectGetWidth(_backView.frame)-8*2-MessageCell_face_width*2))
 //    {
 //        backDelta = 0.0;
