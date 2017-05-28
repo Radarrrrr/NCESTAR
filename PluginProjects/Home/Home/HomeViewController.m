@@ -124,7 +124,7 @@
     }
     else if([myToken isEqualToString:@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7"])
     {
-        toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机
+        toToken = @"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7"; //发给宝手机
     }
     
         

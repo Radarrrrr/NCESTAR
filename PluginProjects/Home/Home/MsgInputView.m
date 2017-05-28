@@ -227,6 +227,10 @@ static float inputLastPosition;
                 [notiDic setObject:report.payload forKey:@"payload"];
                 
                 [[DataCenter sharedCenter] appendNotifyData:notiDic];
+                
+                //发送成功声音
+                [[AudioPlayer sharedAudioPlayer] setAudio:@"msg_sendout" withType:@"wav" withLoop:NO];
+                [[AudioPlayer sharedAudioPlayer] play];
             }
             
             if(_pushReportHandler)
@@ -269,7 +273,7 @@ static float inputLastPosition;
                 @"body":message
             },
             @"badge":@"1",
-            @"sound":@"default",
+            @"sound":@"msg_new.mp3",
             @"mutable-content":@"1",
             @"category":@"myNotificationCategory",
             @"attach":attach,

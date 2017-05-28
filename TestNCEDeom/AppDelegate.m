@@ -162,6 +162,10 @@
     //前台收到通知事件
     if(!blocal)
     {
+        //播放声音
+        [[AudioPlayer sharedAudioPlayer] setAudio:@"Purr" withType:@"aiff" withLoop:NO];
+        [[AudioPlayer sharedAudioPlayer] play];
+        
         //获取存储在group里边的通知payloads
         [[DataCenter sharedCenter] collectGroupMessages];
         

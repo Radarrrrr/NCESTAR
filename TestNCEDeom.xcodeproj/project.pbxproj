@@ -19,6 +19,7 @@
 		0C1771461E2F4B11002FC539 /* Dylib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1771431E2F4ABA002FC539 /* Dylib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C35221C1DEFD54300D9DBEF /* launch_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C35221B1DEFD54300D9DBEF /* launch_image@2x.jpg */; };
 		0C3522451DF5586800D9DBEF /* attach_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3522441DF5586800D9DBEF /* attach_image.png */; };
+		0C4F05F31EDA560400240092 /* Purr.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F05F21EDA560400240092 /* Purr.aiff */; };
 		0C879BBC1DD468CF00C3E86E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBB1DD468CF00C3E86E /* main.m */; };
 		0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBE1DD468CF00C3E86E /* AppDelegate.m */; };
 		0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BC11DD468CF00C3E86E /* ViewController.m */; };
@@ -38,6 +39,8 @@
 		0CA506311E3094E0000A23EB /* NOTE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0CA506301E3094E0000A23EB /* NOTE.txt */; };
 		0CA929B81E7BFA2600F9EF9C /* Home.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA929B61E7BF9E300F9EF9C /* Home.framework */; };
 		0CA929B91E7BFA2600F9EF9C /* Home.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA929B61E7BF9E300F9EF9C /* Home.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0CC2376E1EDA501500E65C5F /* msg_sendout.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2376C1EDA501500E65C5F /* msg_sendout.wav */; };
+		0CC2376F1EDA501500E65C5F /* msg_new.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2376D1EDA501500E65C5F /* msg_new.mp3 */; };
 		0CF3CC251E01A54F005B2AEF /* launch_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C35221B1DEFD54300D9DBEF /* launch_image@2x.jpg */; };
 		0CF3CC271E01A747005B2AEF /* attach_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3522441DF5586800D9DBEF /* attach_image.png */; };
 		0CF3CC2A1E025FFE005B2AEF /* googview.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0CF3CC291E025FFE005B2AEF /* googview.jpg */; };
@@ -126,6 +129,7 @@
 		0C35221D1DF0064A00D9DBEF /* NotificationViewController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationViewController.entitlements; sourceTree = "<group>"; };
 		0C35221E1DF0065600D9DBEF /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		0C3522441DF5586800D9DBEF /* attach_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attach_image.png; sourceTree = "<group>"; };
+		0C4F05F21EDA560400240092 /* Purr.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Purr.aiff; sourceTree = "<group>"; };
 		0C879BB71DD468CF00C3E86E /* TestNCEDeom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestNCEDeom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C879BBB1DD468CF00C3E86E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C879BBD1DD468CF00C3E86E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 		0CA506301E3094E0000A23EB /* NOTE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTE.txt; sourceTree = "<group>"; };
 		0CA929A71E7BC36500F9EF9C /* Home.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Home.xcodeproj; path = Home/Home.xcodeproj; sourceTree = "<group>"; };
 		0CA929B61E7BF9E300F9EF9C /* Home.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Home.framework; sourceTree = "<group>"; };
+		0CC2376C1EDA501500E65C5F /* msg_sendout.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = msg_sendout.wav; sourceTree = "<group>"; };
+		0CC2376D1EDA501500E65C5F /* msg_new.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_new.mp3; sourceTree = "<group>"; };
 		0CF3CC291E025FFE005B2AEF /* googview.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = googview.jpg; sourceTree = "<group>"; };
 		379070FF0C574A19223EF709 /* libPods-NotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		473CCD645C3A2DEFE044BF42 /* Pods-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationService.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationService/Pods-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 				0C8B17B81DED5E3800FC3305 /* NotificationService */,
 				0C879BDB1DD4692900C3E86E /* NotificationViewController */,
 				0C35221A1DEFD54300D9DBEF /* images */,
+				0CC2376B1EDA501500E65C5F /* audios */,
 				0C17713B1E2F4797002FC539 /* Plugins */,
 				0C879BD61DD4692900C3E86E /* Frameworks */,
 				0C879BB81DD468CF00C3E86E /* Products */,
@@ -379,6 +386,16 @@
 				0CA929AC1E7BC36500F9EF9C /* Home.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0CC2376B1EDA501500E65C5F /* audios */ = {
+			isa = PBXGroup;
+			children = (
+				0C4F05F21EDA560400240092 /* Purr.aiff */,
+				0CC2376C1EDA501500E65C5F /* msg_sendout.wav */,
+				0CC2376D1EDA501500E65C5F /* msg_new.mp3 */,
+			);
+			path = audios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,8 +584,11 @@
 				0C3522451DF5586800D9DBEF /* attach_image.png in Resources */,
 				0C35221C1DEFD54300D9DBEF /* launch_image@2x.jpg in Resources */,
 				0C879BCA1DD468CF00C3E86E /* LaunchScreen.storyboard in Resources */,
+				0C4F05F31EDA560400240092 /* Purr.aiff in Resources */,
 				0C879BC71DD468CF00C3E86E /* Assets.xcassets in Resources */,
+				0CC2376E1EDA501500E65C5F /* msg_sendout.wav in Resources */,
 				0CA505F51E307483000A23EB /* pusher.p12 in Resources */,
+				0CC2376F1EDA501500E65C5F /* msg_new.mp3 in Resources */,
 				0C879BC51DD468CF00C3E86E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
