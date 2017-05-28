@@ -22,6 +22,10 @@
 @property (nonatomic, strong)   UIButton *writeBtn;
 @property (nonatomic, strong)   UIView *statusDot;
 
+@property (nonatomic, strong)   UIView *stateView; //发送状态条
+@property (nonatomic, strong)   UIView *sbackV;     //发送状体条背景
+@property (nonatomic, strong)   UILabel *stateLabel;//发送状态文字
+
 @end
 
 
@@ -83,12 +87,37 @@
     _statusDot.backgroundColor = [UIColor clearColor];
     [DDFunction addRadiusToView:_statusDot radius:5];
     [_writeBtn addSubview:_statusDot];
-    
-
-    //TO DO: 添加右侧滑动条操作键盘
-    
+        
     
     //TO DO: 添加好友菜单
+    
+    
+    //发送状态条
+    float stateWidth = SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60;
+    
+    //CGRectMake(60, SCR_HEIGHT-64-35-10, SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60, 30)
+    self.stateView = [[UIView alloc] initWithFrame:CGRectMake(60+stateWidth/2, SCR_HEIGHT-64-35-10, 30, 30)];
+    _stateView.backgroundColor = [UIColor clearColor];
+    _stateView.clipsToBounds = YES;
+    _stateView.alpha = 0.0;
+    [self.view addSubview:_stateView];
+    
+    self.sbackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_stateView.frame), CGRectGetHeight(_stateView.frame))];
+    _sbackV.backgroundColor = [UIColor blackColor];
+    _sbackV.userInteractionEnabled = NO;
+    _sbackV.alpha = 0.75;
+    [DDFunction addRadiusToView:_sbackV radius:CGRectGetHeight(_sbackV.frame)/2];
+    [_stateView addSubview:_sbackV];
+    
+    self.stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_stateView.frame), CGRectGetHeight(_stateView.frame))];
+    _stateLabel.backgroundColor = [UIColor clearColor];
+    _stateLabel.userInteractionEnabled = NO;
+    _stateLabel.textAlignment = NSTextAlignmentCenter;
+    _stateLabel.font = DDFONT(13);
+    _stateLabel.textColor = RGBS(200);
+    _stateLabel.text = @"发送成功！";
+    [_stateView addSubview:_stateLabel];
+    
     
     
     //延时刷新聊天列表
@@ -112,7 +141,7 @@
 - (void)writeMsgAction:(id)sender
 {
     //弹出输入框
-    
+
     //TO DO: 暂时先发给自己
     NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
     
@@ -124,12 +153,11 @@
     }
     else if([myToken isEqualToString:@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7"])
     {
-        toToken = @"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7"; //发给宝手机
+        toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机
     }
     
         
     [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
-        
         
         switch (report.status) {
             case PTPushReportStatusConnecting:
@@ -137,6 +165,9 @@
                 _statusDot.backgroundColor = [UIColor grayColor];  //正在连接 灰色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
+                
+                //状态
+                _stateLabel.text = @"正在连接发送服务";
             }
                 break;
             case PTPushReportStatusConnectFailure:
@@ -144,6 +175,9 @@
                 _statusDot.backgroundColor = [UIColor lightGrayColor];  //连接失败 浅灰色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
+                
+                //状态
+                _stateLabel.text = @"无法与服务器建立连接";
             }
                 break;
             case PTPushReportStatusPushing:
@@ -151,6 +185,9 @@
                 _statusDot.backgroundColor = DDCOLOR_ORANGE;    //正在发送 橘色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
+                
+                //状态
+                _stateLabel.text = @"正在发送消息";
             }
                 break;
             case PTPushReportStatusPushSuccess:
@@ -158,6 +195,11 @@
                 _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
+                
+                //状态
+                _stateLabel.text = @"发送成功!";
+                [self performSelector:@selector(hideStateView) withObject:nil afterDelay:2];
+                
                 
                 //插入列表数据
                 //获取这条新消息的消息token
@@ -186,6 +228,7 @@
         
     } completion:^{
         NSLog(@"输入浮层关闭");
+        [self showStateView];
     }];
 
 }
@@ -259,6 +302,75 @@
 {
     
 }
+
+
+
+#pragma mark - 状态条相关
+- (void)showStateView
+{
+    CGRect sframe = _stateView.frame;
+    CGRect bframe = _sbackV.frame;
+    CGRect lframe = _stateLabel.frame;
+    
+    float swidth = SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60;
+    
+    bframe.size.width = swidth;
+    lframe.size.width = swidth;
+    
+    sframe.origin.x = 60;
+    sframe.size.width = swidth;
+    
+
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        _stateView.alpha = 1.0;
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            _stateView.frame = sframe;
+            _sbackV.frame = bframe;
+            _stateLabel.frame = lframe;
+            
+        }]; 
+    }];
+
+}
+
+- (void)hideStateView
+{
+    CGRect sframe = _stateView.frame;
+    CGRect bframe = _sbackV.frame;
+    CGRect lframe = _stateLabel.frame;
+    
+    float swidth = SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60;
+    
+    bframe.size.width = 30;
+    lframe.size.width = 30;
+    
+    sframe.origin.x = 60+swidth/2;
+    sframe.size.width = 30;
+
+
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        _stateView.frame = sframe;
+        _sbackV.frame = bframe;
+        _stateLabel.frame = lframe;
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            
+            _stateView.alpha = 0.0;
+            
+        }];
+    }];
+
+}
+
+
 
 
 
