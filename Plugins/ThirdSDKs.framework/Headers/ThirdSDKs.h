@@ -34,7 +34,7 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 #import <ThirdSDKs/DDMoveableView.h>
 #import <ThirdSDKs/UIButton+Spin.h>
 #import <ThirdSDKs/UIView+Effect.h>
-
+#import <ThirdSDKs/AudioPlayer.h>
 
 
 

@@ -77,6 +77,8 @@
 		0CC237511ED404E500E65C5F /* UIButton+Spin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2374F1ED404E500E65C5F /* UIButton+Spin.m */; };
 		0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC237561ED847DF00E65C5F /* UIView+Effect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC237591ED847DF00E65C5F /* UIView+Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC237571ED847DF00E65C5F /* UIView+Effect.m */; };
+		0CC237661EDA4E6000E65C5F /* AudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC237641EDA4E6000E65C5F /* AudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CC237671EDA4E6000E65C5F /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC237651EDA4E6000E65C5F /* AudioPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CC6D9D51ECC52C10055770C /* DDMoveableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC6D9D31ECC52C10055770C /* DDMoveableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC6D9D61ECC52C10055770C /* DDMoveableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6D9D41ECC52C10055770C /* DDMoveableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE1FFC01E60200500CDA679 /* DDScrollButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -156,6 +158,8 @@
 		0CC2374F1ED404E500E65C5F /* UIButton+Spin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Spin.m"; sourceTree = "<group>"; };
 		0CC237561ED847DF00E65C5F /* UIView+Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effect.h"; sourceTree = "<group>"; };
 		0CC237571ED847DF00E65C5F /* UIView+Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effect.m"; sourceTree = "<group>"; };
+		0CC237641EDA4E6000E65C5F /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		0CC237651EDA4E6000E65C5F /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		0CC6D9D31ECC52C10055770C /* DDMoveableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoveableView.h; sourceTree = "<group>"; };
 		0CC6D9D41ECC52C10055770C /* DDMoveableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoveableView.m; sourceTree = "<group>"; };
 		0CE1FFC01E60200500CDA679 /* DDScrollButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScrollButton.h; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0CC237631EDA4E6000E65C5F /* AudioPlayer */,
 				0CC6D9D21ECC52C10055770C /* DDMoveableView */,
 				0CE1FFBF1E60200500CDA679 /* DDScrollButton */,
 				0CA5066E1E320390000A23EB /* DDTableView */,
@@ -357,6 +362,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		0CC237631EDA4E6000E65C5F /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				0CC237641EDA4E6000E65C5F /* AudioPlayer.h */,
+				0CC237651EDA4E6000E65C5F /* AudioPlayer.m */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		0CC6D9D21ECC52C10055770C /* DDMoveableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +412,7 @@
 				0C17AD601EA88C8D00238D29 /* DDMacros.h in Headers */,
 				0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */,
 				0CC6D9D51ECC52C10055770C /* DDMoveableView.h in Headers */,
+				0CC237661EDA4E6000E65C5F /* AudioPlayer.h in Headers */,
 				0CC237501ED404E500E65C5F /* UIButton+Spin.h in Headers */,
 				0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
@@ -529,6 +544,7 @@
 				0CA505DE1E307070000A23EB /* NWPusher.m in Sources */,
 				0CA5067D1E320390000A23EB /* DDTMoreFooterView.m in Sources */,
 				0CA505EB1E307070000A23EB /* RDPushTool.m in Sources */,
+				0CC237671EDA4E6000E65C5F /* AudioPlayer.m in Sources */,
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
 				0CA506671E320034000A23EB /* DDEffectView.m in Sources */,
 				0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */,
