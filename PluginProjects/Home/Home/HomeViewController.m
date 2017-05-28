@@ -168,6 +168,7 @@
                 
                 //状态
                 _stateLabel.text = @"正在连接发送服务";
+                [self showStateView];
             }
                 break;
             case PTPushReportStatusConnectFailure:
@@ -188,6 +189,7 @@
                 
                 //状态
                 _stateLabel.text = @"正在发送消息";
+                [self showStateView];
             }
                 break;
             case PTPushReportStatusPushSuccess:
@@ -228,7 +230,6 @@
         
     } completion:^{
         NSLog(@"输入浮层关闭");
-        [self showStateView];
     }];
 
 }
@@ -306,8 +307,13 @@
 
 
 #pragma mark - 状态条相关
+static BOOL stateViewShowing = NO;
+
 - (void)showStateView
 {
+    if(stateViewShowing) return;
+    stateViewShowing = YES;
+    
     CGRect sframe = _stateView.frame;
     CGRect bframe = _sbackV.frame;
     CGRect lframe = _stateLabel.frame;
@@ -340,6 +346,10 @@
 
 - (void)hideStateView
 {
+    if(!stateViewShowing) return;
+    stateViewShowing = NO;
+    
+    
     CGRect sframe = _stateView.frame;
     CGRect bframe = _sbackV.frame;
     CGRect lframe = _stateLabel.frame;
