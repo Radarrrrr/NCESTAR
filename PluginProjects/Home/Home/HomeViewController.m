@@ -115,7 +115,7 @@
     _stateLabel.textAlignment = NSTextAlignmentCenter;
     _stateLabel.font = DDFONT(13);
     _stateLabel.textColor = RGBS(200);
-    _stateLabel.text = @"发送成功！";
+    _stateLabel.alpha = 0.0;
     [_stateView addSubview:_stateLabel];
     
     
@@ -338,6 +338,7 @@ static BOOL stateViewShowing = NO;
             _stateView.frame = sframe;
             _sbackV.frame = bframe;
             _stateLabel.frame = lframe;
+            _stateLabel.alpha = 1.0;
             
         }]; 
     }];
@@ -361,7 +362,8 @@ static BOOL stateViewShowing = NO;
     
     sframe.origin.x = 60+swidth/2;
     sframe.size.width = 30;
-
+    
+    _stateLabel.alpha = 0.0;
 
     [UIView animateWithDuration:0.25 animations:^{
         

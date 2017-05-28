@@ -54,7 +54,7 @@ static BOOL spinAnimating;
 static BOOL flashAnimating; 
 - (void)flashRun {  
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         
         self.alpha = 0.0;
         
