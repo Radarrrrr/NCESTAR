@@ -76,6 +76,9 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
+    //清空本地通知badge数量
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
     //获取存储在group里边的通知payloads
     [[DataCenter sharedCenter] collectGroupMessages];
     
@@ -195,7 +198,7 @@
     NSDictionary *userMe = 
     @{
         @"user_id":@"00001",
-        @"device_token":@"c79b18192ea895c33a58bd411dd4309d01f6ae6b8fd8804def2ecad4510a40c7", 
+        @"device_token":@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b", 
         @"nick_name":@"天气不错", 
         @"face_id":@"ma", 
         @"introduce":@"今天天气不错"

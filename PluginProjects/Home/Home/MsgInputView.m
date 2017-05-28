@@ -272,7 +272,7 @@ static float inputLastPosition;
                 @"subtitle":@"",
                 @"body":message
             },
-            @"badge":@"1",
+            @"badge":@1,
             @"sound":@"msg_new.mp3",
             @"mutable-content":@"1",
             @"category":@"myNotificationCategory",
