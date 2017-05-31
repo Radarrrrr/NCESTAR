@@ -13,7 +13,7 @@
 
 
 
-@interface HomeViewController () <DDTableViewDelegate>
+@interface HomeViewController () <DDTableViewDelegate, RDWaitingDotsDelegate>
 
 //PS: 目前本类并不保存列表数据，所有数据都只是第一次从DataCenter同步过来以后做一次刷新工作，新消息插入以后，直接插入到列表里边，并不插入到这个列表数据数组里边
 @property (nonatomic, strong)   NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
@@ -25,6 +25,8 @@
 @property (nonatomic, strong)   UIView *stateView; //发送状态条
 @property (nonatomic, strong)   UIView *sbackV;     //发送状体条背景
 @property (nonatomic, strong)   UILabel *stateLabel;//发送状态文字
+
+@property (nonatomic, strong)   RDWaitingDots *serverStatusDots; //服务器状态小点
 
 @end
 
@@ -38,6 +40,13 @@
     self.navigationItem.title = @"HOME";
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.messageArray = [[NSMutableArray alloc] init];
+    
+    
+    //在状态条上添加服务器状态小点
+    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-100, 24, 60, 20)];
+    _serverStatusDots.delegate = self;
+    [self.navigationController.navigationBar addSubview:_serverStatusDots];
+    
     
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
@@ -304,6 +313,13 @@
     
 }
 
+
+//RDWaitingDotsDelegate
+- (void)didTapActionFromWaitingDots:(RDWaitingDots*)waitingDots
+{
+    //返回点击事件
+    [waitingDots startFlashing];
+}
 
 
 #pragma mark - 状态条相关
