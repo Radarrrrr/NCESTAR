@@ -171,7 +171,7 @@
     }
     
     //修改各个组件高度
-    float backDelta = 20.0; //头像和背景之间的偏移量
+    float backDelta = 25.0; //头像和背景之间的偏移量
     
     //计算消息文字宽高行数，暂时不删除
 //    float msgWidth = [DDFunction getWidthForString:msg font:MessageCell_msg_font height:CGRectGetHeight(_msgLabel.frame)];
