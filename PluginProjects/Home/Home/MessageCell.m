@@ -122,10 +122,11 @@
     
     //设定时间
     NSString *sendtime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:data];
+    NSDate *sendDate = [DDFunction dateFromString:sendtime useFormat:@"YY-MM-dd HH:mm:ss"];
+    NSTimeInterval delta = -[sendDate timeIntervalSinceNow];  //发送时间距离现在的时间偏移量
+    
     if(STRVALID(sendtime))
     {
-        NSDate *sendDate = [DDFunction dateFromString:sendtime useFormat:@"YY-MM-dd HH:mm:ss"];
-        NSTimeInterval delta = -[sendDate timeIntervalSinceNow];
         if(delta <= 60*60*24)
         {
             NSRange range = [sendtime rangeOfString:@" "];

@@ -234,7 +234,7 @@
         @"user_id":@"00001",
         @"device_token":@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b", 
         @"nick_name":@"天气不错", 
-        @"face_id":@"ma", 
+        @"face_id":@"miao2", 
         @"introduce":@"今天天气不错"
      };
     
@@ -243,7 +243,7 @@
         @"user_id":@"00000",
         @"device_token":@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678", 
         @"nick_name":@"宁小盒", 
-        @"face_id":@"star", 
+        @"face_id":@"wang", 
         @"introduce":@"我是宁小盒，天天旺旺旺"
      };
     
