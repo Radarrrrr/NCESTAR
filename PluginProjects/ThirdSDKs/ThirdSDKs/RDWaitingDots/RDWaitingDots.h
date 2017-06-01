@@ -16,6 +16,14 @@ typedef enum {
 } RDWaitingDotsFlashStyle;
 
 
+typedef enum {
+    RDWaitingDotsFinishStateHide    = 0,    //隐藏，不再显示
+    RDWaitingDotsFinishStateSuccess = 1,    //不隐藏，显示成功状态
+    RDWaitingDotsFinishStateFailure = 2     //不隐藏，显示失败状态
+    
+} RDWaitingDotsFinishState;
+
+
 @class RDWaitingDots;
 @protocol RDWaitingDotsDelegate <NSObject>
 @optional
@@ -35,8 +43,8 @@ typedef enum {
 
 
 //触发等待和结束
-- (void)startFlashing;
-- (void)stopFlashing;
+- (void)startWaiting;
+- (void)stopWaitingForState:(RDWaitingDotsFinishState)state;
 
 
 @end

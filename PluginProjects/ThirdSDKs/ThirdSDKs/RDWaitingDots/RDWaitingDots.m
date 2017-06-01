@@ -12,6 +12,11 @@
 #define dot_width   8  //圆点直径
 #define dots_offset 4  //圆点间隔
 
+#define dots_color_hide    [UIColor clearColor]
+#define dots_color_waiting [UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
+#define dots_color_success [UIColor colorWithRed:50.0f/255.0f green:220.0f/255.0f blue:210.0f/255.0f alpha:1.0f]
+#define dots_color_failure [UIColor colorWithRed:255.0f/255.0f green:30.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
+
 
 @interface RDWaitingDots ()
 
@@ -43,7 +48,7 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
         self.dot2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
         _dot2.center = CGPointMake(CGRectGetWidth(frame)/2, CGRectGetHeight(frame)/2);
         _dot2.userInteractionEnabled = NO;
-        _dot2.backgroundColor = [UIColor darkGrayColor];
+        _dot2.backgroundColor = dots_color_waiting;
         _dot2.alpha = 0.0;
         [self addRadiusToView:_dot2 radius:dot_width/2];
         [self addSubview:_dot2];
@@ -51,7 +56,7 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
         self.dot1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
         _dot1.center = CGPointMake(CGRectGetMidX(_dot2.frame)-dots_offset-dot_width, CGRectGetMidY(_dot2.frame));
         _dot1.userInteractionEnabled = NO;
-        _dot1.backgroundColor = [UIColor darkGrayColor];
+        _dot1.backgroundColor = dots_color_waiting;
         _dot1.alpha = 0.0;
         [self addRadiusToView:_dot1 radius:dot_width/2];
         [self addSubview:_dot1];
@@ -59,7 +64,7 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
         self.dot3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
         _dot3.center = CGPointMake(CGRectGetMidX(_dot2.frame)+dots_offset+dot_width, CGRectGetMidY(_dot2.frame));
         _dot3.userInteractionEnabled = NO;
-        _dot3.backgroundColor = [UIColor darkGrayColor];
+        _dot3.backgroundColor = dots_color_waiting;
         _dot3.alpha = 0.0;
         [self addRadiusToView:_dot3 radius:dot_width/2];
         [self addSubview:_dot3];
@@ -88,7 +93,7 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
 
 
 //触发等待和结束
-- (void)startFlashing
+- (void)startWaiting
 {
     if(dotsFlashing) return;
     dotsFlashing = YES;
@@ -110,13 +115,40 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
     }
     
 }
-- (void)stopFlashing
+- (void)stopWaitingForState:(RDWaitingDotsFinishState)state
 {
     dotsFlashing = NO;
     
     if(_flashStyle == RDWaitingDotsFlashStyleRolling)
     {
         isForwarding = YES;
+    }
+    
+    //更改状态
+    switch (state) {
+        case RDWaitingDotsFinishStateHide:
+        {
+            _dot1.backgroundColor = dots_color_hide;
+            _dot2.backgroundColor = dots_color_hide;
+            _dot3.backgroundColor = dots_color_hide;
+        }
+            break;
+        case RDWaitingDotsFinishStateSuccess:
+        {
+            _dot1.backgroundColor = dots_color_success;
+            _dot2.backgroundColor = dots_color_success;
+            _dot3.backgroundColor = dots_color_success;
+        }
+            break;
+        case RDWaitingDotsFinishStateFailure:
+        {
+            _dot1.backgroundColor = dots_color_failure;
+            _dot2.backgroundColor = dots_color_failure;
+            _dot3.backgroundColor = dots_color_failure;
+        }
+            break;
+        default:
+            break;
     }
 }
 
@@ -153,6 +185,14 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
                     if(dotsFlashing)
                     {
                         [self runFulling];
+                    }
+                    else
+                    {
+                        [UIView animateWithDuration:0.5 animations:^{
+                            _dot1.alpha = 1.0;
+                            _dot2.alpha = 1.0;
+                            _dot3.alpha = 1.0;
+                        }];
                     }
                     
                 }];
@@ -219,6 +259,14 @@ static BOOL isForwarding = YES; //是否正向显示
                 {
                     isForwarding = YES;
                     [self runRolling];
+                }
+                else
+                {
+                    [UIView animateWithDuration:0.5 animations:^{
+                        _dot1.alpha = 1.0;
+                        _dot2.alpha = 1.0;
+                        _dot3.alpha = 1.0;
+                    }];
                 }
                 
             }];

@@ -43,10 +43,9 @@
     
     
     //在状态条上添加服务器状态小点
-    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-100, 24, 60, 20)];
+    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-100, 30, 56, 14)];
     _serverStatusDots.delegate = self;
     [self.navigationController.navigationBar addSubview:_serverStatusDots];
-    
     
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
@@ -142,7 +141,7 @@
 
 
 - (void)addMsgAction:(id)sender
-{
+{    
     RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
     [self.navigationController pushViewController:simuVC animated:YES];
 }
@@ -301,6 +300,11 @@
     [insertCell flashCell];
 }
 
+//- (void)changeConnectStatus:(PTConnectReport*)report
+//{
+//    
+//}
+
 
 //DDTableViewDelegate
 - (void)DDTableViewDidSelectIndexPath:(NSIndexPath*)indexPath withData:(id)data ontable:(DDTableView*)table
@@ -318,7 +322,6 @@
 - (void)didTapActionFromWaitingDots:(RDWaitingDots*)waitingDots
 {
     //返回点击事件
-    [waitingDots startFlashing];
 }
 
 
