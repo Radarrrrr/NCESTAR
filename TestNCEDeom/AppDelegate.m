@@ -38,7 +38,7 @@
     statusBarView.backgroundColor = [UIColor clearColor];
     [_mainNav.navigationBar addSubview:statusBarView];
     
-    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-150, 0, 56, 20)];
+    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-155, 0, 56, 20)];
     [statusBarView addSubview:_serverStatusDots];
     
     
