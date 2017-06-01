@@ -127,7 +127,8 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
+      customArchiveName = "STAR"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

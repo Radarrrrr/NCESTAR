@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = @"HOME";
+    //self.navigationItem.title = @"HOME";
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.messageArray = [[NSMutableArray alloc] init];
     
@@ -50,11 +50,19 @@
     _backImgView.image = effectImg;
     
     
+    //左上角添加好友头像
+//    UIView *friendV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
+//    friendV.backgroundColor = [UIColor redColor];
+//    
+//    UIBarButtonItem *friendItem = [[UIBarButtonItem alloc] initWithCustomView:friendV];
+//    self.navigationItem.leftBarButtonItem = friendItem;
+    
+    
     //右上角添加写推送按钮
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
     self.navigationItem.rightBarButtonItem = addItem;
 
-    //TO DO: 添加聊天列表
+    //添加聊天列表
     self.listTable = [[DDTableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
     _listTable.delegate = self;
     [self.view addSubview:_listTable];
