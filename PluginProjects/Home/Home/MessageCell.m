@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIImageView *faceView;
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, copy)   NSString *selfDeviceToken; 
+@property (nonatomic, strong) UILabel *timeLabel;
 
 @end
 
@@ -76,6 +77,19 @@
         _line.backgroundColor = RGBS(200);
         [self.contentView addSubview:_line];
         
+        //add timeLabel
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_faceView.frame)+8, CGRectGetMinY(_line.frame)+2, CGRectGetWidth(_backView.frame)-MessageCell_face_width*2-8*4, 20)];
+        _timeLabel.backgroundColor = [UIColor clearColor];
+        _timeLabel.userInteractionEnabled = NO;
+        _timeLabel.textAlignment = NSTextAlignmentLeft;
+        _timeLabel.textColor = DDCOLOR_TEXT_C;
+        _timeLabel.font = DDFONT(13);
+        [self.contentView addSubview:_timeLabel];
+        
+        
+        
+        
+    
     }
     return self;
 }
@@ -102,11 +116,27 @@
 #pragma mark out use functions
 -(void)setCellData:(id)data atIndexPath:(NSIndexPath*)indexPath
 {
+    //设定msg
     NSString *msg = (NSString*)[DDFunction getValueForKey:@"body" inData:data];
-    if(!STRVALID(msg)) return;
-
-	_msgLabel.text = msg;
+    _msgLabel.text = msg;
     
+    //设定时间
+    NSString *sendtime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:data];
+    if(STRVALID(sendtime))
+    {
+        NSDate *sendDate = [DDFunction dateFromString:sendtime useFormat:@"YY-MM-dd HH:mm:ss"];
+        NSTimeInterval delta = -[sendDate timeIntervalSinceNow];
+        if(delta <= 60*60*24)
+        {
+            NSRange range = [sendtime rangeOfString:@" "];
+            if(range.length)
+            {
+                sendtime = [sendtime substringFromIndex:range.location+1];
+            }
+        }
+        
+        _timeLabel.text = sendtime;
+    }
 
     //判断是不是自己发出去的消息
     BOOL isMymsg = NO;
@@ -158,6 +188,7 @@
     
     if(!isMymsg)
     {
+        //不是自己发出去的消息
         _msgLabel.textAlignment = NSTextAlignmentLeft;
         CGRect mframe = _msgLabel.frame;
         mframe.origin.x = CGRectGetMinX(_backView.frame)+8+MessageCell_face_width+8;
@@ -172,9 +203,15 @@
         lframe.origin.y = CGRectGetMinY(_faceView.frame)+30;
         lframe.origin.x = CGRectGetMinX(_faceView.frame)+MessageCell_face_width+8;
         _line.frame = lframe;
+        
+        CGRect tframe = _timeLabel.frame;
+        tframe.origin.y = CGRectGetMinY(_line.frame)+2;
+        _timeLabel.frame = tframe;
+        _timeLabel.textAlignment = NSTextAlignmentLeft;
     }
     else
     {
+        //自己发出去的消息
         CGSize msgSize = [_msgLabel.text sizeWithFont:MessageCell_msg_font constrainedToSize:_msgLabel.frame.size];
         
         _msgLabel.textAlignment = NSTextAlignmentLeft;
@@ -191,6 +228,11 @@
         lframe.origin.y = CGRectGetMinY(_faceView.frame)+30;
         lframe.origin.x = CGRectGetMinX(_faceView.frame)-8-lframe.size.width;
         _line.frame = lframe;
+        
+        CGRect tframe = _timeLabel.frame;
+        tframe.origin.y = CGRectGetMinY(_line.frame)+2;
+        _timeLabel.frame = tframe;
+        _timeLabel.textAlignment = NSTextAlignmentRight;
     }
     
     //设定contentview的高度，这个很重要，关系到外部tableview的cell的高度设定多高，那个高度就是从这里来的
