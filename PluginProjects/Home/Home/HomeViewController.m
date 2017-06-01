@@ -26,8 +26,6 @@
 @property (nonatomic, strong)   UIView *sbackV;     //发送状体条背景
 @property (nonatomic, strong)   UILabel *stateLabel;//发送状态文字
 
-@property (nonatomic, strong)   RDWaitingDots *serverStatusDots; //服务器状态小点
-
 @end
 
 
@@ -41,12 +39,7 @@
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.messageArray = [[NSMutableArray alloc] init];
     
-    
-    //在状态条上添加服务器状态小点
-    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-100, 30, 56, 14)];
-    _serverStatusDots.delegate = self;
-    [self.navigationController.navigationBar addSubview:_serverStatusDots];
-    
+
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
     _backImgView.backgroundColor = [UIColor grayColor];
@@ -300,10 +293,6 @@
     [insertCell flashCell];
 }
 
-//- (void)changeConnectStatus:(PTConnectReport*)report
-//{
-//    
-//}
 
 
 //DDTableViewDelegate

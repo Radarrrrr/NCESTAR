@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) HomeViewController *homeVC;
 @property (nonatomic, strong) UINavigationController *mainNav;
+@property (nonatomic, strong) RDWaitingDots *serverStatusDots; //服务器状态小点
 
 @end
 
@@ -30,6 +31,16 @@
     _mainNav.navigationBarHidden = NO;
     _mainNav.navigationBar.translucent = NO; //不要导航条模糊，为了让页面从导航条下部是0开始，如果为YES，则从屏幕顶部开始是0
     self.window.rootViewController = _mainNav;
+    
+    
+    //添加状态条上的连接状态
+    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH, 20)];
+    statusBarView.backgroundColor = [UIColor clearColor];
+    [_mainNav.navigationBar addSubview:statusBarView];
+    
+    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-150, 0, 56, 20)];
+    [statusBarView addSubview:_serverStatusDots];
+    
     
     
     //注册和使用通知相关-----------------------------------------------------------------------------------------------------
@@ -80,14 +91,50 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    NSDate *lastConnectDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"last_connected_date"];
+    
+    //三分钟以内不主动断开
+    if(!lastConnectDate || (-[lastConnectDate timeIntervalSinceNow] > 60*3))
+    {
+        [[RDPushTool sharedTool] disconnect];
+    }
+    
     //连接推送服务
-    [[RDPushTool sharedTool] disconnect];
     [[RDPushTool sharedTool] connect:^(PTConnectReport *report) {
         
+        [self changeConnectStatus:report];
+        
+        if(report.status == PTConnectReportStatusConnectSuccess)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"last_connected_date"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }];
 }
 
-
+- (void)changeConnectStatus:(PTConnectReport*)report
+{
+    switch (report.status) {
+        case PTConnectReportStatusConnecting:
+        {
+            [_serverStatusDots startWaiting];
+        }
+            break;
+        case PTConnectReportStatusConnectSuccess:
+        {
+            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateSuccess];
+        }  
+            break;
+        case PTConnectReportStatusConnectFailure:
+        {
+            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateFailure];
+        }  
+            break;
+        default:
+            break;
+    }
+}
 
 
 
