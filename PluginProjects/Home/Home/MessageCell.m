@@ -83,7 +83,7 @@
         _timeLabel.userInteractionEnabled = NO;
         _timeLabel.textAlignment = NSTextAlignmentLeft;
         _timeLabel.textColor = DDCOLOR_TEXT_C;
-        _timeLabel.font = DDFONT(13);
+        _timeLabel.font = DDFONT(12);
         [self.contentView addSubview:_timeLabel];
         
         
