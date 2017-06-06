@@ -26,6 +26,7 @@ static float inputLastPosition;
 @property (nonatomic, strong) DDMoveableView *containerView;
 
 @property (nonatomic, copy) NSString *selfToken; //自己的devicetoken
+@property (nonatomic, copy) NSString *selfUserId;//自己的userid
 @property (nonatomic, copy) NSString *pushToToken; //要发送到的devicetoken
 
 @property (nonatomic, strong) void (^pushReportHandler)(PTPushReport *report);
@@ -103,17 +104,24 @@ static float inputLastPosition;
     _containerView.frame = cframe;
 }
 
-- (void)callMsgInputToToken:(NSString*)toToken pushReport:(void(^)(PTPushReport *report))pushReportHandler completion:(void (^)(void))closeHandler
+- (void)callMsgInputToUser:(NSDictionary*)userInfo pushReport:(void(^)(PTPushReport *report))pushReportHandler completion:(void (^)(void))closeHandler
 {
     self.pushReportHandler = pushReportHandler;
     self.closeHandler = closeHandler;
     
+    if(!DICTIONARYVALID(userInfo)) return;
+    
+    NSString *toToken = [userInfo objectForKey:@"device_token"];
     if(!STRVALID(toToken)) return;
     self.pushToToken = toToken;
     
-    NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+    NSString *myToken = [[DataCenter sharedCenter] loadMyInfoForItem:@"device_token"];
     if(!STRVALID(myToken)) return;
     self.selfToken = myToken;
+    
+    NSString *myUserId = [[DataCenter sharedCenter] loadMyInfoForItem:@"user_id"];
+    if(!STRVALID(myUserId)) return;
+    self.selfUserId = myUserId;
     
     
     UIWindow *topWindow = [UIApplication sharedApplication].keyWindow;
@@ -278,6 +286,7 @@ static float inputLastPosition;
             @"category":@"myNotificationCategory",
             @"attach":attach,
             @"from_token":_selfToken,
+            @"from_userid":_selfUserId,
             @"to_token":_pushToToken
         },
         @"goto_page":@"",

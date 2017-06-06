@@ -26,6 +26,9 @@
 @property (nonatomic, strong)   UIView *sbackV;     //发送状体条背景
 @property (nonatomic, strong)   UILabel *stateLabel;//发送状态文字
 
+@property (nonatomic, strong)   UIButton *myfaceBtn;    //我的头像
+@property (nonatomic, strong)   UIButton *tofaceBtn;    //发送的好友头像
+
 @end
 
 
@@ -50,12 +53,24 @@
     _backImgView.image = effectImg;
     
     
-    //左上角添加好友头像
-//    UIView *friendV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
-//    friendV.backgroundColor = [UIColor redColor];
-//    
-//    UIBarButtonItem *friendItem = [[UIBarButtonItem alloc] initWithCustomView:friendV];
-//    self.navigationItem.leftBarButtonItem = friendItem;
+    //左上角添加自己头像和好友头像
+    UIView *peoplesV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    peoplesV.backgroundColor = [UIColor clearColor];
+    
+    UIBarButtonItem *friendItem = [[UIBarButtonItem alloc] initWithCustomView:peoplesV];
+    self.navigationItem.leftBarButtonItem = friendItem;
+    
+    self.myfaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _myfaceBtn.frame = CGRectMake(-6, 5, 34, 34);
+    _myfaceBtn.backgroundColor = [UIColor redColor];
+    [DDFunction addRadiusToView:_myfaceBtn radius:CGRectGetWidth(_myfaceBtn.frame)/2];
+    [peoplesV addSubview:_myfaceBtn];
+    
+    self.tofaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _tofaceBtn.frame = CGRectMake(130, 5, 34, 34);
+    _tofaceBtn.backgroundColor = [UIColor redColor];
+    [DDFunction addRadiusToView:_tofaceBtn radius:CGRectGetWidth(_tofaceBtn.frame)/2];
+    [peoplesV addSubview:_tofaceBtn];
     
     
     //右上角添加写推送按钮
@@ -152,21 +167,24 @@
     //弹出输入框
 
     //TO DO: 暂时先发给自己
-    NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+//    NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+//    
+//    NSString *toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //默认发给我手机
+//    
+//    if([myToken isEqualToString:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"])
+//    {
+//        toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //发给我手机
+//    }
+//    else if([myToken isEqualToString:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"])
+//    {
+//        toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机
+//    }
     
-    NSString *toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //默认发给我手机
     
-    if([myToken isEqualToString:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"])
-    {
-        toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //发给我手机
-    }
-    else if([myToken isEqualToString:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"])
-    {
-        toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机
-    }
     
+    NSDictionary *toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" item:nil];
         
-    [[MsgInputView sharedInstance] callMsgInputToToken:toToken pushReport:^(PTPushReport *report) {
+    [[MsgInputView sharedInstance] callMsgInputToUser:toUserInfo pushReport:^(PTPushReport *report) {
         
         switch (report.status) {
             case PTPushReportStatusConnecting:

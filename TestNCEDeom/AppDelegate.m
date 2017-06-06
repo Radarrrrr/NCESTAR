@@ -226,6 +226,17 @@
 
 
 
+
+#pragma mark - 创建和维护用户信息相关
+- (void)createAndUpdateMyUserInfoWithDeviceToken:(NSString*)deviceToken
+{
+    if(!STRVALID(deviceToken)) return;
+    
+//    //把第一次的devicetoken做md5当成用户user_id,以后删除再重装以后，devicetoken会变，那么需要更新自己的用户信息
+//    NSString *user_id = [DDFunction md5FormString:deviceToken];
+}
+
+
 //----模拟两份用户数据--------------------------------------------------------------------------------------------------------------------
 - (void)createUsers
 {
@@ -235,7 +246,8 @@
         @"device_token":@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b", 
         @"nick_name":@"天气不错", 
         @"face_id":@"miao2", 
-        @"introduce":@"今天天气不错"
+        @"introduce":@"今天天气不错",
+        @"relation":@"myself"
      };
     
     NSDictionary *userBao = 
@@ -244,14 +256,15 @@
         @"device_token":@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678", 
         @"nick_name":@"宁小盒", 
         @"face_id":@"wang", 
-        @"introduce":@"我是宁小盒，天天旺旺旺"
+        @"introduce":@"我是宁小盒，天天旺旺旺",
+        @"relation":@"home"
      };
     
-    [[DataCenter sharedCenter] addUserInfo:userMe completion:^(BOOL finish) {
+    [[DataCenter sharedCenter] setUserInfo:userMe completion:^(BOOL finish) {
         
     }];
     
-    [[DataCenter sharedCenter] addUserInfo:userBao completion:^(BOOL finish) {
+    [[DataCenter sharedCenter] setUserInfo:userBao completion:^(BOOL finish) {
         
     }];
     

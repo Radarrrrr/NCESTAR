@@ -16,6 +16,6 @@
 
 + (instancetype)sharedInstance; //单实例
 
-- (void)callMsgInputToToken:(NSString*)toToken pushReport:(void(^)(PTPushReport *report))pushReportHandler completion:(void (^)(void))closeHandler;
+- (void)callMsgInputToUser:(NSDictionary*)userInfo pushReport:(void(^)(PTPushReport *report))pushReportHandler completion:(void (^)(void))closeHandler;
 
 @end

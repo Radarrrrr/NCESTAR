@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIImageView *faceView;
 @property (nonatomic, strong) UIView *line;
-@property (nonatomic, copy)   NSString *selfDeviceToken; 
+@property (nonatomic, copy)   NSString *selfUserId; 
 @property (nonatomic, strong) UILabel *timeLabel;
 
 @end
@@ -38,7 +38,7 @@
         // Initialization code.
         
         //保存一下本机的token，用来做判断
-        self.selfDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
+        self.selfUserId = [[DataCenter sharedCenter] loadMyInfoForItem:@"user_id"];
         
         //添加一个背景框
         self.backView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, SCR_WIDTH-16, MessageCell_default_cell_height-8)];
@@ -142,17 +142,17 @@
     //判断是不是自己发出去的消息
     BOOL isMymsg = NO;
     
-    NSString *fromToken = (NSString*)[DDFunction getValueForKey:@"from_token" inData:data];
-    if(STRVALID(_selfDeviceToken) && STRVALID(fromToken) && [_selfDeviceToken isEqualToString:fromToken])
+    NSString *fromUserId = (NSString*)[DDFunction getValueForKey:@"from_userid" inData:data];
+    if(STRVALID(_selfUserId) && STRVALID(fromUserId) && [_selfUserId isEqualToString:fromUserId])
     {
         isMymsg = YES;
     }
     
     
     //修改发送人的头像
-    if(STRVALID(fromToken))
+    if(STRVALID(fromUserId))
     {
-        NSString *faceid = [[DataCenter sharedCenter] userInfoForToken:fromToken item:@"face_id"];
+        NSString *faceid = [[DataCenter sharedCenter] userInfoForId:fromUserId item:@"face_id"];
         if(!STRVALID(faceid)) faceid = @"star";
         
         NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];

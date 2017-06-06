@@ -26,8 +26,9 @@
             "mutable-content":"1",
             "category":"myNotificationCategory",
             "attach":"https://picjumbo.imgix.net/HNCK8461.jpg?q=40&w=200&sharp=30",
-            "from_token" = "xxxxxxxx",          //如果from_token是自己，说明是发出去的，然后如果有notifyid，说明已送达，如果没有，说明尚不知道是否已送达
-            "to_token" = "xxxxxxxx"
+            "from_token":"xxxxxxxx",          //如果from_token是自己，说明是发出去的，然后如果有notifyid，说明已送达，如果没有，说明尚不知道是否已送达
+            "from_userid":"xxxxxxxx",
+            "to_token":"xxxxxxxx"
         },
         "goto_page":"cms://page_id=14374",
         "sendtime":"17-04-19 16:53:32",          //发送时间
@@ -74,22 +75,31 @@
 #pragma mark - 个人信息相关数据
 /* userInfos整体数据结构
 {
-    "devicetoken1":
+    "user_id1":
     {
         "user_id":"xxxxxx",
         "device_token":"xxxxx", 
         "nick_name":"xxxx", 
         "face_id": "xxxx", 
-        "introduce":"xxxxx"
+        "introduce":"xxxxx",
+        "relation":"myself"     //关系，myself/home/friend/workmate/others
     },
-    "devicetoken2":{"":"", "":"", "": ""},
-    "devicetoken3":{"":"", "":"", "": ""}
+    "user_id2":{"":"", "":"", "": ""},
+    "user_id3":{"":"", "":"", "": ""}
     ...
 }
 */
-- (id)userInfoForToken:(NSString*)deviceToken item:(NSString*)itemName; //根据deviceToken获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
 
-- (void)addUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加一个用户信息到库里存储
+//维护自己的个人信息
+- (void)updateMyUserInfo:(NSDictionary*)myInfo;       //存储自己的用户信息，PS:每次存储会覆盖以前的信息
+- (id)loadMyInfoForItem:(NSString*)itemName; //读取自己的用户信息，如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
+
+
+//维护整个用户关系表
+- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加一个用户信息到库里存储,使用user_id当key来存储
+- (id)userInfoForId:(NSString*)userid item:(NSString*)itemName;//根据user_id获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
+
+
 
 
 @end

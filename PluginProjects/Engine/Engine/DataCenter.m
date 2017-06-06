@@ -25,6 +25,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *allUserInfos; //所有的用户信息
 
+@property (nonatomic, strong) NSMutableDictionary *myUserInfo; //我自己的用户信息，因为一直常用，所以提前引出来，提高效率
+
 @end
 
 
@@ -37,6 +39,7 @@
         //do something
         self.allMessages = [[NSMutableArray alloc] init];
         self.allUserInfos = [self loadAllUserInfos];  //初始化就把所有的用户信息放在内存里
+        self.myUserInfo = [self loadMyInfoForItem:nil];
     }
     return self;
 }
@@ -151,6 +154,58 @@
 
 
 #pragma mark - 个人信息相关数据
+- (void)updateMyUserInfo:(NSDictionary*)myInfo
+{
+    if(!DICTIONARYVALID(myInfo)) return;
+    
+    self.myUserInfo = [NSMutableDictionary dictionaryWithDictionary:myInfo];
+    
+    [self setUserInfo:_myUserInfo completion:^(BOOL finish) {
+        
+    }];
+}
+- (id)loadMyInfoForItem:(NSString*)itemName
+{
+    if(!DICTIONARYVALID(_allUserInfos)) return nil;
+    
+    NSMutableDictionary *useUserInfo = nil;
+    
+    if(DICTIONARYVALID(_myUserInfo))
+    {
+        useUserInfo = _myUserInfo;
+    }
+    else
+    {
+        NSArray *allkeys = [_allUserInfos allKeys];
+        for(NSString *key in allkeys)
+        {
+            NSMutableDictionary *infodic = [_allUserInfos objectForKey:key];
+            if(DICTIONARYVALID(infodic))
+            {
+                NSString *relation = [infodic objectForKey:@"relation"];
+                if(STRVALID(relation) && [relation isEqualToString:@"myself"])
+                {
+                    //找到自己的信息了
+                    useUserInfo = infodic;
+                    break;
+                }
+            }
+        }
+        
+    }
+    
+    //如果分项字段为nil，则返回整体用户信息
+    if(!STRVALID(itemName))
+    {
+        return useUserInfo;
+    }
+    
+    //如果分项字段存在，则返回分项信息
+    id item = [useUserInfo objectForKey:itemName];
+    return item;
+}
+
+
 - (NSMutableDictionary *)loadAllUserInfos
 {
     NSMutableDictionary *allInfos = [[NSMutableDictionary alloc] init];
@@ -163,12 +218,13 @@
     
     return allInfos;
 }
-- (id)userInfoForToken:(NSString*)deviceToken item:(NSString*)itemName
+
+- (id)userInfoForId:(NSString*)userid item:(NSString*)itemName
 {
-    if(!STRVALID(deviceToken)) return nil;
+    if(!STRVALID(userid)) return nil;
     if(!DICTIONARYVALID(_allUserInfos)) return nil;
     
-    NSDictionary *userInfo = [_allUserInfos objectForKey:deviceToken];
+    NSDictionary *userInfo = [_allUserInfos objectForKey:userid];
     if(!DICTIONARYVALID(userInfo)) return nil;
     
     //如果分项字段为nil，则返回整体用户信息
@@ -179,7 +235,7 @@
     return item;
 }
 
-- (void)addUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion
+- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion
 {    
     if(!DICTIONARYVALID(userInfoDic)) 
     {
@@ -190,9 +246,9 @@
         return;
     }
     
-    //先拿到token
-    NSString *devicetoken = [userInfoDic objectForKey:@"device_token"];
-    if(!STRVALID(devicetoken))
+    //先拿到userid
+    NSString *userid = [userInfoDic objectForKey:@"user_id"];
+    if(!STRVALID(userid))
     {
         if(completion)
         {
@@ -202,7 +258,7 @@
     }
     
     //存储userinfo
-    [_allUserInfos setObject:userInfoDic forKey:devicetoken];
+    [_allUserInfos setObject:userInfoDic forKey:userid];
     
     //存储到本地
     [[NSUserDefaults standardUserDefaults] setObject:_allUserInfos forKey:DataCenter_all_user_info_save_list];
