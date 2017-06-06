@@ -93,12 +93,17 @@
 */
 
 //维护自己的个人信息
-- (void)updateMyUserInfo:(NSDictionary*)myInfo;       //存储自己的用户信息，PS:每次存储会覆盖以前的信息
-- (id)loadMyInfoForItem:(NSString*)itemName; //读取自己的用户信息，如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
+- (void)onceInitMyUserID:(NSString*)userID;         //初始化我自己的用户id，只需要第一次安装时执行一次，以后都从keychain里边取了
+
+- (void)updateMyUserInfo:(NSDictionary*)myInfo;     //存储自己的用户信息，PS:每次存储会覆盖以前的信息
+- (id)loadMyInfoForItem:(NSString*)itemName;        //读取自己的用户信息，如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
+
 
 
 //维护整个用户关系表
-- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加or更新 一个用户信息到库里存储,使用user_id当key来存储
+- (void)saveUserInfo:(NSDictionary*)userInfoDic; //保存一个用户信息到库里存储，使用user_id当key来存储，如果已有则覆盖
+- (void)updateUserInfo:(NSString*)info onitem:(NSString*)item foruser:(NSString*)userid; //修改userid对应的用户的item对应字段的信息
+
 - (id)userInfoForId:(NSString*)userid item:(NSString*)itemName;//根据user_id获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
 
 

@@ -8,17 +8,14 @@
 
 
 
-
+#define KEYCHAIN_KEY_MY_USER_ID                 @"com.dangdang.unc.myuserid"
 #define KEYCHAIN_KEY_ALL_USERS                  @"com.dangdang.unc.allusers"
+
 #define DataCenter_all_messages_save_list       @"DataCenter all messages save list"
 
 #define DataCenter_saved_messages_limit_count   60     //总存储容量，超过60以后，则修正为20条
 #define DataCenter_saved_messages_fix_count     20      
 
-
-
-
-//#define DataCenter_all_user_info_save_list  @"DataCenter all user info save list"
 
 
 
@@ -43,7 +40,11 @@
 - (id)init{
     self = [super init];
     if(self){
-        //do something
+
+        //最早先进行一下初始化默认用户的存储
+        [self onceSetupDefaultUsers];  //此方法只会在第一次安装并启动的时候，运行一次，以后都不会运行了
+        
+        //然后再获取其他各种信息
         self.allMessages = [[NSMutableArray alloc] init];
         self.allUserInfos = [self loadAllUserInfos];  //初始化就把所有的用户信息放在内存里
         self.myUserInfo = [self loadMyInfoForItem:nil];
@@ -159,15 +160,25 @@
 
 
 #pragma mark - 个人信息相关数据
+- (void)onceInitMyUserID:(NSString*)userID
+{
+    if(!STRVALID(userID)) return;
+    
+    NSString *myUserid = [CHKeyChain load:KEYCHAIN_KEY_MY_USER_ID];
+    
+    //只要keychain里边有自己的userid了，那么以后都不再存储了，始终保持同一个
+    if(STRVALID(myUserid)) return;
+    
+    [CHKeyChain save:KEYCHAIN_KEY_MY_USER_ID data:userID];
+}
+
 - (void)updateMyUserInfo:(NSDictionary*)myInfo
 {
     if(!DICTIONARYVALID(myInfo)) return;
     
     self.myUserInfo = [NSMutableDictionary dictionaryWithDictionary:myInfo];
     
-    [self setUserInfo:_myUserInfo completion:^(BOOL finish) {
-        
-    }];
+    [self saveUserInfo:_myUserInfo];
 }
 - (id)loadMyInfoForItem:(NSString*)itemName
 {
@@ -187,8 +198,9 @@
             NSMutableDictionary *infodic = [_allUserInfos objectForKey:key];
             if(DICTIONARYVALID(infodic))
             {
-                NSString *relation = [infodic objectForKey:@"relation"];
-                if(STRVALID(relation) && [relation isEqualToString:@"myself"])
+                NSString *myUserid = [CHKeyChain load:KEYCHAIN_KEY_MY_USER_ID];
+                NSString *userid = [infodic objectForKey:@"user_id"];
+                if(STRVALID(userid) && [userid isEqualToString:myUserid])
                 {
                     //找到自己的信息了
                     useUserInfo = infodic;
@@ -215,19 +227,6 @@
 {
     NSMutableDictionary *allInfos = [[NSMutableDictionary alloc] init];
     
-    //暂时注释掉
-//    NSDictionary *savedAllInfos = [[NSUserDefaults standardUserDefaults] objectForKey:DataCenter_all_user_info_save_list];
-//    
-//    if(!DICTIONARYVALID(savedAllInfos))
-//    {
-//        //如果本地没存，先从keychain取一次，存到本地
-//        savedAllInfos = [CHKeyChain load:KEYCHAIN_KEY_ALL_USERS];
-//        
-//        //存到本地
-//        [[NSUserDefaults standardUserDefaults] setObject:savedAllInfos forKey:DataCenter_all_user_info_save_list];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-    
     NSDictionary *savedAllInfos = [CHKeyChain load:KEYCHAIN_KEY_ALL_USERS];
     
     if(DICTIONARYVALID(savedAllInfos))
@@ -236,6 +235,78 @@
     }
     
     return allInfos;
+}
+
+
+- (void)onceSetupDefaultUsers 
+{
+    //只做一次，初始化一些空用户，只有user_id内置一下
+    //如果已经存储过了用户，那么就不再存储默认用户了
+    NSDictionary *savedAllInfos = [CHKeyChain load:KEYCHAIN_KEY_ALL_USERS];
+    if(DICTIONARYVALID(savedAllInfos)) return;
+    
+    //创建默认用户
+    NSDictionary *defaultUsers = 
+    @{
+      @"00000":  
+          @{
+              @"user_id":@"00000",
+              @"device_token":@"", 
+              @"nick_name":@"", 
+              @"face_id":@"", 
+              @"introduce":@"",
+              @"relation":@""
+              },
+      @"00001":  
+          @{
+              @"user_id":@"00001",
+              @"device_token":@"", 
+              @"nick_name":@"", 
+              @"face_id":@"", 
+              @"introduce":@"",
+              @"relation":@""
+              }
+      };
+    
+    //存储到钥匙串
+    [CHKeyChain save:KEYCHAIN_KEY_ALL_USERS data:defaultUsers];
+}
+
+
+- (void)saveUserInfo:(NSDictionary*)userInfoDic
+{    
+    if(!DICTIONARYVALID(userInfoDic)) 
+    {
+        return;
+    }
+    
+    //先拿到userid
+    NSString *userid = [userInfoDic objectForKey:@"user_id"];
+    if(!STRVALID(userid))
+    {
+        return;
+    }
+    
+    //存储userinfo
+    [_allUserInfos setObject:userInfoDic forKey:userid];
+    
+    //存储到钥匙串
+    [CHKeyChain save:KEYCHAIN_KEY_ALL_USERS data:_allUserInfos];
+}
+
+- (void)updateUserInfo:(NSString*)info onitem:(NSString*)item foruser:(NSString*)userid 
+{
+    if(!STRVALID(userid)) return;
+    if(!STRVALID(info)) return;
+    if(!DICTIONARYVALID(_allUserInfos)) return;
+    
+    NSDictionary *userInfo = [_allUserInfos objectForKey:userid];
+    if(!DICTIONARYVALID(userInfo)) return;
+    
+    NSMutableDictionary *mInfo = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+    
+    [mInfo setObject:info forKey:item];
+    [self saveUserInfo:mInfo];
 }
 
 - (id)userInfoForId:(NSString*)userid item:(NSString*)itemName
@@ -252,45 +323,6 @@
     //如果分项字段存在，则返回分项信息
     id item = [userInfo objectForKey:itemName];
     return item;
-}
-
-- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion
-{    
-    if(!DICTIONARYVALID(userInfoDic)) 
-    {
-        if(completion)
-        {
-            completion(NO);
-        }
-        return;
-    }
-    
-    //先拿到userid
-    NSString *userid = [userInfoDic objectForKey:@"user_id"];
-    if(!STRVALID(userid))
-    {
-        if(completion)
-        {
-            completion(NO);
-        }
-        return;
-    }
-    
-    //存储userinfo
-    [_allUserInfos setObject:userInfoDic forKey:userid];
-    
-    //存储到本地
-//    [[NSUserDefaults standardUserDefaults] setObject:_allUserInfos forKey:DataCenter_all_user_info_save_list];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    //存储到钥匙串
-    [CHKeyChain save:KEYCHAIN_KEY_ALL_USERS data:_allUserInfos];
-    
-    //返回给上层
-    if(completion)
-    {
-        completion(YES);
-    }
 }
 
 

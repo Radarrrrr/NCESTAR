@@ -227,12 +227,13 @@
 
 
 #pragma mark - 创建和维护用户信息相关
-- (void)createAndUpdateMyUserInfoWithDeviceToken:(NSString*)deviceToken
+- (void)updateMyDeviceToken:(NSString*)deviceToken
 {
     if(!STRVALID(deviceToken)) return;
     
-//    //把第一次的devicetoken做md5当成用户user_id,以后删除再重装以后，devicetoken会变，那么需要更新自己的用户信息
-//    NSString *user_id = [DDFunction md5FormString:deviceToken];
+    //先假定一定有个人信息
+    NSMutableDictionary *myUserInfo = [[DataCenter sharedCenter] loadMyInfoForItem:nil];
+    if(!DICTIONARYVALID(myUserInfo)) return;
     
     
 }
@@ -241,34 +242,25 @@
 //----模拟两份用户数据--------------------------------------------------------------------------------------------------------------------
 - (void)createUsers
 {
-    NSDictionary *userMe = 
-    @{
-        @"user_id":@"00001",
-        @"device_token":@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b", 
-        @"nick_name":@"天气不错", 
-        @"face_id":@"miao2", 
-        @"introduce":@"今天天气不错",
-        @"relation":@"myself"
-     };
+    //更新用户信息
+    //user_id = @"00000"
+    [[DataCenter sharedCenter] updateUserInfo:@"宁小盒" onitem:@"nick_name" foruser:@"00000"];
+    [[DataCenter sharedCenter] updateUserInfo:@"wang" onitem:@"face_id" foruser:@"00000"];
+    [[DataCenter sharedCenter] updateUserInfo:@"我是宁小盒，天天旺旺旺" onitem:@"introduce" foruser:@"00000"];
+    [[DataCenter sharedCenter] updateUserInfo:@"home" onitem:@"relation" foruser:@"00000"];
+    [[DataCenter sharedCenter] updateUserInfo:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678" onitem:@"device_token" foruser:@"00000"];
     
-    NSDictionary *userBao = 
-    @{
-        @"user_id":@"00000",
-        @"device_token":@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678", 
-        @"nick_name":@"宁小盒", 
-        @"face_id":@"wang", 
-        @"introduce":@"我是宁小盒，天天旺旺旺",
-        @"relation":@"home"
-     };
+    //user_id = @"00001"
+    [[DataCenter sharedCenter] updateUserInfo:@"天气不错" onitem:@"nick_name" foruser:@"00001"];
+    [[DataCenter sharedCenter] updateUserInfo:@"miao2" onitem:@"face_id" foruser:@"00001"];
+    [[DataCenter sharedCenter] updateUserInfo:@"哦呦，今天天气不错哦" onitem:@"introduce" foruser:@"00001"];
+    [[DataCenter sharedCenter] updateUserInfo:@"home" onitem:@"relation" foruser:@"00001"];
+    [[DataCenter sharedCenter] updateUserInfo:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b" onitem:@"device_token" foruser:@"00001"];
+
     
-    [[DataCenter sharedCenter] setUserInfo:userMe completion:^(BOOL finish) {
-        
-    }];
-    
-    [[DataCenter sharedCenter] setUserInfo:userBao completion:^(BOOL finish) {
-        
-    }];
-    
+    //设定自己是哪一个
+    [[DataCenter sharedCenter] onceInitMyUserID:@"00001"];  //我自己用
+    //[[DataCenter sharedCenter] onceInitMyUserID:@"00000"];  //宝用
 }
 //-----------------------------------------------------------------------------------------------------------------------
 

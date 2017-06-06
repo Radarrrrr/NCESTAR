@@ -68,12 +68,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestNCEDeom/AppDelegate.m"
-            timestampString = "518426667.918691"
+            timestampString = "518436182.783444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "236"
             endingLineNumber = "236"
-            landmarkName = "-createAndUpdateMyUserInfoWithDeviceToken:"
+            landmarkName = "-updateMyDeviceToken:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
