@@ -11,6 +11,7 @@
 #import "ViewController.h"
 
 
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) HomeViewController *homeVC;
@@ -63,6 +64,9 @@
     
     //获取存储在group里边的通知payloads
     [[DataCenter sharedCenter] collectGroupMessages];
+    
+    //修正一下超出数量限制的消息存储
+    [[DataCenter sharedCenter] fixMessageStorageCapacity];
     
     
     //TO DO: 模拟两个用户数据，以后会换成正式的
@@ -142,12 +146,7 @@
 /***********************************************************************************************************/
 #pragma mark - APNS
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-//    NSString *newToken1 = [NSString stringWithFormat:@"%@",deviceToken];
-//    //NSString *newToken2 = [newToken1 substringWithRange:NSMakeRange(1, [newToken1 length]-2)];
-//    //NSString *newToken3 = [newToken2 stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSLog(@"Received token from Apple: %@",newToken1);
-    
+{    
     NSString *deviceTokenStr = [[[[deviceToken description]
                                  stringByReplacingOccurrencesOfString:@"<" withString:@""]
                                  stringByReplacingOccurrencesOfString:@">" withString:@""]
@@ -234,6 +233,8 @@
     
 //    //把第一次的devicetoken做md5当成用户user_id,以后删除再重装以后，devicetoken会变，那么需要更新自己的用户信息
 //    NSString *user_id = [DDFunction md5FormString:deviceToken];
+    
+    
 }
 
 

@@ -9,6 +9,19 @@
 //  数据中心的数据都是copy以后下发，相当于在app内部做了一个数据备份，每个pulgin模块都会独立拥有自己的数据，如果需要修改，也是模块和数据中心在做一次同步，这么做是为了解耦，可以接受双份数据。
 
 
+
+
+
+#import <Foundation/Foundation.h>
+
+@interface DataCenter : NSObject
+
++ (instancetype)sharedCenter; //单实例
+
+
+
+
+#pragma mark - 数据收集&获取相关 (存储在UserDefault里)
 /* payload完整结构
 {
     "payload":
@@ -46,33 +59,22 @@
 }  
 */
 
-
-
-
-#import <Foundation/Foundation.h>
-
-@interface DataCenter : NSObject
-
-+ (instancetype)sharedCenter; //单实例
-
-
-#pragma mark - 数据收集&获取
+//数据收集和存储
 - (void)collectGroupMessages; //从group里边收集未展示的消息payloads
-
+- (void)fixMessageStorageCapacity; //修正消息存储容量
 - (void)appendNotifyData:(NSDictionary*)notiDic;//添加一条新的消息，到队列最后面
 
 
-#pragma mark - 数据请求
+//数据请求
 - (NSMutableArray *)getAllMessages; //获取所有已经存储的messages 返回顺序为时间正序，最新的在最后面
-
 - (NSDictionary *)getNotiDataForNotifyid:(NSString*)notifyid; //根据notifyid在数据中心的所有消息表中获取对应的消息字典
-
 - (NSDictionary *)getNotiDataForNotifyToken:(NSString*)notifytoken; //根据notifytoken在数据中心的所有消息表中获取对应的消息字典
 
 
 
 
-#pragma mark - 个人信息相关数据
+
+#pragma mark - 个人信息相关数据 (存储在KeyChain里)
 /* userInfos整体数据结构
 {
     "user_id1":
@@ -96,9 +98,8 @@
 
 
 //维护整个用户关系表
-- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加一个用户信息到库里存储,使用user_id当key来存储
+- (void)setUserInfo:(NSDictionary*)userInfoDic completion:(void (^)(BOOL finish))completion; //添加or更新 一个用户信息到库里存储,使用user_id当key来存储
 - (id)userInfoForId:(NSString*)userid item:(NSString*)itemName;//根据user_id获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
-
 
 
 

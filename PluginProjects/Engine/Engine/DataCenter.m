@@ -7,11 +7,18 @@
 //
 
 
+
+
+#define KEYCHAIN_KEY_ALL_USERS                  @"com.dangdang.unc.allusers"
 #define DataCenter_all_messages_save_list       @"DataCenter all messages save list"
-#define DataCenter_saved_messages_limit_count   20
+
+#define DataCenter_saved_messages_limit_count   60     //总存储容量，超过60以后，则修正为20条
+#define DataCenter_saved_messages_fix_count     20      
 
 
-#define DataCenter_all_user_info_save_list  @"DataCenter all user info save list"
+
+
+//#define DataCenter_all_user_info_save_list  @"DataCenter all user info save list"
 
 
 
@@ -56,7 +63,8 @@
 
 
 
-#pragma mark - 数据收集&获取
+#pragma mark - 数据收集&获取相关
+//数据收集和存储
 - (void)collectGroupMessages
 {    
     //先从userdefault里边取出以前存储的
@@ -76,12 +84,6 @@
     //把group里边的添加到总列表里边
     [_allMessages addObjectsFromArray:payloads];
     
-    //限定最多数量，超出的删掉不保存
-    if([_allMessages count] > DataCenter_saved_messages_limit_count)
-    {
-        [_allMessages removeObjectsInRange:NSMakeRange(0, [payloads count])];
-    }
-    
     //保存列表
     [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -93,24 +95,26 @@
     
     [_allMessages addObject:notiDic];
     
-    //限定最多数量，超出的删掉不保存
-    if([_allMessages count] > DataCenter_saved_messages_limit_count)
-    {
-        [_allMessages removeObjectAtIndex:0];
-    }
-    
     //保存列表
     [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+}
+
+- (void)fixMessageStorageCapacity
+{
+    //修正消息存储容量
+    NSInteger count = [_allMessages count];
+    if(count > DataCenter_saved_messages_limit_count)
+    {
+        [_allMessages removeObjectsInRange:NSMakeRange(0, (count - DataCenter_saved_messages_fix_count) )];
+        //保存列表
+        [[NSUserDefaults standardUserDefaults] setObject:_allMessages forKey:DataCenter_all_messages_save_list];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 
-#pragma mark - 数据请求下发
-
-
-
-#pragma mark - 数据请求
+//数据请求
 - (NSMutableArray *)getAllMessages
 {
     return _allMessages;
@@ -150,6 +154,7 @@
     
     return nil;
 }
+
 
 
 
@@ -210,7 +215,21 @@
 {
     NSMutableDictionary *allInfos = [[NSMutableDictionary alloc] init];
     
-    NSDictionary *savedAllInfos = [[NSUserDefaults standardUserDefaults] objectForKey:DataCenter_all_user_info_save_list];
+    //暂时注释掉
+//    NSDictionary *savedAllInfos = [[NSUserDefaults standardUserDefaults] objectForKey:DataCenter_all_user_info_save_list];
+//    
+//    if(!DICTIONARYVALID(savedAllInfos))
+//    {
+//        //如果本地没存，先从keychain取一次，存到本地
+//        savedAllInfos = [CHKeyChain load:KEYCHAIN_KEY_ALL_USERS];
+//        
+//        //存到本地
+//        [[NSUserDefaults standardUserDefaults] setObject:savedAllInfos forKey:DataCenter_all_user_info_save_list];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
+    
+    NSDictionary *savedAllInfos = [CHKeyChain load:KEYCHAIN_KEY_ALL_USERS];
+    
     if(DICTIONARYVALID(savedAllInfos))
     {
         allInfos = [NSMutableDictionary dictionaryWithDictionary:savedAllInfos];
@@ -261,9 +280,13 @@
     [_allUserInfos setObject:userInfoDic forKey:userid];
     
     //存储到本地
-    [[NSUserDefaults standardUserDefaults] setObject:_allUserInfos forKey:DataCenter_all_user_info_save_list];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] setObject:_allUserInfos forKey:DataCenter_all_user_info_save_list];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
+    //存储到钥匙串
+    [CHKeyChain save:KEYCHAIN_KEY_ALL_USERS data:_allUserInfos];
+    
+    //返回给上层
     if(completion)
     {
         completion(YES);
