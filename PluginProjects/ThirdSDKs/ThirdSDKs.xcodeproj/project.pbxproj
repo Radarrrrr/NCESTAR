@@ -13,6 +13,8 @@
 		0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C17AD5F1EA88C8D00238D29 /* DDMacros.m */; };
 		0C4F05FC1EDED0A000240092 /* RDWaitingDots.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C4F05FA1EDED0A000240092 /* RDWaitingDots.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C4F05FD1EDED0A000240092 /* RDWaitingDots.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F05FB1EDED0A000240092 /* RDWaitingDots.m */; };
+		0C53B3911EE67A69003FFCE7 /* CHKeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C53B38F1EE67A69003FFCE7 /* CHKeyChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C53B3921EE67A69003FFCE7 /* CHKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C53B3901EE67A69003FFCE7 /* CHKeyChain.m */; };
 		0CA505B41E306F84000A23EB /* ThirdSDKs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505B21E306F84000A23EB /* ThirdSDKs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA505D71E307070000A23EB /* NWHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA505C21E307070000A23EB /* NWHub.h */; };
 		0CA505D81E307070000A23EB /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA505C31E307070000A23EB /* NWHub.m */; };
@@ -94,6 +96,8 @@
 		0C17AD5F1EA88C8D00238D29 /* DDMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMacros.m; sourceTree = "<group>"; };
 		0C4F05FA1EDED0A000240092 /* RDWaitingDots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDWaitingDots.h; sourceTree = "<group>"; };
 		0C4F05FB1EDED0A000240092 /* RDWaitingDots.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDWaitingDots.m; sourceTree = "<group>"; };
+		0C53B38F1EE67A69003FFCE7 /* CHKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHKeyChain.h; sourceTree = "<group>"; };
+		0C53B3901EE67A69003FFCE7 /* CHKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHKeyChain.m; sourceTree = "<group>"; };
 		0CA505AF1E306F84000A23EB /* ThirdSDKs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdSDKs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA505B21E306F84000A23EB /* ThirdSDKs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdSDKs.h; sourceTree = "<group>"; };
 		0CA505B31E306F84000A23EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -190,6 +194,15 @@
 			path = RDWaitingDots;
 			sourceTree = "<group>";
 		};
+		0C53B38E1EE67A69003FFCE7 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				0C53B38F1EE67A69003FFCE7 /* CHKeyChain.h */,
+				0C53B3901EE67A69003FFCE7 /* CHKeyChain.m */,
+			);
+			path = KeyChain;
+			sourceTree = "<group>";
+		};
 		0CA505A51E306F84000A23EB = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +222,7 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0C53B38E1EE67A69003FFCE7 /* KeyChain */,
 				0C4F05F91EDED0A000240092 /* RDWaitingDots */,
 				0CC237631EDA4E6000E65C5F /* AudioPlayer */,
 				0CC6D9D21ECC52C10055770C /* DDMoveableView */,
@@ -430,6 +444,7 @@
 				0CC237501ED404E500E65C5F /* UIButton+Spin.h in Headers */,
 				0C4F05FC1EDED0A000240092 /* RDWaitingDots.h in Headers */,
 				0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */,
+				0C53B3911EE67A69003FFCE7 /* CHKeyChain.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
 				0CA505EA1E307070000A23EB /* RDPushTool.h in Headers */,
 				0CA5063A1E31F4AF000A23EB /* JSONKit.h in Headers */,
@@ -564,6 +579,7 @@
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
 				0CA506671E320034000A23EB /* DDEffectView.m in Sources */,
 				0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */,
+				0C53B3921EE67A69003FFCE7 /* CHKeyChain.m in Sources */,
 				0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */,
 				0CA506A11E32046D000A23EB /* UITableViewController+ISRefreshControl.m in Sources */,
 				0CC237511ED404E500E65C5F /* UIButton+Spin.m in Sources */,
