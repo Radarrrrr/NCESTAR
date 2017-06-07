@@ -28,6 +28,9 @@
 
 @property (nonatomic, strong)   UIButton *myfaceBtn;    //我的头像
 @property (nonatomic, strong)   UIButton *tofaceBtn;    //发送的好友头像
+@property (nonatomic, strong)   UILabel *toNameLabel;   //发送的好友名称
+
+@property (nonatomic, strong)   NSString *pushToUserID; //发送的好友的user_id
 
 @end
 
@@ -42,6 +45,9 @@
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.messageArray = [[NSMutableArray alloc] init];
     
+    //直接决定发送用户的user_id了
+    [self determinePushToUserID];
+    
 
     //添加背景图片层
     self.backImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
@@ -54,23 +60,32 @@
     
     
     //左上角添加自己头像和好友头像
-    UIView *peoplesV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIView *peoplesV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 350, 44)];
     peoplesV.backgroundColor = [UIColor clearColor];
     
     UIBarButtonItem *friendItem = [[UIBarButtonItem alloc] initWithCustomView:peoplesV];
     self.navigationItem.leftBarButtonItem = friendItem;
     
     self.myfaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _myfaceBtn.frame = CGRectMake(-6, 5, 34, 34);
-    _myfaceBtn.backgroundColor = [UIColor redColor];
+    _myfaceBtn.frame = CGRectMake(-6, 7, 30, 30);
     [DDFunction addRadiusToView:_myfaceBtn radius:CGRectGetWidth(_myfaceBtn.frame)/2];
     [peoplesV addSubview:_myfaceBtn];
+    [self changeMyInfomation];
     
     self.tofaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _tofaceBtn.frame = CGRectMake(130, 5, 34, 34);
-    _tofaceBtn.backgroundColor = [UIColor redColor];
+    _tofaceBtn.frame = CGRectMake(135, 4, 36, 36);
     [DDFunction addRadiusToView:_tofaceBtn radius:CGRectGetWidth(_tofaceBtn.frame)/2];
     [peoplesV addSubview:_tofaceBtn];
+    
+    self.toNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tofaceBtn.frame)+4, 12, CGRectGetWidth(peoplesV.frame)-CGRectGetMaxX(_tofaceBtn.frame)-4, 20)];
+    _toNameLabel.backgroundColor = [UIColor clearColor];
+    _toNameLabel.userInteractionEnabled = NO;
+    _toNameLabel.textAlignment = NSTextAlignmentLeft;
+    _toNameLabel.font = DDFONT_B(14);
+    _toNameLabel.textColor = RGBS(100);
+    [peoplesV addSubview:_toNameLabel];
+    
+    [self changeToUserInfomation];
     
     
     //右上角添加写推送按钮
@@ -105,11 +120,11 @@
     [self.view addSubview:_writeBtn];
     
     //做状态圆点
-    self.statusDot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    self.statusDot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
     _statusDot.center = CGPointMake(CGRectGetWidth(_writeBtn.frame)/2, CGRectGetHeight(_writeBtn.frame)/2);
     _statusDot.userInteractionEnabled = NO;
     _statusDot.backgroundColor = [UIColor clearColor];
-    [DDFunction addRadiusToView:_statusDot radius:5];
+    [DDFunction addRadiusToView:_statusDot radius:4];
     [_writeBtn addSubview:_statusDot];
         
     
@@ -120,7 +135,7 @@
     float stateWidth = SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60;
     
     //CGRectMake(60, SCR_HEIGHT-64-35-10, SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60, 30)
-    self.stateView = [[UIView alloc] initWithFrame:CGRectMake(60+stateWidth/2, SCR_HEIGHT-64-35-10, 30, 30)];
+    self.stateView = [[UIView alloc] initWithFrame:CGRectMake(60+stateWidth/2, SCR_HEIGHT-64-35-10-2.5, 25, 25)];
     _stateView.backgroundColor = [UIColor clearColor];
     _stateView.clipsToBounds = YES;
     _stateView.alpha = 0.0;
@@ -153,6 +168,26 @@
 }
 
 
+- (void)determinePushToUserID
+{
+    //决定要发送的用户的user_id, 暂时使用固定的userid选择发送人
+    NSString *touserid = nil;
+    
+    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
+    if(STRVALID(myuserid))
+    {
+        if([myuserid isEqualToString:@"00000"])
+        {
+            touserid = @"00001";
+        }
+        else if([myuserid isEqualToString:@"00001"])
+        {
+            touserid = @"00000";
+        }
+    }
+
+    self.pushToUserID = touserid;
+}
 
 
 
@@ -165,25 +200,9 @@
 - (void)writeMsgAction:(id)sender
 {
     //弹出输入框
-
-    //TO DO: 暂时使用固定的userid选择发送人
-    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
-    if(!STRVALID(myuserid)) return;
+    if(!STRVALID(_pushToUserID)) return;
     
-    NSDictionary *toUserInfo;
-    if([myuserid isEqualToString:@"00000"])
-    {
-        toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:nil];
-    }
-    else if([myuserid isEqualToString:@"00001"])
-    {
-        toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:nil];
-    }
-    else
-    {
-        return;
-    }
-    
+    NSDictionary *toUserInfo = [[DataCenter sharedCenter] userInfoForId:_pushToUserID onitem:nil];    
     
     [[MsgInputView sharedInstance] callMsgInputToUser:toUserInfo pushReport:^(PTPushReport *report) {
         
@@ -341,6 +360,9 @@
 }
 
 
+
+
+
 #pragma mark - 状态条相关
 static BOOL stateViewShowing = NO;
 
@@ -418,6 +440,41 @@ static BOOL stateViewShowing = NO;
 }
 
 
+#pragma mark - 修改导航条头像
+- (UIImage*)faceImageForUserId:(NSString*)userid
+{
+    NSString *faceid = @"star";
+    
+    if(STRVALID(userid)) 
+    {
+        NSString *ufaceid = [[DataCenter sharedCenter] userInfoForId:userid onitem:@"face_id"];
+        if(STRVALID(ufaceid)) 
+        {
+            faceid = ufaceid;
+        }
+    }
+    
+    NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
+    return [UIImage imageNamed:facepicN forme:self];
+}
+
+- (void)changeMyInfomation
+{
+    //改变自己信息
+    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
+    
+    UIImage *faceImg = [self faceImageForUserId:myuserid];
+    [_myfaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal];
+}
+- (void)changeToUserInfomation
+{
+    //改变发送对象信息    
+    UIImage *faceImg = [self faceImageForUserId:_pushToUserID];
+    [_tofaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal];
+    
+    NSString *nick = [[DataCenter sharedCenter] userInfoForId:_pushToUserID onitem:@"nick_name"];
+    _toNameLabel.text = nick;
+}
 
 
 

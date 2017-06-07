@@ -9,7 +9,7 @@
 #import "RDWaitingDots.h"
 
 
-#define dot_width   8  //圆点直径
+#define dot_width   6  //圆点直径
 #define dots_offset 4  //圆点间隔
 
 #define dots_color_hide    [UIColor clearColor]
