@@ -47,7 +47,7 @@
         //然后再获取其他各种信息
         self.allMessages = [[NSMutableArray alloc] init];
         self.allUserInfos = [self loadAllUserInfos];  //初始化就把所有的用户信息放在内存里
-        self.myUserInfo = [self loadMyInfoForItem:nil];
+        self.myUserInfo = [self myInfoOnItem:nil];
     }
     return self;
 }
@@ -160,6 +160,7 @@
 
 
 #pragma mark - 个人信息相关数据
+//初始化自己的个人ID，只需要第一次安装时执行一次，以后都从keychain里边取了
 - (void)onceInitMyUserID:(NSString*)userID
 {
     if(!STRVALID(userID)) return;
@@ -172,15 +173,7 @@
     [CHKeyChain save:KEYCHAIN_KEY_MY_USER_ID data:userID];
 }
 
-- (void)updateMyUserInfo:(NSDictionary*)myInfo
-{
-    if(!DICTIONARYVALID(myInfo)) return;
-    
-    self.myUserInfo = [NSMutableDictionary dictionaryWithDictionary:myInfo];
-    
-    [self saveUserInfo:_myUserInfo];
-}
-- (id)loadMyInfoForItem:(NSString*)itemName
+- (id)myInfoOnItem:(NSString*)itemName
 {
     if(!DICTIONARYVALID(_allUserInfos)) return nil;
     
@@ -309,7 +302,7 @@
     [self saveUserInfo:mInfo];
 }
 
-- (id)userInfoForId:(NSString*)userid item:(NSString*)itemName
+- (id)userInfoForId:(NSString*)userid onitem:(NSString*)itemName
 {
     if(!STRVALID(userid)) return nil;
     if(!DICTIONARYVALID(_allUserInfos)) return nil;

@@ -115,11 +115,11 @@ static float inputLastPosition;
     if(!STRVALID(toToken)) return;
     self.pushToToken = toToken;
     
-    NSString *myToken = [[DataCenter sharedCenter] loadMyInfoForItem:@"device_token"];
+    NSString *myToken = [[DataCenter sharedCenter] myInfoOnItem:@"device_token"];
     if(!STRVALID(myToken)) return;
     self.selfToken = myToken;
     
-    NSString *myUserId = [[DataCenter sharedCenter] loadMyInfoForItem:@"user_id"];
+    NSString *myUserId = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
     if(!STRVALID(myUserId)) return;
     self.selfUserId = myUserId;
     

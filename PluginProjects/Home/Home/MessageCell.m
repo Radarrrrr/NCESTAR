@@ -38,7 +38,7 @@
         // Initialization code.
         
         //保存一下本机的token，用来做判断
-        self.selfUserId = [[DataCenter sharedCenter] loadMyInfoForItem:@"user_id"];
+        self.selfUserId = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
         
         //添加一个背景框
         self.backView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, SCR_WIDTH-16, MessageCell_default_cell_height-8)];
@@ -152,7 +152,7 @@
     //修改发送人的头像
     if(STRVALID(fromUserId))
     {
-        NSString *faceid = [[DataCenter sharedCenter] userInfoForId:fromUserId item:@"face_id"];
+        NSString *faceid = [[DataCenter sharedCenter] userInfoForId:fromUserId onitem:@"face_id"];
         if(!STRVALID(faceid)) faceid = @"star";
         
         NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];

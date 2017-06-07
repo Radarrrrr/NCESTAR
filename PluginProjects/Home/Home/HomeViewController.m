@@ -182,7 +182,7 @@
     
     
     
-    NSDictionary *toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" item:nil];
+    NSDictionary *toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:nil];
         
     [[MsgInputView sharedInstance] callMsgInputToUser:toUserInfo pushReport:^(PTPushReport *report) {
         

@@ -158,6 +158,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:deviceTokenStr forKey:SAVED_SELF_DEVICE_TOKEN];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    //更新自己的token
+    [self updateMyDeviceToken:deviceTokenStr];
+    
     //给推送模拟器存一份
     [RDPushSimuVC saveAppDeviceToken:deviceTokenStr];
 }
@@ -231,34 +234,53 @@
 {
     if(!STRVALID(deviceToken)) return;
     
-    //先假定一定有个人信息
-    NSMutableDictionary *myUserInfo = [[DataCenter sharedCenter] loadMyInfoForItem:nil];
-    if(!DICTIONARYVALID(myUserInfo)) return;
+    NSString *mysavedtoken = [[DataCenter sharedCenter] myInfoOnItem:@"device_token"];
+    if(STRVALID(mysavedtoken) && [mysavedtoken isEqualToString:deviceToken]) return;
     
-    
+    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
+    if(!STRVALID(myuserid)) return;
+
+    //更新自己的token
+    [[DataCenter sharedCenter] updateUserInfo:deviceToken onitem:@"device_token" foruser:myuserid];
 }
+
 
 
 //----模拟两份用户数据--------------------------------------------------------------------------------------------------------------------
 - (void)createUsers
 {
-    //更新用户信息
-    //user_id = @"00000"
+    //更新用户信息 for user_id = @"00000"
     [[DataCenter sharedCenter] updateUserInfo:@"宁小盒" onitem:@"nick_name" foruser:@"00000"];
     [[DataCenter sharedCenter] updateUserInfo:@"wang" onitem:@"face_id" foruser:@"00000"];
     [[DataCenter sharedCenter] updateUserInfo:@"我是宁小盒，天天旺旺旺" onitem:@"introduce" foruser:@"00000"];
     [[DataCenter sharedCenter] updateUserInfo:@"home" onitem:@"relation" foruser:@"00000"];
-    [[DataCenter sharedCenter] updateUserInfo:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678" onitem:@"device_token" foruser:@"00000"];
     
-    //user_id = @"00001"
+    //如果已经keychain里边已经有token了，就不再写入了
+    NSString *token00000 = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:@"device_token"];
+    if(!STRVALID(token00000))
+    {
+        [[DataCenter sharedCenter] updateUserInfo:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678" onitem:@"device_token" foruser:@"00000"];
+    }
+    
+    
+    
+    //更新用户信息 for user_id = @"00001"
     [[DataCenter sharedCenter] updateUserInfo:@"天气不错" onitem:@"nick_name" foruser:@"00001"];
     [[DataCenter sharedCenter] updateUserInfo:@"miao2" onitem:@"face_id" foruser:@"00001"];
     [[DataCenter sharedCenter] updateUserInfo:@"哦呦，今天天气不错哦" onitem:@"introduce" foruser:@"00001"];
     [[DataCenter sharedCenter] updateUserInfo:@"home" onitem:@"relation" foruser:@"00001"];
-    [[DataCenter sharedCenter] updateUserInfo:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b" onitem:@"device_token" foruser:@"00001"];
-
     
-    //设定自己是哪一个
+
+    //如果已经keychain里边已经有token了，就不再写入了
+    NSString *token00001 = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:@"device_token"];
+    if(!STRVALID(token00001))
+    {
+        [[DataCenter sharedCenter] updateUserInfo:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b" onitem:@"device_token" foruser:@"00001"];
+    }
+    
+    
+    
+    //设定自己是哪一个，只用一次，以后直接注释掉不用再写了
     [[DataCenter sharedCenter] onceInitMyUserID:@"00001"];  //我自己用
     //[[DataCenter sharedCenter] onceInitMyUserID:@"00000"];  //宝用
 }
