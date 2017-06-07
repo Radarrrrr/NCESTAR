@@ -166,24 +166,25 @@
 {
     //弹出输入框
 
-    //TO DO: 暂时先发给自己
-//    NSString *myToken = [[NSUserDefaults standardUserDefaults] objectForKey:SAVED_SELF_DEVICE_TOKEN];
-//    
-//    NSString *toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //默认发给我手机
-//    
-//    if([myToken isEqualToString:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"])
-//    {
-//        toToken = @"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"; //发给我手机
-//    }
-//    else if([myToken isEqualToString:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"])
-//    {
-//        toToken = @"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"; //发给宝手机
-//    }
+    //TO DO: 暂时使用固定的userid选择发送人
+    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
+    if(!STRVALID(myuserid)) return;
+    
+    NSDictionary *toUserInfo;
+    if([myuserid isEqualToString:@"00000"])
+    {
+        toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:nil];
+    }
+    else if([myuserid isEqualToString:@"00001"])
+    {
+        toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:nil];
+    }
+    else
+    {
+        return;
+    }
     
     
-    
-    NSDictionary *toUserInfo = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:nil];
-        
     [[MsgInputView sharedInstance] callMsgInputToUser:toUserInfo pushReport:^(PTPushReport *report) {
         
         switch (report.status) {
