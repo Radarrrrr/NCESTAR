@@ -302,6 +302,25 @@
     [self saveUserInfo:mInfo];
 }
 
+- (BOOL)checkUserExist:(NSString*)userid
+{
+    if(!STRVALID(userid)) return NO;
+    if(!DICTIONARYVALID(_allUserInfos)) return NO;
+    
+    NSArray *allIDs = [_allUserInfos allKeys];
+    if(!ARRAYVALID(allIDs)) return NO;
+    
+    for(NSString *kid in allIDs)
+    {
+        if([kid isEqualToString:userid])
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (id)userInfoForId:(NSString*)userid onitem:(NSString*)itemName
 {
     if(!STRVALID(userid)) return nil;

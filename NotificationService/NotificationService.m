@@ -63,8 +63,8 @@
     
     
     
-    
-    
+    //同步更新一下发送人的user_id和device_token
+    [self syncUserInfomationsForPayload:request.content.userInfo];
     
     
     //截获attach和其他数据，下载并存储    
@@ -226,5 +226,39 @@
 }
 
 
+//根据发送过来的payload，同步更新一下用户信息
+- (void)syncUserInfomationsForPayload:(NSDictionary*)payload
+{
+    if(!DICTIONARYVALID(payload)) return;
+    
+    NSString *from_userid = [DDFunction getValueForKey:@"from_userid" inData:payload];
+    if(!STRVALID(from_userid)) return;
+    
+    NSString *from_token = [DDFunction getValueForKey:@"from_token" inData:payload];
+    if(!STRVALID(from_token)) return;
+    
+    BOOL exist = [[DataCenter sharedCenter] checkUserExist:from_userid];
+    if(!exist) return;
+    
+    NSString *savedToken = [[DataCenter sharedCenter] userInfoForId:from_userid onitem:@"device_token"];
+    if(STRVALID(savedToken) && [savedToken isEqualToString:from_token]) return;
+    
+    //更新token
+    [[DataCenter sharedCenter] updateUserInfo:from_token onitem:@"device_token" foruser:from_userid];
+}
+
+
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+

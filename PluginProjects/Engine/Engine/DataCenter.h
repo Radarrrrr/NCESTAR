@@ -99,6 +99,7 @@
 //维护整个用户关系表
 - (void)saveUserInfo:(NSDictionary*)userInfoDic; //保存一个用户信息到库里存储，使用user_id当key来存储，如果已有则覆盖
 - (void)updateUserInfo:(NSString*)info onitem:(NSString*)item foruser:(NSString*)userid; //修改userid对应的用户的item对应字段的信息
+- (BOOL)checkUserExist:(NSString*)userid; //检查一个userid对应的用户是否存在
 
 - (id)myInfoOnItem:(NSString*)itemName;        //读取自己的用户信息，如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
 - (id)userInfoForId:(NSString*)userid onitem:(NSString*)itemName;//根据user_id获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"

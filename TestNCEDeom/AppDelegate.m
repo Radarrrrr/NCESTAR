@@ -178,9 +178,10 @@
 #pragma mark RDUserNotifyCenterDelegate 相关返回方法
 - (void)didReceiveNotificationResponse:(UNNotificationResponse*)response content:(UNNotificationContent*)content isLocal:(BOOL)blocal
 {
+    //点击消息窗体进入APP
     NSString     *actionID      = response.actionIdentifier;
-    //    NSString     *categoryID    = content.categoryIdentifier;
-    //    NSDictionary *userInfo      = content.userInfo;
+    //NSString     *categoryID    = content.categoryIdentifier;
+    NSDictionary *payload      = content.userInfo;
     
     
     if([actionID isEqualToString:@"com.apple.UNNotificationDefaultActionIdentifier"])
