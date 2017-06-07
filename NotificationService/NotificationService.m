@@ -244,7 +244,7 @@
     if(STRVALID(savedToken) && [savedToken isEqualToString:from_token]) return;
     
     //更新token
-    [[DataCenter sharedCenter] updateUserInfo:from_token onitem:@"device_token" foruser:from_userid];
+    [[DataCenter sharedCenter] updateUserInfo:from_userid onitem:@"device_token" useinfo:from_token];
 }
 
 

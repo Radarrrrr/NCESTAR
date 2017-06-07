@@ -287,7 +287,7 @@
     [CHKeyChain save:KEYCHAIN_KEY_ALL_USERS data:_allUserInfos];
 }
 
-- (void)updateUserInfo:(NSString*)info onitem:(NSString*)item foruser:(NSString*)userid 
+- (void)updateUserInfo:(NSString*)userid onitem:(NSString*)item useinfo:(NSString*)info
 {
     if(!STRVALID(userid)) return;
     if(!STRVALID(info)) return;
