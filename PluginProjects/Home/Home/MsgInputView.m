@@ -17,9 +17,10 @@ static float inputLastPosition;
 
 
 #import "MsgInputView.h"
+#import "MsgFunctionView.h"
 
 
-@interface MsgInputView () <DDMoveableViewDelegate, UITextFieldDelegate>
+@interface MsgInputView () <DDMoveableViewDelegate, UITextFieldDelegate, MsgFunctionViewDelegate>
 
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UIView *backView;
@@ -31,6 +32,8 @@ static float inputLastPosition;
 
 @property (nonatomic, strong) void (^pushReportHandler)(PTPushReport *report);
 @property (nonatomic, strong) void (^closeHandler)(void);
+
+@property (nonatomic, strong) MsgFunctionView *functionView; //快捷功能区
 
 @end
 
@@ -92,6 +95,11 @@ static float inputLastPosition;
         [DDFunction addRadiusToView:dragLine radius:2];
         [_containerView addSubview:dragLine];
         
+        
+        //添加快捷功能区
+        self.functionView = [[MsgFunctionView alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(_inputField.frame)+8, SCR_WIDTH-16, CGRectGetHeight(_containerView.frame)-CGRectGetMaxY(_inputField.frame)-8-8)];
+        _functionView.delegate = self;
+        [_containerView addSubview:_functionView];
         
     }
     return self;
@@ -220,36 +228,8 @@ static float inputLastPosition;
     if(textField.text && ![textField.text isEqualToString:@""])
     {
         NSString *message = textField.text;
-        NSDictionary *payload = [self assemblePayload:message attach:nil msgtype:MSG_TYPE_MESSAGE]; //表情可以当作attach发过来
-    
-        [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
-            
-            if(report.status == PTPushReportStatusPushSuccess)
-            {
-                _inputField.text = nil;
+        [self pushMessage:message attach:nil msgtype:MSG_TYPE_MESSAGE];
                 
-                //存储发送成功的消息字典 {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
-                NSMutableDictionary *notiDic = [[NSMutableDictionary alloc] init];
-                [notiDic setObject:@"" forKey:@"notifyid"];
-                [notiDic setObject:@"" forKey:@"receivetime"];
-                [notiDic setObject:report.payload forKey:@"payload"];
-                
-                [[DataCenter sharedCenter] appendNotifyData:notiDic];
-                
-                //发送成功声音
-                [[AudioPlayer sharedAudioPlayer] setAudio:@"msg_send" withType:@"wav" withLoop:NO];
-                [[AudioPlayer sharedAudioPlayer] play];
-            }
-            
-            if(_pushReportHandler)
-            {
-                _pushReportHandler(report);
-            }
-        }];
-        
-        [self closeAction:nil];
-        
-        
         return YES;
     }
     
@@ -257,8 +237,58 @@ static float inputLastPosition;
 }
 
 
+//MsgFunctionViewDelegate
+- (void)msgFunctionViewTargetAction:(MSGFunctionAction)action
+{
+    //返回选择了那种操作事件
+    switch (action) {
+        case MSGFunctionActionAttention:
+        {
+            //收到呼叫提醒
+            [self pushMessage:@"求关注" attach:nil msgtype:MSG_TYPE_ATTENTION];
+        }
+            break;
+        default:
+            break;
+    }
+}
 
-#pragma mark - payload相关
+
+
+#pragma mark - payload及发送相关
+- (void)pushMessage:(NSString *)message attach:(NSString *)attach msgtype:(NSString*)msgtype
+{
+    //发送消息
+    NSDictionary *payload = [self assemblePayload:message attach:attach msgtype:msgtype]; //表情可以当作attach发过来
+    
+    [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
+        
+        if(report.status == PTPushReportStatusPushSuccess)
+        {
+            _inputField.text = nil;
+            
+            //存储发送成功的消息字典 {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
+            NSMutableDictionary *notiDic = [[NSMutableDictionary alloc] init];
+            [notiDic setObject:@"" forKey:@"notifyid"];
+            [notiDic setObject:@"" forKey:@"receivetime"];
+            [notiDic setObject:report.payload forKey:@"payload"];
+            
+            [[DataCenter sharedCenter] appendNotifyData:notiDic];
+            
+            //发送成功声音
+            [[AudioPlayer sharedAudioPlayer] setAudio:@"msg_send" withType:@"wav" withLoop:NO];
+            [[AudioPlayer sharedAudioPlayer] play];
+        }
+        
+        if(_pushReportHandler)
+        {
+            _pushReportHandler(report);
+        }
+    }];
+    
+    [self closeAction:nil];
+}
+
 - (NSDictionary *)assemblePayload:(NSString *)message attach:(NSString *)attach msgtype:(NSString*)msgtype//attach就是一个url，无论上传了什么都是一个url
 {    
 //#define MSG_TYPE_MESSAGE        @"message"      //标准信息

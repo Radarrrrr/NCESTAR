@@ -20,6 +20,8 @@
 		0CA929B31E7BC3D700F9EF9C /* MessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA929AF1E7BC3D700F9EF9C /* MessageCell.h */; };
 		0CA929B41E7BC3D700F9EF9C /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA929B01E7BC3D700F9EF9C /* MessageCell.m */; };
 		0CA929BB1E7BFC8900F9EF9C /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CA929BA1E7BFC8900F9EF9C /* PrefixHeader.pch */; };
+		0CCA98D81EE9544D000B60C7 /* MsgFunctionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCA98D61EE9544D000B60C7 /* MsgFunctionView.h */; };
+		0CCA98D91EE9544D000B60C7 /* MsgFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCA98D71EE9544D000B60C7 /* MsgFunctionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		0CA929AF1E7BC3D700F9EF9C /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		0CA929B01E7BC3D700F9EF9C /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		0CA929BA1E7BFC8900F9EF9C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		0CCA98D61EE9544D000B60C7 /* MsgFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgFunctionView.h; sourceTree = "<group>"; };
+		0CCA98D71EE9544D000B60C7 /* MsgFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgFunctionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 				0CA929AE1E7BC3D700F9EF9C /* HomeViewController.m */,
 				0C0FE3231EB1FB1E00D74708 /* MsgInputView.h */,
 				0C0FE3241EB1FB1E00D74708 /* MsgInputView.m */,
+				0CCA98D61EE9544D000B60C7 /* MsgFunctionView.h */,
+				0CCA98D71EE9544D000B60C7 /* MsgFunctionView.m */,
 				0CA929AF1E7BC3D700F9EF9C /* MessageCell.h */,
 				0CA929B01E7BC3D700F9EF9C /* MessageCell.m */,
 				0CA9299F1E7BC36500F9EF9C /* Home.h */,
@@ -106,6 +112,7 @@
 				0CA929BB1E7BFC8900F9EF9C /* PrefixHeader.pch in Headers */,
 				0C0FE3251EB1FB1E00D74708 /* MsgInputView.h in Headers */,
 				0CA929B31E7BC3D700F9EF9C /* MessageCell.h in Headers */,
+				0CCA98D81EE9544D000B60C7 /* MsgFunctionView.h in Headers */,
 				0CA929B11E7BC3D700F9EF9C /* HomeViewController.h in Headers */,
 				0CA929A11E7BC36500F9EF9C /* Home.h in Headers */,
 			);
@@ -202,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CCA98D91EE9544D000B60C7 /* MsgFunctionView.m in Sources */,
 				0CA929B21E7BC3D700F9EF9C /* HomeViewController.m in Sources */,
 				0CA929B41E7BC3D700F9EF9C /* MessageCell.m in Sources */,
 				0C0FE3261EB1FB1E00D74708 /* MsgInputView.m in Sources */,
