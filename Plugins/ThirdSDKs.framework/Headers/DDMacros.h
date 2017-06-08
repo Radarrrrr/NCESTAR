@@ -10,6 +10,12 @@
 #pragma mark 一些通用的宏，用来全局使用，统一改动
 #define SAVED_SELF_DEVICE_TOKEN @"saved self device token"  //存储本机的devicetoken
 
+//消息类型，随payload发送
+#define MSG_TYPE_MESSAGE        @"message"      //标准信息
+#define MSG_TYPE_CONFIRM        @"confirm"      //确认信息
+#define MSG_TYPE_ATTENTION      @"attention"    //提醒注意信息
+
+
 
 #pragma mark - 
 #pragma mark 远程通知相关

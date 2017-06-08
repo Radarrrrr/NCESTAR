@@ -220,7 +220,7 @@ static float inputLastPosition;
     if(textField.text && ![textField.text isEqualToString:@""])
     {
         NSString *message = textField.text;
-        NSDictionary *payload = [self assemblePayload:message attach:nil]; //表情可以当作attach发过来
+        NSDictionary *payload = [self assemblePayload:message attach:nil msgtype:MSG_TYPE_MESSAGE]; //表情可以当作attach发过来
     
         [[RDPushTool sharedTool] pushPayload:payload toToken:_pushToToken completion:^(PTPushReport *report) {
             
@@ -259,10 +259,16 @@ static float inputLastPosition;
 
 
 #pragma mark - payload相关
-- (NSDictionary *)assemblePayload:(NSString *)message attach:(NSString *)attach //attach就是一个url，无论上传了什么都是一个url
+- (NSDictionary *)assemblePayload:(NSString *)message attach:(NSString *)attach msgtype:(NSString*)msgtype//attach就是一个url，无论上传了什么都是一个url
 {    
+//#define MSG_TYPE_MESSAGE        @"message"      //标准信息
+//#define MSG_TYPE_CONFIRM        @"confirm"      //确认信息
+//#define MSG_TYPE_ATTENTION      @"attention"    //提醒注意信息
+    
+    
     if(!STRVALID(message)) message = @"";
     if(!STRVALID(attach)) attach = @"";
+    if(!STRVALID(msgtype)) msgtype = MSG_TYPE_MESSAGE;
     
     NSString *sendtime = [DDFunction stringFromDate:[NSDate date] useFormat:@"YY-MM-dd HH:mm:ss"];
     
@@ -270,6 +276,31 @@ static float inputLastPosition;
     NSString *ntokenString = [NSString stringWithFormat:@"%@_%@_%@", _selfToken, _pushToToken, sendtime];
     NSString *notifyToken = [DDFunction md5FormString:ntokenString];
     
+    
+    //根据不同消息类型，设定声音, mutable-content状态等
+    NSString *sound = @"default";
+    NSString *mutcontent = @"1";
+    
+    //修改设定
+    if([msgtype isEqualToString:MSG_TYPE_MESSAGE])
+    {
+        sound = @"default";
+        mutcontent = @"1";
+    }
+    else if([msgtype isEqualToString:MSG_TYPE_CONFIRM])
+    {
+        sound = @"Submarine.aiff";
+        mutcontent = @"0";
+    }
+    else if([msgtype isEqualToString:MSG_TYPE_ATTENTION])
+    {
+        sound = @"msg_new.mp3";
+        mutcontent = @"0";
+    }
+    
+    
+    
+    //组合payload
     NSDictionary *payload = 
     @{
         @"aps":
@@ -281,8 +312,8 @@ static float inputLastPosition;
                 @"body":message
             },
             @"badge":@1,
-            @"sound":@"msg_new.mp3",
-            @"mutable-content":@"1",
+            @"sound":sound,
+            @"mutable-content":mutcontent,
             @"category":@"myNotificationCategory",
             @"attach":attach,
             @"from_token":_selfToken,
@@ -294,7 +325,7 @@ static float inputLastPosition;
         
         @"notifytoken":notifyToken, 
         
-        @"msgtype":@"message",
+        @"msgtype":msgtype,
         @"confirm_notifyid":@""
         
     };
@@ -302,7 +333,35 @@ static float inputLastPosition;
     return payload;
 }
 
+- (NSString*)soundForMsgtype:(NSString*)msgtype
+{
+    //根据消息类型，选择不同的提示声音
+    NSString *sound = @"default";
+    if(STRVALID(msgtype))
+    {
+        if([msgtype isEqualToString:MSG_TYPE_MESSAGE])
+        {
+            sound = @"default";
+        }
+        else if([msgtype isEqualToString:MSG_TYPE_CONFIRM])
+        {
+            sound = @"Submarine.aiff";
+        }
+        else if([msgtype isEqualToString:MSG_TYPE_ATTENTION])
+        {
+            sound = @"msg_new.mp3";
+        }
+    }
+    
+    return sound;
+}
+
+
 
 
 
 @end
+
+
+
+
