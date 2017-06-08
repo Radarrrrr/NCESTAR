@@ -237,7 +237,7 @@ static float inputLastPosition;
                 [[DataCenter sharedCenter] appendNotifyData:notiDic];
                 
                 //发送成功声音
-                [[AudioPlayer sharedAudioPlayer] setAudio:@"msg_sendout" withType:@"wav" withLoop:NO];
+                [[AudioPlayer sharedAudioPlayer] setAudio:@"msg_send" withType:@"wav" withLoop:NO];
                 [[AudioPlayer sharedAudioPlayer] play];
             }
             
