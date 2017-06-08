@@ -12,6 +12,8 @@
 #import "MsgInputView.h"
 
 
+#define write_button_width 60
+
 
 @interface HomeViewController () <DDTableViewDelegate, RDWaitingDotsDelegate>
 
@@ -114,7 +116,7 @@
     
     //添加写信息按钮
     self.writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    _writeBtn.frame = CGRectMake(SCR_WIDTH-70, SCR_HEIGHT-64-70, 70, 70);
+    _writeBtn.frame = CGRectMake(SCR_WIDTH-write_button_width, SCR_HEIGHT-64-write_button_width, write_button_width, write_button_width);
     [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forme:self] forState:UIControlStateNormal];
     [_writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_writeBtn];
@@ -135,7 +137,7 @@
     float stateWidth = SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60;
     
     //CGRectMake(60, SCR_HEIGHT-64-35-10, SCR_WIDTH-CGRectGetWidth(_writeBtn.frame)-10-60, 30)
-    self.stateView = [[UIView alloc] initWithFrame:CGRectMake(60+stateWidth/2, SCR_HEIGHT-64-35-10-2.5, 25, 25)];
+    self.stateView = [[UIView alloc] initWithFrame:CGRectMake(60+stateWidth/2, SCR_HEIGHT-64-write_button_width/2-10-2.5, 25, 25)];
     _stateView.backgroundColor = [UIColor clearColor];
     _stateView.clipsToBounds = YES;
     _stateView.alpha = 0.0;
