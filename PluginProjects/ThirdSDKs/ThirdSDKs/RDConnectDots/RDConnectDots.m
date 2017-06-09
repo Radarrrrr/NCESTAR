@@ -9,8 +9,12 @@
 #import "RDConnectDots.h"
 
 
-#define dot_width   8  //圆点直径
-#define dots_offset 8  //圆点间隔
+#define default_dot_width   8  //默认圆点直径
+#define default_dots_offset 8  //默认圆点间隔
+#define default_dots_amount 3  //默认圆点数量
+
+//#define 
+
 
 #define dots_color_hide    [UIColor clearColor]
 #define dots_color_waiting [UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
@@ -39,6 +43,10 @@
         // Initialization code.
         self.backgroundColor = [UIColor clearColor];
         
+        //初始化默认值
+        self.diameter = default_dot_width; 
+        self.space = default_dots_offset; 
+        self.amount = default_dots_amount;
         
         //初始化状态值
         self.dotsFlashing = NO;  //是否正在闪烁
@@ -48,28 +56,28 @@
         [self addGestureRecognizer:tapGesture];
         
         //添加圆点
-        self.dot2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
+        self.dot2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _diameter, _diameter)];
         _dot2.center = CGPointMake(CGRectGetWidth(frame)/2, CGRectGetHeight(frame)/2);
         _dot2.userInteractionEnabled = NO;
         _dot2.backgroundColor = dots_color_waiting;
         _dot2.alpha = 0.0;
-        [self addRadiusToView:_dot2 radius:dot_width/2];
+        [self addRadiusToView:_dot2 radius:_diameter/2];
         [self addSubview:_dot2];
         
-        self.dot1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
-        _dot1.center = CGPointMake(CGRectGetMidX(_dot2.frame)-dots_offset-dot_width, CGRectGetMidY(_dot2.frame));
+        self.dot1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _diameter, _diameter)];
+        _dot1.center = CGPointMake(CGRectGetMidX(_dot2.frame)-_space-_diameter, CGRectGetMidY(_dot2.frame));
         _dot1.userInteractionEnabled = NO;
         _dot1.backgroundColor = dots_color_waiting;
         _dot1.alpha = 0.0;
-        [self addRadiusToView:_dot1 radius:dot_width/2];
+        [self addRadiusToView:_dot1 radius:_diameter/2];
         [self addSubview:_dot1];
         
-        self.dot3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
-        _dot3.center = CGPointMake(CGRectGetMidX(_dot2.frame)+dots_offset+dot_width, CGRectGetMidY(_dot2.frame));
+        self.dot3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _diameter, _diameter)];
+        _dot3.center = CGPointMake(CGRectGetMidX(_dot2.frame)+_space+_diameter, CGRectGetMidY(_dot2.frame));
         _dot3.userInteractionEnabled = NO;
         _dot3.backgroundColor = dots_color_waiting;
         _dot3.alpha = 0.0;
-        [self addRadiusToView:_dot3 radius:dot_width/2];
+        [self addRadiusToView:_dot3 radius:_diameter/2];
         [self addSubview:_dot3];
         
 //        self.dot4 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dot_width, dot_width)];
@@ -82,6 +90,10 @@
         
     }
     return self;
+}
+
+- (void)drawRect:(CGRect)rect 
+{
 }
 
 - (void)addRadiusToView:(UIView*)view radius:(float)radius

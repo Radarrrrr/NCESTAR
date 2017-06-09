@@ -32,9 +32,9 @@ typedef enum {
 
 @property (assign) id <RDConnectDotsDelegate> delegate;
 
-//@property (nonatomic) float diameter;       //圆点直径 //不设定默认使用宏 dot_width
-//@property (nonatomic) float space;          //原电间距 //不设定默认使用宏 dots_offset
-//@property (nonatomic) NSInteger amount;     //原点个数 //
+@property (nonatomic) float diameter;       //圆点直径 //不设定默认 8
+@property (nonatomic) float space;          //原电间距 //不设定默认 8
+@property (nonatomic) NSInteger amount;     //原点个数 //不设定默认 3
 
 
 //触发等待和结束
