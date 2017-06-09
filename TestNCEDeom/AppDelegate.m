@@ -186,7 +186,7 @@
     //点击消息窗体进入APP
     NSString     *actionID      = response.actionIdentifier;
     //NSString     *categoryID    = content.categoryIdentifier;
-    NSDictionary *payload      = content.userInfo;
+    //NSDictionary *payload      = content.userInfo;
     
     
     if([actionID isEqualToString:@"com.apple.UNNotificationDefaultActionIdentifier"])

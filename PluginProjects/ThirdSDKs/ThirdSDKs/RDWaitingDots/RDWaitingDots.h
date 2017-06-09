@@ -40,6 +40,9 @@ typedef enum {
 
 @property (nonatomic) RDWaitingDotsFlashStyle flashStyle; //设定闪烁风格 //默认为 RDWaitingDotsFlashStyleFulling
 
+@property (nonatomic) float diameter;       //圆点直径 //不设定默认使用宏 dot_width
+@property (nonatomic) float space;          //原电间距 //不设定默认使用宏 dots_offset
+@property (nonatomic) NSInteger amount;     //原点个数 //
 
 
 //触发等待和结束

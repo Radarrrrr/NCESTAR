@@ -15,7 +15,7 @@
 #define write_button_width 60
 
 
-@interface HomeViewController () <DDTableViewDelegate, RDWaitingDotsDelegate>
+@interface HomeViewController () <DDTableViewDelegate, RDConnectDotsDelegate>
 
 //PS: 目前本类并不保存列表数据，所有数据都只是第一次从DataCenter同步过来以后做一次刷新工作，新消息插入以后，直接插入到列表里边，并不插入到这个列表数据数组里边
 @property (nonatomic, strong)   NSMutableArray *messageArray; //所有的消息数据 //[{"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}, ...]
@@ -34,7 +34,7 @@
 
 @property (nonatomic, strong)   NSString *pushToUserID; //发送的好友的user_id
 
-@property (nonatomic, strong) RDWaitingDots *connectStatusDots; //连接状态小点
+@property (nonatomic, strong)   RDConnectDots *connectStatusDots; //连接状态小点
 
 @end
 
@@ -93,7 +93,7 @@
     
     
     //添加两个头像之间的状态小点
-    self.connectStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
+    self.connectStatusDots = [[RDConnectDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
     _connectStatusDots.delegate = self;
     [peoplesV addSubview:_connectStatusDots];
     
@@ -366,8 +366,8 @@
 }
 
 
-//RDWaitingDotsDelegate
-- (void)didTapActionFromWaitingDots:(RDWaitingDots*)waitingDots
+//RDConnectDotsDelegate
+- (void)didTapActionFromConnectDots:(RDConnectDots*)connectDots
 {
     //返回点击事件
 }
@@ -499,12 +499,12 @@ static BOOL stateViewShowing = NO;
             break;
         case PTConnectReportStatusConnectSuccess:
         {
-            [_connectStatusDots stopWaitingForState:RDWaitingDotsFinishStateSuccess];
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
         }  
             break;
         case PTConnectReportStatusConnectFailure:
         {
-            [_connectStatusDots stopWaitingForState:RDWaitingDotsFinishStateFailure];
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
         }  
             break;
         default:

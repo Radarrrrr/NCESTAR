@@ -85,6 +85,8 @@
 		0CC237671EDA4E6000E65C5F /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC237651EDA4E6000E65C5F /* AudioPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0CC6D9D51ECC52C10055770C /* DDMoveableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC6D9D31ECC52C10055770C /* DDMoveableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC6D9D61ECC52C10055770C /* DDMoveableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC6D9D41ECC52C10055770C /* DDMoveableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0CCA98E01EEAC2EE000B60C7 /* RDConnectDots.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCA98DE1EEAC2EE000B60C7 /* RDConnectDots.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CCA98E11EEAC2EE000B60C7 /* RDConnectDots.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCA98DF1EEAC2EE000B60C7 /* RDConnectDots.m */; };
 		0CE1FFC21E60200500CDA679 /* DDScrollButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE1FFC01E60200500CDA679 /* DDScrollButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CE1FFC31E60200500CDA679 /* DDScrollButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1FFC11E60200500CDA679 /* DDScrollButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -170,6 +172,8 @@
 		0CC237651EDA4E6000E65C5F /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		0CC6D9D31ECC52C10055770C /* DDMoveableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMoveableView.h; sourceTree = "<group>"; };
 		0CC6D9D41ECC52C10055770C /* DDMoveableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMoveableView.m; sourceTree = "<group>"; };
+		0CCA98DE1EEAC2EE000B60C7 /* RDConnectDots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDConnectDots.h; sourceTree = "<group>"; };
+		0CCA98DF1EEAC2EE000B60C7 /* RDConnectDots.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDConnectDots.m; sourceTree = "<group>"; };
 		0CE1FFC01E60200500CDA679 /* DDScrollButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDScrollButton.h; sourceTree = "<group>"; };
 		0CE1FFC11E60200500CDA679 /* DDScrollButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDScrollButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,6 +226,7 @@
 		0CA505B11E306F84000A23EB /* ThirdSDKs */ = {
 			isa = PBXGroup;
 			children = (
+				0CCA98DD1EEAC2EE000B60C7 /* RDConnectDots */,
 				0C53B38E1EE67A69003FFCE7 /* KeyChain */,
 				0C4F05F91EDED0A000240092 /* RDWaitingDots */,
 				0CC237631EDA4E6000E65C5F /* AudioPlayer */,
@@ -408,6 +413,15 @@
 			path = DDMoveableView;
 			sourceTree = "<group>";
 		};
+		0CCA98DD1EEAC2EE000B60C7 /* RDConnectDots */ = {
+			isa = PBXGroup;
+			children = (
+				0CCA98DE1EEAC2EE000B60C7 /* RDConnectDots.h */,
+				0CCA98DF1EEAC2EE000B60C7 /* RDConnectDots.m */,
+			);
+			path = RDConnectDots;
+			sourceTree = "<group>";
+		};
 		0CE1FFBF1E60200500CDA679 /* DDScrollButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +457,7 @@
 				0CC237661EDA4E6000E65C5F /* AudioPlayer.h in Headers */,
 				0CC237501ED404E500E65C5F /* UIButton+Spin.h in Headers */,
 				0C4F05FC1EDED0A000240092 /* RDWaitingDots.h in Headers */,
+				0CCA98E01EEAC2EE000B60C7 /* RDConnectDots.h in Headers */,
 				0CC237581ED847DF00E65C5F /* UIView+Effect.h in Headers */,
 				0C53B3911EE67A69003FFCE7 /* CHKeyChain.h in Headers */,
 				0CA506681E320034000A23EB /* DDMoveShowView.h in Headers */,
@@ -579,6 +594,7 @@
 				0CA505E91E307070000A23EB /* RDPushSimuVC.m in Sources */,
 				0CA506671E320034000A23EB /* DDEffectView.m in Sources */,
 				0CA5066B1E320034000A23EB /* DDSlideLayer.m in Sources */,
+				0CCA98E11EEAC2EE000B60C7 /* RDConnectDots.m in Sources */,
 				0C53B3921EE67A69003FFCE7 /* CHKeyChain.m in Sources */,
 				0C17AD611EA88C8D00238D29 /* DDMacros.m in Sources */,
 				0CA506A11E32046D000A23EB /* UITableViewController+ISRefreshControl.m in Sources */,

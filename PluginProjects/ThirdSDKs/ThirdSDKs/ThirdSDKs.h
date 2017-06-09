@@ -37,6 +37,6 @@ FOUNDATION_EXPORT const unsigned char ThirdSDKsVersionString[];
 #import <ThirdSDKs/AudioPlayer.h>
 #import <ThirdSDKs/RDWaitingDots.h>
 #import <ThirdSDKs/CHKeyChain.h>
-
+#import <ThirdSDKs/RDConnectDots.h>
 
 
