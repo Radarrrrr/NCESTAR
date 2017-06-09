@@ -23,17 +23,15 @@
     self.bestAttemptContent = [request.content mutableCopy];
     
 
+    //----测试用，暂时保留-----------------------------------------------------------
     //重写一些东西
-//    self.bestAttemptContent.title = @"我是新标题，说明我拦截到通知了";
-//    self.bestAttemptContent.subtitle = @"我是子标题";
-//    self.bestAttemptContent.body = @"changed text hallo";
-    
+    //    self.bestAttemptContent.title = @"我是新标题，说明我拦截到通知了";
+    //    self.bestAttemptContent.subtitle = @"我是子标题";
+    //    self.bestAttemptContent.body = @"changed text hallo";
     
     //这里添加一些点击事件，可以在收到通知的时候，添加，也可以在拦截通知的这个扩展中添加
     //self.bestAttemptContent.categoryIdentifier = @"myNotificationCategory";
-    
-    
-    
+    //----------------------------------------------------------------------------
     
     
 
@@ -63,8 +61,31 @@
     
     
     
+    
     //同步更新一下发送人的user_id和device_token
     [self syncUserInfomationsForPayload:request.content.userInfo];
+    
+    
+    //根据payload里边的信息，修改某些信息的显示状态
+    NSDictionary *payload = request.content.userInfo;
+    NSString *from_userid = [DDFunction getValueForKey:@"from_userid" inData:payload];
+    NSString *body        = [DDFunction getValueForKey:@"body" inData:payload];
+    NSString *msgtype     = [DDFunction getValueForKey:@"msgtype" inData:payload];
+    NSString *nick_name   = [[DataCenter sharedCenter] userInfoForId:from_userid onitem:@"nick_name"];
+    
+    //根据消息类型不同，修改显示效果
+    if(STRVALID(msgtype))
+    {
+        if([msgtype isEqualToString:MSG_TYPE_MESSAGE])
+        {
+            self.bestAttemptContent.body = [NSString stringWithFormat:@"%@ : %@", nick_name, body];
+        }
+        else if([msgtype isEqualToString:MSG_TYPE_ATTENTION])
+        {
+            self.bestAttemptContent.body = [NSString stringWithFormat:@"[%@] 发来一个呼叫", nick_name];
+        }
+    }
+    
     
     
     //截获attach和其他数据，下载并存储    
