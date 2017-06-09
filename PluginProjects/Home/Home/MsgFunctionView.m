@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Radar. All rights reserved.
 //
 
-#define func_btn_width 63
+#define func_btn_width 80
 
 #import "MsgFunctionView.h"
 
@@ -27,10 +27,11 @@
         //添加呼叫按钮
         UIButton *attentionBtn = [UIButton buttonWithColor:DDCOLOR_ORANGE selColor:RGBS(150)];
         attentionBtn.frame = CGRectMake(0, 0, func_btn_width, func_btn_width);
+        attentionBtn.center = CGPointMake(frame.size.width/2, frame.size.height-func_btn_width/2-70);
         [attentionBtn setTitle:@"呼叫" forState:UIControlStateNormal];
         attentionBtn.titleLabel.textColor = DDCOLOR_TEXT_A;
         attentionBtn.titleLabel.font = DDFONT_B(14);
-        [DDFunction addRadiusToView:attentionBtn radius:6];
+        [DDFunction addRadiusToView:attentionBtn radius:func_btn_width/2];
         [attentionBtn addTarget:self action:@selector(functionAction:) forControlEvents:UIControlEventTouchUpInside];
         attentionBtn.tag = MSGFunctionActionAttention;
         [self addSubview:attentionBtn];
