@@ -22,7 +22,7 @@
 @property (nonatomic, strong)   DDTableView *listTable;
 @property (nonatomic, strong)   UIImageView *backImgView; //背景图片层
 @property (nonatomic, strong)   UIButton *writeBtn;
-@property (nonatomic, strong)   UIView *statusDot;
+@property (nonatomic, strong)   UIView *statusDot;  //写消息按钮上的状态小点
 
 @property (nonatomic, strong)   UIView *stateView; //发送状态条
 @property (nonatomic, strong)   UIView *sbackV;     //发送状体条背景
@@ -33,6 +33,8 @@
 @property (nonatomic, strong)   UILabel *toNameLabel;   //发送的好友名称
 
 @property (nonatomic, strong)   NSString *pushToUserID; //发送的好友的user_id
+
+@property (nonatomic, strong) RDWaitingDots *connectStatusDots; //连接状态小点
 
 @end
 
@@ -88,6 +90,15 @@
     [peoplesV addSubview:_toNameLabel];
     
     [self changeToUserInfomation];
+    
+    
+    //添加两个头像之间的状态小点
+    self.connectStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
+    _connectStatusDots.delegate = self;
+    [peoplesV addSubview:_connectStatusDots];
+    
+    [_connectStatusDots startWaiting];
+    
     
     
     //右上角添加写推送按钮
@@ -478,6 +489,28 @@ static BOOL stateViewShowing = NO;
     _toNameLabel.text = nick;
 }
 
+- (void)changeConnectStatus:(NSInteger)status
+{
+    switch (status) {
+        case PTConnectReportStatusConnecting:
+        {
+            [_connectStatusDots startWaiting];
+        }
+            break;
+        case PTConnectReportStatusConnectSuccess:
+        {
+            [_connectStatusDots stopWaitingForState:RDWaitingDotsFinishStateSuccess];
+        }  
+            break;
+        case PTConnectReportStatusConnectFailure:
+        {
+            [_connectStatusDots stopWaitingForState:RDWaitingDotsFinishStateFailure];
+        }  
+            break;
+        default:
+            break;
+    }
+}
 
 
 

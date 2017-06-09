@@ -34,6 +34,7 @@
     self.window.rootViewController = _mainNav;
     
     
+    //状态条上的连接状态小点，暂时保留
     //添加状态条上的连接状态
     UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH, 20)];
     statusBarView.backgroundColor = [UIColor clearColor];
@@ -119,6 +120,7 @@
 
 - (void)changeConnectStatus:(PTConnectReport*)report
 {
+    //状态条上的连接状态小点，暂时保留
     switch (report.status) {
         case PTConnectReportStatusConnecting:
         {
@@ -138,6 +140,9 @@
         default:
             break;
     }
+    
+    //传给首页
+    [_homeVC changeConnectStatus:report.status];
 }
 
 

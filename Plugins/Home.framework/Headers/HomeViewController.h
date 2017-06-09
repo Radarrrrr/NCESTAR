@@ -17,5 +17,6 @@
 - (void)moveListPositionToTop; //恢复到列表最顶部
 - (void)flashFirstMessage; //让第一条信息闪动一下
 
+- (void)changeConnectStatus:(NSInteger)status;
 
 @end

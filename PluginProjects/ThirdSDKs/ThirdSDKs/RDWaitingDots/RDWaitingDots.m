@@ -24,10 +24,10 @@
 @property (nonatomic, strong) UIView *dot2;
 @property (nonatomic, strong) UIView *dot3;
 
+@property (nonatomic) BOOL dotsFlashing;  //是否正在闪烁
+@property (nonatomic) BOOL isForwarding; //是否正向显示
+
 @end
-
-
-static BOOL dotsFlashing = NO;  //是否正在闪烁
 
 
 @implementation RDWaitingDots
@@ -39,6 +39,11 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
         // Initialization code.
         self.backgroundColor = [UIColor clearColor];
         self.flashStyle = RDWaitingDotsFlashStyleFulling;
+        
+        
+        //初始化状态值
+        self.dotsFlashing = NO;  //是否正在闪烁
+        self.isForwarding = YES; //是否正向显示
         
         //添加点击事件
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
@@ -95,8 +100,8 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
 //触发等待和结束
 - (void)startWaiting
 {
-    if(dotsFlashing) return;
-    dotsFlashing = YES;
+    if(_dotsFlashing) return;
+    _dotsFlashing = YES;
     
     //先全部还原
     _dot1.alpha = 0.0;
@@ -110,18 +115,18 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
     }
     else if(_flashStyle == RDWaitingDotsFlashStyleRolling)
     {
-        isForwarding = YES;
+        _isForwarding = YES;
         [self runRolling];
     }
     
 }
 - (void)stopWaitingForState:(RDWaitingDotsFinishState)state
 {
-    dotsFlashing = NO;
+    _dotsFlashing = NO;
     
     if(_flashStyle == RDWaitingDotsFlashStyleRolling)
     {
-        isForwarding = YES;
+        _isForwarding = YES;
     }
     
     //更改状态
@@ -182,7 +187,7 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
                     
                 } completion:^(BOOL finished) {
                     
-                    if(dotsFlashing)
+                    if(_dotsFlashing)
                     {
                         [self runFulling];
                     }
@@ -204,10 +209,9 @@ static BOOL dotsFlashing = NO;  //是否正在闪烁
 
 
 //前后滚动方式RDWaitingDotsFlashStyleRolling
-static BOOL isForwarding = YES; //是否正向显示
 - (void)runRolling 
 {  
-    if(isForwarding) //正向前进
+    if(_isForwarding) //正向前进
     {
         [UIView animateWithDuration:0.5 animations:^{
             
@@ -229,9 +233,9 @@ static BOOL isForwarding = YES; //是否正向显示
                     
                 } completion:^(BOOL finished) {
                     
-                    if(dotsFlashing)
+                    if(_dotsFlashing)
                     {
-                        isForwarding = NO;
+                        _isForwarding = NO;
                         [self runRolling];
                     }
                     
@@ -255,9 +259,9 @@ static BOOL isForwarding = YES; //是否正向显示
                 
             } completion:^(BOOL finished) {
                 
-                if(dotsFlashing)
+                if(_dotsFlashing)
                 {
-                    isForwarding = YES;
+                    _isForwarding = YES;
                     [self runRolling];
                 }
                 else
