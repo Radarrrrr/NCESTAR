@@ -32,9 +32,10 @@ typedef enum {
 
 @property (assign) id <RDConnectDotsDelegate> delegate;
 
-@property (nonatomic) float diameter;       //圆点直径 //不设定默认 8
-@property (nonatomic) float space;          //原电间距 //不设定默认 8
-@property (nonatomic) NSInteger amount;     //原点个数 //不设定默认 3
+@property (nonatomic) float diameter;           //圆点直径 //不设定默认 8
+@property (nonatomic) float space;              //原电间距 //不设定默认 8
+@property (nonatomic) NSInteger amount;         //原点个数 //不设定默认 3
+@property (nonatomic) NSTimeInterval duration;  //原点动画时间 //不设定默认0.5
 
 
 //触发等待和结束

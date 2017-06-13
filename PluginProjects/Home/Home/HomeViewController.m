@@ -95,9 +95,11 @@
     //添加两个头像之间的状态小点
     self.connectStatusDots = [[RDConnectDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
     _connectStatusDots.delegate = self;
+    _connectStatusDots.diameter = 8;
+    _connectStatusDots.space = 3;
+    _connectStatusDots.amount = 7;
+    _connectStatusDots.duration = 0.1;
     [peoplesV addSubview:_connectStatusDots];
-    
-    [_connectStatusDots startWaiting];
     
     
     
@@ -178,6 +180,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [_connectStatusDots startWaiting];
 }
 
 
@@ -491,25 +494,25 @@ static BOOL stateViewShowing = NO;
 
 - (void)changeConnectStatus:(NSInteger)status
 {
-    switch (status) {
-        case PTConnectReportStatusConnecting:
-        {
-            [_connectStatusDots startWaiting];
-        }
-            break;
-        case PTConnectReportStatusConnectSuccess:
-        {
-            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
-        }  
-            break;
-        case PTConnectReportStatusConnectFailure:
-        {
-            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
-        }  
-            break;
-        default:
-            break;
-    }
+//    switch (status) {
+//        case PTConnectReportStatusConnecting:
+//        {
+//            [_connectStatusDots startWaiting];
+//        }
+//            break;
+//        case PTConnectReportStatusConnectSuccess:
+//        {
+//            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
+//        }  
+//            break;
+//        case PTConnectReportStatusConnectFailure:
+//        {
+//            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
+//        }  
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 
