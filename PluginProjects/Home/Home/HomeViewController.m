@@ -36,10 +36,17 @@
 
 @property (nonatomic, strong)   RDConnectDots *connectStatusDots; //连接状态小点
 
+
 @end
 
 
+
+static BOOL bFirstTriggerWaiting = YES;  //第一次触发连接状态waiting
+static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给appdelegate触发连接状态等待专用
+
+
 @implementation HomeViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,10 +102,10 @@
     //添加两个头像之间的状态小点
     self.connectStatusDots = [[RDConnectDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
     _connectStatusDots.delegate = self;
-    _connectStatusDots.diameter = 8;
-    _connectStatusDots.space = 3;
-    _connectStatusDots.amount = 7;
-    _connectStatusDots.duration = 0.1;
+    _connectStatusDots.diameter = 6;
+    _connectStatusDots.space = 4;
+    _connectStatusDots.amount = 6;
+    _connectStatusDots.duration = 0.2;
     [peoplesV addSubview:_connectStatusDots];
     
     
@@ -180,7 +187,15 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_connectStatusDots startWaiting];
+    if(bFirstTriggerWaiting)
+    {
+        bFirstTriggerWaiting = NO;
+        
+        if(needTriggerWating)
+        {
+            [_connectStatusDots startWaiting];
+        }
+    }
 }
 
 
@@ -228,6 +243,7 @@
                 _statusDot.backgroundColor = [UIColor grayColor];  //正在连接 灰色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
+                [_connectStatusDots startWaiting];
                 
                 //状态
                 _stateLabel.text = @"正在连接发送服务";
@@ -239,6 +255,7 @@
                 _statusDot.backgroundColor = [UIColor lightGrayColor];  //连接失败 浅灰色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
+                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
                 
                 //状态
                 _stateLabel.text = @"无法与服务器建立连接";
@@ -249,6 +266,7 @@
                 _statusDot.backgroundColor = DDCOLOR_ORANGE;    //正在发送 橘色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
+                [_connectStatusDots startWaiting];
                 
                 //状态
                 _stateLabel.text = @"正在发送消息";
@@ -260,6 +278,7 @@
                 _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
+                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
                 
                 //状态
                 _stateLabel.text = @"发送成功!";
@@ -494,25 +513,28 @@ static BOOL stateViewShowing = NO;
 
 - (void)changeConnectStatus:(NSInteger)status
 {
-//    switch (status) {
-//        case PTConnectReportStatusConnecting:
-//        {
-//            [_connectStatusDots startWaiting];
-//        }
-//            break;
-//        case PTConnectReportStatusConnectSuccess:
-//        {
-//            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
-//        }  
-//            break;
-//        case PTConnectReportStatusConnectFailure:
-//        {
-//            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
-//        }  
-//            break;
-//        default:
-//            break;
-//    }
+    switch (status) {
+        case PTConnectReportStatusConnecting:
+        {
+            needTriggerWating = YES;
+            [_connectStatusDots startWaiting];
+        }
+            break;
+        case PTConnectReportStatusConnectSuccess:
+        {
+            needTriggerWating = NO;
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
+        }  
+            break;
+        case PTConnectReportStatusConnectFailure:
+        {
+            needTriggerWating = NO;
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
+        }  
+            break;
+        default:
+            break;
+    }
 }
 
 
