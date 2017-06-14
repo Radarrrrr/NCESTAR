@@ -18,9 +18,15 @@
 
 
 #define dots_color_hide    [UIColor clearColor]
-#define dots_color_waiting [UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
-#define dots_color_success [UIColor colorWithRed:50.0f/255.0f green:220.0f/255.0f blue:210.0f/255.0f alpha:1.0f]
-#define dots_color_failure [UIColor colorWithRed:255.0f/255.0f green:30.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
+
+#define dots_color_connect_waiting  [UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
+#define dots_color_send_waiting     [UIColor colorWithRed:50.0f/255.0f green:220.0f/255.0f blue:210.0f/255.0f alpha:1.0f]
+
+#define dots_color_connect_success  [UIColor colorWithRed:50.0f/255.0f green:220.0f/255.0f blue:210.0f/255.0f alpha:1.0f]
+#define dots_color_send_success     [UIColor colorWithRed:50.0f/255.0f green:220.0f/255.0f blue:210.0f/255.0f alpha:1.0f]
+
+#define dots_color_connect_failure  [UIColor lightGrayColor]
+#define dots_color_send_failure     [UIColor colorWithRed:255.0f/255.0f green:30.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
 
 
 @interface RDConnectDots ()
@@ -94,14 +100,29 @@
 
 
 //触发等待和结束
-- (void)startWaiting
+- (void)startWaiting:(RDConnectDotsWaitingState)state
 {
     if(_dotsFlashing) return;
     _dotsFlashing = YES;
     
     //先全部隐藏
     [self hideAllDots];
-    [self changeDotsColor:dots_color_waiting];
+    
+    //根据启动状态改变颜色
+    switch (state) {
+        case RDConnectDotsWaitingStateConnecting:
+        {
+            [self changeDotsColor:dots_color_connect_waiting];
+        }
+            break;
+        case RDConnectDotsWaitingStateSending:
+        {
+            [self changeDotsColor:dots_color_send_waiting];
+        }
+            break;
+        default:
+            break;
+    }
     
     //开始闪烁
     //[self runFulling];
@@ -119,14 +140,24 @@
             [self changeDotsColor:dots_color_hide];
         }
             break;
-        case RDConnectDotsFinishStateSuccess:
+        case RDConnectDotsFinishStateConnectSuccess:
         {
-            [self changeDotsColor:dots_color_success];
+            [self changeDotsColor:dots_color_connect_success];
         }
             break;
-        case RDConnectDotsFinishStateFailure:
+        case RDConnectDotsFinishStateConnectFailure:
         {
-            [self changeDotsColor:dots_color_failure];
+            [self changeDotsColor:dots_color_connect_failure];
+        }
+            break;
+        case RDConnectDotsFinishStateSendSuccess:
+        {
+            [self changeDotsColor:dots_color_send_success];
+        }
+            break;
+        case RDConnectDotsFinishStateSendFailure:
+        {
+            [self changeDotsColor:dots_color_send_failure];
         }
             break;
         default:
@@ -209,6 +240,19 @@
         int tag = 100+i;
         UIView *dot = [self viewWithTag:tag]; //dot一定存在，不判断了
         dot.backgroundColor = color;
+        
+        //追加改动一下颜色
+        if(_amount >= 2)
+        {
+            if(color == dots_color_send_failure)
+            {
+                //如果是发送失败，前两个原点变成绿色，表示连接是成功的单是发送失败而已
+                if(i==0 || i==1)
+                {
+                    dot.backgroundColor = dots_color_connect_success;
+                }
+            }
+        }
     }
 }
 

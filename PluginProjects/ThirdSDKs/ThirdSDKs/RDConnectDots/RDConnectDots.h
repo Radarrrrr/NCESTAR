@@ -6,16 +6,30 @@
 //  Copyright © 2017年 Radar. All rights reserved.
 //
 
+//PS: 为连接状态和发送状态定制的小点效果，如果需要封装通用模块，还需要再整理
+
 #import <UIKit/UIKit.h>
 
 
 
 typedef enum {
+    RDConnectDotsWaitingStateConnecting    = 0,    //等待连接中
+    RDConnectDotsWaitingStateSending       = 1,    //等待发送中
+    
+} RDConnectDotsWaitingState;
+
+
+typedef enum {
     RDConnectDotsFinishStateHide    = 0,    //隐藏，不再显示
-    RDConnectDotsFinishStateSuccess = 1,    //不隐藏，显示成功状态
-    RDConnectDotsFinishStateFailure = 2     //不隐藏，显示失败状态
+    
+    RDConnectDotsFinishStateConnectSuccess = 1,    //不隐藏，显示连接成功状态
+    RDConnectDotsFinishStateConnectFailure = 2,           //不隐藏，显示连接失败状态
+    
+    RDConnectDotsFinishStateSendSuccess = 3,     //不隐藏，显示发送成功状态
+    RDConnectDotsFinishStateSendFailure = 4      //不隐藏，显示发送失败状态
     
 } RDConnectDotsFinishState;
+
 
 
 @class RDConnectDots;
@@ -39,7 +53,7 @@ typedef enum {
 
 
 //触发等待和结束
-- (void)startWaiting;
+- (void)startWaiting:(RDConnectDotsWaitingState)state;
 - (void)stopWaitingForState:(RDConnectDotsFinishState)state;
 
 

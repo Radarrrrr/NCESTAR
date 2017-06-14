@@ -193,7 +193,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
         
         if(needTriggerWating)
         {
-            [_connectStatusDots startWaiting];
+            [_connectStatusDots startWaiting:RDConnectDotsWaitingStateConnecting];
         }
     }
 }
@@ -243,7 +243,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
                 _statusDot.backgroundColor = [UIColor grayColor];  //正在连接 灰色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
-                [_connectStatusDots startWaiting];
+                [_connectStatusDots startWaiting:RDConnectDotsWaitingStateConnecting];
                 
                 //状态
                 _stateLabel.text = @"正在连接发送服务";
@@ -255,7 +255,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
                 _statusDot.backgroundColor = [UIColor lightGrayColor];  //连接失败 浅灰色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
-                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
+                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateConnectFailure];
                 
                 //状态
                 _stateLabel.text = @"无法与服务器建立连接";
@@ -266,7 +266,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
                 _statusDot.backgroundColor = DDCOLOR_ORANGE;    //正在发送 橘色
                 [_writeBtn startSpining];
                 [_statusDot startFlash];
-                [_connectStatusDots startWaiting];
+                [_connectStatusDots startWaiting:RDConnectDotsWaitingStateSending];
                 
                 //状态
                 _stateLabel.text = @"正在发送消息";
@@ -278,7 +278,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
                 _statusDot.backgroundColor = DDCOLOR_BLUE;     //发送成功 蓝色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
-                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
+                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSendSuccess];
                 
                 //状态
                 _stateLabel.text = @"发送成功!";
@@ -303,6 +303,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
                 _statusDot.backgroundColor = DDCOLOR_RED;       //发送失败 红色
                 [_writeBtn stopSpining];
                 [_statusDot stopFlash];
+                [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSendFailure];
             }
                 break;
             default:
@@ -517,19 +518,19 @@ static BOOL stateViewShowing = NO;
         case PTConnectReportStatusConnecting:
         {
             needTriggerWating = YES;
-            [_connectStatusDots startWaiting];
+            [_connectStatusDots startWaiting:RDConnectDotsWaitingStateConnecting];
         }
             break;
         case PTConnectReportStatusConnectSuccess:
         {
             needTriggerWating = NO;
-            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateSuccess];
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateConnectSuccess];
         }  
             break;
         case PTConnectReportStatusConnectFailure:
         {
             needTriggerWating = NO;
-            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateFailure];
+            [_connectStatusDots stopWaitingForState:RDConnectDotsFinishStateConnectFailure];
         }  
             break;
         default:
