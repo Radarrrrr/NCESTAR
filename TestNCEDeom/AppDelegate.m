@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) HomeViewController *homeVC;
 @property (nonatomic, strong) UINavigationController *mainNav;
-@property (nonatomic, strong) RDWaitingDots *serverStatusDots; //服务器状态小点
+//@property (nonatomic, strong) RDWaitingDots *serverStatusDots; //服务器状态小点 //服务器连接状态,暂时注释掉不删除
 
 @end
 
@@ -34,14 +34,14 @@
     self.window.rootViewController = _mainNav;
     
     
-    //状态条上的连接状态小点，暂时保留
-    //添加状态条上的连接状态
-    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH, 20)];
-    statusBarView.backgroundColor = [UIColor clearColor];
-    [_mainNav.navigationBar addSubview:statusBarView];
-    
-    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-155, 0, 56, 20)];
-    [statusBarView addSubview:_serverStatusDots];
+    //服务器连接状态,暂时注释掉不删除
+//    //添加状态条上的连接状态
+//    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH, 20)];
+//    statusBarView.backgroundColor = [UIColor clearColor];
+//    [_mainNav.navigationBar addSubview:statusBarView];
+//    
+//    self.serverStatusDots = [[RDWaitingDots alloc] initWithFrame:CGRectMake(SCR_WIDTH-155, 0, 56, 20)];
+//    [statusBarView addSubview:_serverStatusDots];
     
     
     
@@ -120,26 +120,26 @@
 
 - (void)changeConnectStatus:(PTConnectReport*)report
 {
-    //状态条上的连接状态小点，暂时保留
-    switch (report.status) {
-        case PTConnectReportStatusConnecting:
-        {
-            [_serverStatusDots startWaiting];
-        }
-            break;
-        case PTConnectReportStatusConnectSuccess:
-        {
-            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateSuccess];
-        }  
-            break;
-        case PTConnectReportStatusConnectFailure:
-        {
-            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateFailure];
-        }  
-            break;
-        default:
-            break;
-    }
+    //服务器连接状态,暂时注释掉不删除
+//    switch (report.status) {
+//        case PTConnectReportStatusConnecting:
+//        {
+//            [_serverStatusDots startWaiting];
+//        }
+//            break;
+//        case PTConnectReportStatusConnectSuccess:
+//        {
+//            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateSuccess];
+//        }  
+//            break;
+//        case PTConnectReportStatusConnectFailure:
+//        {
+//            [_serverStatusDots stopWaitingForState:RDWaitingDotsFinishStateFailure];
+//        }  
+//            break;
+//        default:
+//            break;
+//    }
     
     //传给首页
     [_homeVC changeConnectStatus:report.status];
