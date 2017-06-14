@@ -100,7 +100,21 @@
     NSDate *lastConnectDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"last_connected_date"];
     
     //三分钟以内不主动断开
+    BOOL needDisconnect = NO;
     if(!lastConnectDate || (-[lastConnectDate timeIntervalSinceNow] > 60*3))
+    {
+        needDisconnect = YES;
+    }
+    
+    //连接推送服务
+    [self connectAPNsServer:needDisconnect];
+    
+}
+
+- (void)connectAPNsServer:(BOOL)needDisconnect
+{
+    //重连推送服务器,是否需要断开连接再重连
+    if(needDisconnect)
     {
         [[RDPushTool sharedTool] disconnect];
     }

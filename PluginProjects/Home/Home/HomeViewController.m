@@ -100,7 +100,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     
     
     //添加两个头像之间的状态小点
-    self.connectStatusDots = [[RDConnectDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 12, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), 20)];
+    self.connectStatusDots = [[RDConnectDots alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_myfaceBtn.frame), 0, CGRectGetMinX(_tofaceBtn.frame)-CGRectGetMaxX(_myfaceBtn.frame), CGRectGetHeight(peoplesV.frame))];
     _connectStatusDots.delegate = self;
     _connectStatusDots.diameter = 6;
     _connectStatusDots.space = 4;
