@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestNCEDeom/AppDelegate.m"
-            timestampString = "519131568.306806"
+            filePath = "PluginProjects/Engine/Engine/DataCenter.m"
+            timestampString = "519141643.135664"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "-didReceiveNotificationResponse:content:isLocal:"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "-loadAllUserInfos"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
