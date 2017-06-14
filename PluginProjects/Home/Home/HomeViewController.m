@@ -392,7 +392,8 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
 //RDConnectDotsDelegate
 - (void)didTapActionFromConnectDots:(RDConnectDots*)connectDots
 {
-    //返回点击事件
+    //返回点击事件,手动重新连接
+    [DDRouter actionForLinkURL:@"connectapns://disconnectneed=1"];
 }
 
 
