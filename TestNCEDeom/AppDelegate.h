@@ -12,6 +12,11 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) UINavigationController *mainNav;
+
+
+- (void)connectAPNsServer:(BOOL)needDisconnect;  //连接推送服务器, 是否需要断开连接再重连
+
 
 @end
 

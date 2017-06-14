@@ -15,7 +15,6 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) HomeViewController *homeVC;
-@property (nonatomic, strong) UINavigationController *mainNav;
 //@property (nonatomic, strong) RDWaitingDots *serverStatusDots; //服务器状态小点 //服务器连接状态,暂时注释掉不删除
 
 @end
@@ -113,7 +112,7 @@
 
 - (void)connectAPNsServer:(BOOL)needDisconnect
 {
-    //重连推送服务器,是否需要断开连接再重连
+    //连接推送服务器,是否需要断开连接再重连
     if(needDisconnect)
     {
         [[RDPushTool sharedTool] disconnect];
