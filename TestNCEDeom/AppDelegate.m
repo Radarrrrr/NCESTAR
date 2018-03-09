@@ -281,7 +281,7 @@
     NSString *token00000 = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:@"device_token"];
     if(!STRVALID(token00000))
     {
-        [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"device_token" useinfo:@"e78d0b60218a911f7d062ef5d42f0fe22a24ee8a9fca50f8d7bd86c89b8a6678"];
+        [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"device_token" useinfo:@"73135faba1c97b4c6e17de2f5d50b7afac5ace2f449f62ded01517511a9b8ea1"];
     }
     
     
@@ -295,7 +295,7 @@
     NSString *token00001 = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:@"device_token"];
     if(!STRVALID(token00001))
     {
-        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"17055f34cae68e9d99abed13cedf99ba1ece1b819f2dc61b8b075fc68d67e03b"];
+        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"8458fcc8ca9f9a69209f330abd22f20b2de2e4596f2c2bd2276b39405bcd2ed7"];
     }
     
 
