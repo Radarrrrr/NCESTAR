@@ -16,6 +16,9 @@
 #define MSG_TYPE_ATTENTION      @"attention"    //提醒注意信息
 
 
+//列表时间区分空白间隔
+#define MSGLIST_TIME_BLOCK_DELTA 600   
+
 
 #pragma mark - 
 #pragma mark 远程通知相关
