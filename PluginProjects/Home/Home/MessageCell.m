@@ -241,8 +241,11 @@
     
     
     //根据本条信息和上条信息的时间差，决定是否增加空白，以便把聊天记录分块显示
-    
-    
+    BOOL needsBlank = [self checkNeedsBlankForMsgData:data];
+    if(needsBlank)
+    {
+        height += 25;
+    }
     
         
     //最下面这段用来给DDTableView容器使用，无须更改。
@@ -302,14 +305,14 @@
 //}
 
 
-- (BOOL)checkNeedsBlankForNotifytoken:(id)data
+- (BOOL)checkNeedsBlankForMsgData:(id)data
 {
     //根据notifyToken指定的消息，来判断这条消息与上一条消息之间是否需要添加分块空白
     if(!data) return NO;
     
     //获取本条信息的check时间
     NSString *myCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:data];
-    if(!myCheckTime) 
+    if(!STRVALID(myCheckTime)) 
     {
         myCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:data];
     }
@@ -320,16 +323,13 @@
     NSArray *allMsgs = [[DataCenter sharedCenter] getAllMessages]; //时间正序的，最新的在最后面
     if(!ARRAYVALID(allMsgs)) return NO;
     
-    NSArray* reversedArray = [[allMsgs reverseObjectEnumerator] allObjects];
-    NSArray *showMsgs = [NSArray arrayWithArray:reversedArray]; //时间倒序，最新的在最前面，和列表显示相同顺序
-    
     //定位本条信息
     NSInteger myindex = -1;
     NSString *mytoken = (NSString*)[DDFunction getValueForKey:@"notifytoken" inData:data];
     
-    for(int i=0; i<[showMsgs count]; i++)
+    for(int i=0; i<[allMsgs count]; i++)
     {
-        id msg = [showMsgs objectAtIndex:i];
+        id msg = [allMsgs objectAtIndex:i];
         NSString *token = (NSString*)[DDFunction getValueForKey:@"notifytoken" inData:msg];
         
         if(STRVALID(token) && [token isEqualToString:mytoken])
@@ -339,18 +339,18 @@
         }
     }
     
-    if(myindex == -1) return NO;
+    if(myindex <= 0) return NO;
+    
     
     //找到本条信息的上一条
-    NSInteger preindex = myindex + 1;
-    if(preindex >= showMsgs.count) return NO;
-    
-    id preMsg = [showMsgs objectAtIndex:preindex];
+    NSInteger preindex = myindex - 1;    
+    id preMsg = [allMsgs objectAtIndex:preindex];
     if(!preMsg) return NO;
+
     
     //获取上一条信息的checktime
     NSString *preCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:preMsg];
-    if(!preCheckTime) 
+    if(!STRVALID(preCheckTime)) 
     {
         preCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:preMsg];
     }
@@ -358,8 +358,8 @@
     if(!STRVALID(preCheckTime)) return NO;
     
     //对比myCheckTime和preCheckTime，判断是否需要添加时间块空白
-    NSDate *mydate  = [DDFunction dateFromString:myCheckTime useFormat:@"MM-dd HH:mm"];
-    NSDate *predate = [DDFunction dateFromString:preCheckTime useFormat:@"MM-dd HH:mm"];
+    NSDate *mydate  = [DDFunction dateFromString:myCheckTime useFormat:@"YY-MM-dd HH:mm:ss"];
+    NSDate *predate = [DDFunction dateFromString:preCheckTime useFormat:@"YY-MM-dd HH:mm:ss"];
     
     NSTimeInterval delta = [mydate timeIntervalSinceDate:predate];
     if(delta >= MSGLIST_TIME_BLOCK_DELTA)
