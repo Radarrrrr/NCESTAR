@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, copy)   NSString *selfUserId; 
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *blankLabel;
 
 @end
 
@@ -87,8 +88,15 @@
         [self.contentView addSubview:_timeLabel];
         
         
-        
-        
+        //add lastBlank date
+        self.blankLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_backView.frame)+8, SCR_WIDTH, 20)];
+        _blankLabel.backgroundColor = [UIColor clearColor];
+        _blankLabel.userInteractionEnabled = NO;
+        _blankLabel.textAlignment = NSTextAlignmentCenter;
+        _blankLabel.textColor = RGBS(200);
+        _blankLabel.font = DDFONT(12);
+        _blankLabel.text = nil;
+        [self.contentView addSubview:_blankLabel];
     
     }
     return self;
@@ -240,11 +248,21 @@
     float height = backHeight + 8;
     
     
+    //修改空白时间区域的位置
+    CGRect bframe = _blankLabel.frame;
+    bframe.origin.y = CGRectGetMaxY(_backView.frame)+8;
+    _blankLabel.frame = bframe;
+    
     //根据本条信息和上条信息的时间差，决定是否增加空白，以便把聊天记录分块显示
-    BOOL needsBlank = [self checkNeedsBlankForMsgData:data];
-    if(needsBlank)
+    NSString *blankStr = [self checkNeedsBlankForMsgData:data];
+    if(STRVALID(blankStr))
     {
-        height += 25;
+        height += 20;
+        _blankLabel.text = blankStr;
+    }
+    else
+    {
+        _blankLabel.text = nil;
     }
     
         
@@ -305,10 +323,11 @@
 //}
 
 
-- (BOOL)checkNeedsBlankForMsgData:(id)data
+
+- (NSString *)checkNeedsBlankForMsgData:(id)data
 {
     //根据notifyToken指定的消息，来判断这条消息与上一条消息之间是否需要添加分块空白
-    if(!data) return NO;
+    if(!data) return nil;
     
     //获取本条信息的check时间
     NSString *myCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:data];
@@ -317,11 +336,11 @@
         myCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:data];
     }
     
-    if(!STRVALID(myCheckTime)) return NO;
+    if(!STRVALID(myCheckTime)) return nil;
     
     //获取本条的前一条信息的check时间
     NSArray *allMsgs = [[DataCenter sharedCenter] getAllMessages]; //时间正序的，最新的在最后面
-    if(!ARRAYVALID(allMsgs)) return NO;
+    if(!ARRAYVALID(allMsgs)) return nil;
     
     //定位本条信息
     NSInteger myindex = -1;
@@ -339,14 +358,14 @@
         }
     }
     
-    if(myindex <= 0) return NO;
+    if(myindex <= 0) return nil;
     
     
     //找到本条信息的上一条
     NSInteger preindex = myindex - 1;    
     id preMsg = [allMsgs objectAtIndex:preindex];
-    if(!preMsg) return NO;
-
+    if(!preMsg) return nil;
+    
     
     //获取上一条信息的checktime
     NSString *preCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:preMsg];
@@ -355,7 +374,7 @@
         preCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:preMsg];
     }
     
-    if(!STRVALID(preCheckTime)) return NO;
+    if(!STRVALID(preCheckTime)) return nil;
     
     //对比myCheckTime和preCheckTime，判断是否需要添加时间块空白
     NSDate *mydate  = [DDFunction dateFromString:myCheckTime useFormat:@"YY-MM-dd HH:mm:ss"];
@@ -364,11 +383,78 @@
     NSTimeInterval delta = [mydate timeIntervalSinceDate:predate];
     if(delta >= MSGLIST_TIME_BLOCK_DELTA)
     {
-        return YES;
+        //如果时间差超过了预设，则返回上一次信息的日期
+        return [DDFunction stringFromDate:predate useFormat:@"YYYY-MM-dd"];
     }
     
-    return NO;
+    return nil;
 }
+
+
+//- (BOOL)checkNeedsBlankForMsgData:(id)data
+//{
+//    //根据notifyToken指定的消息，来判断这条消息与上一条消息之间是否需要添加分块空白
+//    if(!data) return NO;
+//    
+//    //获取本条信息的check时间
+//    NSString *myCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:data];
+//    if(!STRVALID(myCheckTime)) 
+//    {
+//        myCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:data];
+//    }
+//    
+//    if(!STRVALID(myCheckTime)) return NO;
+//    
+//    //获取本条的前一条信息的check时间
+//    NSArray *allMsgs = [[DataCenter sharedCenter] getAllMessages]; //时间正序的，最新的在最后面
+//    if(!ARRAYVALID(allMsgs)) return NO;
+//    
+//    //定位本条信息
+//    NSInteger myindex = -1;
+//    NSString *mytoken = (NSString*)[DDFunction getValueForKey:@"notifytoken" inData:data];
+//    
+//    for(int i=0; i<[allMsgs count]; i++)
+//    {
+//        id msg = [allMsgs objectAtIndex:i];
+//        NSString *token = (NSString*)[DDFunction getValueForKey:@"notifytoken" inData:msg];
+//        
+//        if(STRVALID(token) && [token isEqualToString:mytoken])
+//        {
+//            myindex = i;
+//            break;
+//        }
+//    }
+//    
+//    if(myindex <= 0) return NO;
+//    
+//    
+//    //找到本条信息的上一条
+//    NSInteger preindex = myindex - 1;    
+//    id preMsg = [allMsgs objectAtIndex:preindex];
+//    if(!preMsg) return NO;
+//
+//    
+//    //获取上一条信息的checktime
+//    NSString *preCheckTime = (NSString*)[DDFunction getValueForKey:@"receivetime" inData:preMsg];
+//    if(!STRVALID(preCheckTime)) 
+//    {
+//        preCheckTime = (NSString*)[DDFunction getValueForKey:@"sendtime" inData:preMsg];
+//    }
+//    
+//    if(!STRVALID(preCheckTime)) return NO;
+//    
+//    //对比myCheckTime和preCheckTime，判断是否需要添加时间块空白
+//    NSDate *mydate  = [DDFunction dateFromString:myCheckTime useFormat:@"YY-MM-dd HH:mm:ss"];
+//    NSDate *predate = [DDFunction dateFromString:preCheckTime useFormat:@"YY-MM-dd HH:mm:ss"];
+//    
+//    NSTimeInterval delta = [mydate timeIntervalSinceDate:predate];
+//    if(delta >= MSGLIST_TIME_BLOCK_DELTA)
+//    {
+//        return YES;
+//    }
+//    
+//    return NO;
+//}
 
 
 @end
