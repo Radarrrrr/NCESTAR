@@ -87,6 +87,7 @@ static float inputLastPosition;
         _inputField.borderStyle = UITextBorderStyleRoundedRect;
         _inputField.returnKeyType = UIReturnKeySend;
         _inputField.delegate = self;
+        _inputField.placeholder = @"直接发送呼叫";
         [_containerView addSubview:_inputField];
         
         //添加拉动条
@@ -231,6 +232,10 @@ static float inputLastPosition;
         [self pushMessage:message attach:nil msgtype:MSG_TYPE_MESSAGE];
                 
         return YES;
+    }
+    else
+    {
+        [self pushMessage:@"求关注" attach:nil msgtype:MSG_TYPE_ATTENTION];
     }
     
     return NO;
