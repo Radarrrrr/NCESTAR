@@ -83,13 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestNCEDeom/AppDelegate.m"
-            timestampString = "543648159.724974"
+            filePath = "PluginProjects/Home/Home/HomeViewController.m"
+            timestampString = "543653083.409619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "-createUsers"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "-settingAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

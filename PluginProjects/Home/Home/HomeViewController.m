@@ -80,6 +80,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     self.myfaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _myfaceBtn.frame = CGRectMake(-6, 7, 30, 30);
     [DDFunction addRadiusToView:_myfaceBtn radius:CGRectGetWidth(_myfaceBtn.frame)/2];
+    [_myfaceBtn addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
     [peoplesV addSubview:_myfaceBtn];
     [self changeMyInfomation];
     
@@ -220,6 +221,11 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     self.pushToUserID = touserid;
 }
 
+
+- (void)settingAction:(id)sender
+{
+    
+}
 
 
 - (void)addMsgAction:(id)sender
