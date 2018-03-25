@@ -20,6 +20,9 @@
 		0C35221C1DEFD54300D9DBEF /* launch_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C35221B1DEFD54300D9DBEF /* launch_image@2x.jpg */; };
 		0C3522451DF5586800D9DBEF /* attach_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3522441DF5586800D9DBEF /* attach_image.png */; };
 		0C4F05F31EDA560400240092 /* Purr.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F05F21EDA560400240092 /* Purr.aiff */; };
+		0C7B9404206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
+		0C7B9405206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
+		0C7B9406206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
 		0C879BBC1DD468CF00C3E86E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBB1DD468CF00C3E86E /* main.m */; };
 		0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBE1DD468CF00C3E86E /* AppDelegate.m */; };
 		0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BC11DD468CF00C3E86E /* ViewController.m */; };
@@ -134,6 +137,8 @@
 		0C35221E1DF0065600D9DBEF /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		0C3522441DF5586800D9DBEF /* attach_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attach_image.png; sourceTree = "<group>"; };
 		0C4F05F21EDA560400240092 /* Purr.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Purr.aiff; sourceTree = "<group>"; };
+		0C7B9402206783D700B4B296 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		0C7B9403206783D700B4B296 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0C879BB71DD468CF00C3E86E /* TestNCEDeom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestNCEDeom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C879BBB1DD468CF00C3E86E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C879BBD1DD468CF00C3E86E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -287,6 +292,15 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		0C7B93FE206783A200B4B296 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				0C7B9402206783D700B4B296 /* SettingViewController.h */,
+				0C7B9403206783D700B4B296 /* SettingViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		0C879BAE1DD468CF00C3E86E = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				0C17713C1E2F47C0002FC539 /* PluginPlatform */,
+				0C7B93FE206783A200B4B296 /* Setting */,
 				0C879BBD1DD468CF00C3E86E /* AppDelegate.h */,
 				0C879BBE1DD468CF00C3E86E /* AppDelegate.m */,
 				0C119B631E7A3BDD002ED007 /* DDRouter.h */,
@@ -753,6 +768,7 @@
 				0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */,
 				0C119B651E7A3BDD002ED007 /* DDRouter.m in Sources */,
 				0C879BBC1DD468CF00C3E86E /* main.m in Sources */,
+				0C7B9404206783D700B4B296 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +777,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C879BDE1DD4692900C3E86E /* NotificationViewController.m in Sources */,
+				0C7B9406206783D700B4B296 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8B17BB1DED5E3800FC3305 /* NotificationService.m in Sources */,
+				0C7B9405206783D700B4B296 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,6 +32,11 @@
     _mainNav.navigationBar.translucent = NO; //不要导航条模糊，为了让页面从导航条下部是0开始，如果为YES，则从屏幕顶部开始是0
     self.window.rootViewController = _mainNav;
     
+    //设定主导航的返回按钮为“返回”
+    _homeVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; 
+    _mainNav.navigationBar.tintColor = DDCOLOR_BLUE;
+    [_mainNav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : DDCOLOR_TEXT_B}];
+    
     
     //服务器连接状态,暂时注释掉不删除
 //    //添加状态条上的连接状态

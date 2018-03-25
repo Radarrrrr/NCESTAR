@@ -8,7 +8,8 @@
 
 /* 支持的linkURL字典：
 
- connectapns://disconnectneed=0      //连接APNs服务器，disconnectneed参数表示是否需要先断开连接再重连 0/1
+ connectapns://disconnectneed=0     //连接APNs服务器，disconnectneed参数表示是否需要先断开连接再重连 0/1
+ setting://                         //唤起setting页面
 
 */
  

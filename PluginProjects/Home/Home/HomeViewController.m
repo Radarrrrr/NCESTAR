@@ -51,7 +51,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     //self.navigationItem.title = @"HOME";
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.messageArray = [[NSMutableArray alloc] init];
@@ -82,6 +82,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     [DDFunction addRadiusToView:_myfaceBtn radius:CGRectGetWidth(_myfaceBtn.frame)/2];
     [_myfaceBtn addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
     [peoplesV addSubview:_myfaceBtn];
+    
     [self changeMyInfomation];
     
     self.tofaceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -224,7 +225,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
 
 - (void)settingAction:(id)sender
 {
-    
+    [DDRouter actionForLinkURL:@"setting://"];
 }
 
 
@@ -507,8 +508,9 @@ static BOOL stateViewShowing = NO;
     NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
     
     UIImage *faceImg = [self faceImageForUserId:myuserid];
-    [_myfaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal];
+    [_myfaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal]; 
 }
+
 - (void)changeToUserInfomation
 {
     //改变发送对象信息    

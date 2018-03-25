@@ -8,6 +8,8 @@
 
 #import "DDRouter.h"
 #import "AppDelegate.h"
+#import "SettingViewController.h"
+
 
 @implementation DDRouter
 
@@ -93,7 +95,7 @@
     if(!STRVALID(linkURL)) return;
     
     AppDelegate *appDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    UINavigationController * navController  = (UINavigationController *)appDele.mainNav;
+    UINavigationController *navController  = (UINavigationController *)appDele.mainNav;
     UIViewController *topVC = navController.topViewController;
     
     //全部小写处理，去掉回车和前后空白
@@ -108,7 +110,12 @@
         NSString *disconnectneed = [self getProperty:@"disconnectneed" formLinkURL:linkURL];
         [appDele connectAPNsServer:disconnectneed];
     }
-    
+    else if([linkURL hasPrefix:@"setting://"]) //进入setting页面
+    {
+        //setting://
+        SettingViewController *settingVC = [[SettingViewController alloc] init];
+        [navController pushViewController:settingVC animated:YES];
+    }
 
     
 }
