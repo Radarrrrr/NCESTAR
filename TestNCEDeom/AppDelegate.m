@@ -295,7 +295,7 @@
     NSString *token00001 = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:@"device_token"];
     if(!STRVALID(token00001))
     {
-        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"8458fcc8ca9f9a69209f330abd22f20b2de2e4596f2c2bd2276b39405bcd2ed7"];
+        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"bfc5314537797747e3c63b2f67610b92b5825028dd80724fc95543e4a86e6793"];
     }
     
 

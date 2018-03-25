@@ -70,6 +70,10 @@ static float inputLastPosition;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeAction:)];
         [_backView addGestureRecognizer:tapGesture];
         
+        UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeAction:)];
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionDown;
+        [_backView addGestureRecognizer:swipeGesture];
+        
         
         //添加输入内容浮层
         self.containerView = [[DDMoveableView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, MsgInputView_container_height)];
@@ -104,6 +108,10 @@ static float inputLastPosition;
         
     }
     return self;
+}
+
+- (void)dealloc
+{
 }
 
 - (void)moveContainerViewToY:(float)toY
@@ -270,7 +278,7 @@ static float inputLastPosition;
         
         if(report.status == PTPushReportStatusPushSuccess)
         {
-            _inputField.text = nil;
+//            _inputField.text = nil;
             
             //存储发送成功的消息字典 {"notifyid":"xxx", "receivetime":"xxxx", "payload":{xxxxxx}}
             NSMutableDictionary *notiDic = [[NSMutableDictionary alloc] init];
@@ -291,7 +299,10 @@ static float inputLastPosition;
         }
     }];
     
-    [self closeAction:nil];
+    _inputField.text = nil;
+    
+    //发送以后暂时不做关闭
+    //[self closeAction:nil];
 }
 
 - (NSDictionary *)assemblePayload:(NSString *)message attach:(NSString *)attach msgtype:(NSString*)msgtype//attach就是一个url，无论上传了什么都是一个url

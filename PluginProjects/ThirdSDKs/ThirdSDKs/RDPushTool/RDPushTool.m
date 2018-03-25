@@ -376,7 +376,12 @@
     
     //获取推送结果
     dispatch_async(_serial, ^{
-        NSUInteger failed = [_hub pushPayload:payload token:token]; 
+        NSUInteger failed = 1;
+        if(_hub)
+        {
+            failed = [_hub pushPayload:payload token:token]; 
+        }
+        
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
         dispatch_after(popTime, _serial, ^(void){
             
@@ -430,7 +435,7 @@
         else
         {
             //如果推送失败，则重连一次，重新推送
-            [sSelf disconnect];
+            [sSelf disconnect]; 
             [sSelf connect:^(PTConnectReport *connectReport) {
                 
                 __strong RDPushTool *ssSelf = sSelf;
