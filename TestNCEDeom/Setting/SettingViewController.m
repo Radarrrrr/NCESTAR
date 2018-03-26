@@ -79,30 +79,30 @@
     if(!indexPath) return;
     
     switch (indexPath.row) {
-        case 0: //头像
+        case 0: //头像+昵称+签名
             {
-                cell.textLabel.text = @"头像";
-                //cell.imageView.image = [_myInfoDic objectForKey:@"face_id"];
+                NSString *faceid = [_myInfoDic objectForKey:@"face_id"];
+                NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
+                cell.imageView.image = [UIImage imageNamed:facepicN];
+                
+                cell.textLabel.text = [_myInfoDic objectForKey:@"nick_name"];
+                cell.detailTextLabel.text = [_myInfoDic objectForKey:@"introduce"];
             }
             break;
-        case 1: //昵称
-        {
-            cell.textLabel.text = @"昵称";
-        }
-            break;
-        case 2: //签名
-        {
-            cell.textLabel.text = @"签名";
-        }
-            break;
-        case 3: //二维码
+        case 1: //二维码
         {
             cell.textLabel.text = @"我的二维码";
+        }
+            break;
+        case 2: //其他
+        {
+            cell.textLabel.text = @"其他";
         }
             break;
         default:
             break;
     }
+
 }
 
 
@@ -118,7 +118,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     

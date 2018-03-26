@@ -53,7 +53,7 @@
         self.faceView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_backView.frame)+8, CGRectGetMaxY(_backView.frame)-8-MessageCell_face_width, MessageCell_face_width, MessageCell_face_width)];
         _faceView.backgroundColor = [UIColor clearColor];
         [DDFunction addRadiusToView:_faceView radius:15];
-        _faceView.image = [UIImage imageNamed:@"face_star.png" forme:self];
+        _faceView.image = [UIImage imageNamed:@"face_star.png"];
         [self.contentView addSubview:_faceView];
   
 		//add _tLabel
@@ -164,11 +164,11 @@
         if(!STRVALID(faceid)) faceid = @"star";
         
         NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-        _faceView.image = [UIImage imageNamed:facepicN forme:self];
+        _faceView.image = [UIImage imageNamed:facepicN];
     }
     else
     {
-        _faceView.image = [UIImage imageNamed:@"face_star.png" forme:self];
+        _faceView.image = [UIImage imageNamed:@"face_star.png"];
     }
     
     

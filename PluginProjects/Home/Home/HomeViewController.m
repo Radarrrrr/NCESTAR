@@ -499,7 +499,7 @@ static BOOL stateViewShowing = NO;
     }
     
     NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-    return [UIImage imageNamed:facepicN forme:self];
+    return [UIImage imageNamed:facepicN];
 }
 
 - (void)changeMyInfomation
