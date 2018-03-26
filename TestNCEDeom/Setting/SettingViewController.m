@@ -7,6 +7,8 @@
 //
 
 #import "SettingViewController.h"
+#import "MyQRCodeVC.h"
+
 
 @interface SettingViewController ()
 
@@ -30,16 +32,14 @@
     self.view.backgroundColor = DDCOLOR_BACK_GROUND;
     self.navigationItem.title = @"我的设置";
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil]; 
+    
+    //获取我的信息
     self.myInfoDic = [[DataCenter sharedCenter] myInfoOnItem:nil];
     if(!_myInfoDic)
     {
         self.myInfoDic = [[NSDictionary alloc] init];
     }
-    
-//    if(DICTIONARYVALID(_myInfoDic))
-//    {
-//        self.navigationItem.title = [_myInfoDic objectForKey:@"nick_name"];
-//    }
     
     //添加列表
     self.infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64) style:UITableViewStylePlain];
@@ -105,7 +105,29 @@
 
 }
 
-
+- (void)jumpToFuncPageForIndexPath:(NSIndexPath *)indexPath
+{
+    if(!indexPath) return;
+    
+    switch (indexPath.row) {
+        case 0: //头像+昵称+签名
+        {
+        }
+            break;
+        case 1: //二维码
+        {
+            MyQRCodeVC *myqrVC = [[MyQRCodeVC alloc] init];
+            [self.navigationController pushViewController:myqrVC animated:YES];
+        }
+            break;
+        case 2: //其他
+        {
+        }
+            break;
+        default:
+            break;
+    }
+}
 
 
 
@@ -142,6 +164,7 @@
 #pragma mark Table View Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self jumpToFuncPageForIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
