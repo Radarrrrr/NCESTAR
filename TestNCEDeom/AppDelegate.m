@@ -33,7 +33,7 @@
     self.window.rootViewController = _mainNav;
     
     //设定主导航的返回按钮为“返回”
-    _homeVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; 
+    //_homeVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; 
     _mainNav.navigationBar.tintColor = DDCOLOR_BLUE;
     [_mainNav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : DDCOLOR_TEXT_B}];
     
@@ -281,34 +281,36 @@
     [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"face_id" useinfo:@"wang"];
     [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"introduce" useinfo:@"我是宁小盒，天天旺旺旺"];
     [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"relation" useinfo:@"home"];
-
-    //如果已经keychain里边已经有token了，就不再写入了
-    NSString *token00000 = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:@"device_token"];
-    if(!STRVALID(token00000))
-    {
-        [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"device_token" useinfo:@"73135faba1c97b4c6e17de2f5d50b7afac5ace2f449f62ded01517511a9b8ea1"];
-    }
-    
     
     //更新用户信息 for user_id = @"00001"
     [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"nick_name" useinfo:@"天气不错"];
     [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"face_id" useinfo:@"miao2"];
     [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"introduce" useinfo:@"哦呦，今天天气不错哦"];
     [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"relation" useinfo:@"home"];
-
-    //如果已经keychain里边已经有token了，就不再写入了
-    NSString *token00001 = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:@"device_token"];
-    if(!STRVALID(token00001))
-    {
-        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"bfc5314537797747e3c63b2f67610b92b5825028dd80724fc95543e4a86e6793"];
-    }
     
 
-    //设定自己是哪一个，只用一次，以后直接注释掉不用再写了，第一次安装以后，已经存储到keychain里边了，自己就是00001，宝就是00000
+    //不从这里写token了，直接从本地获取并存储
+//    //如果已经keychain里边已经有token了，就不再写入了
+//    NSString *token00000 = [[DataCenter sharedCenter] userInfoForId:@"00000" onitem:@"device_token"];
+//    if(!STRVALID(token00000))
+//    {
+//        [[DataCenter sharedCenter] updateUserInfo:@"00000" onitem:@"device_token" useinfo:@"73135faba1c97b4c6e17de2f5d50b7afac5ace2f449f62ded01517511a9b8ea1"];
+//    }
+//    
+//    //如果已经keychain里边已经有token了，就不再写入了
+//    NSString *token00001 = [[DataCenter sharedCenter] userInfoForId:@"00001" onitem:@"device_token"];
+//    if(!STRVALID(token00001))
+//    {
+//        [[DataCenter sharedCenter] updateUserInfo:@"00001" onitem:@"device_token" useinfo:@"bfc5314537797747e3c63b2f67610b92b5825028dd80724fc95543e4a86e6793"];
+//    }
+    
+
+    //设定自己是哪一个，只用一次，以后直接注释掉不用再写了，第一次安装以后，已经存储到keychain里边了，自己就是00001，宝就是00000，除非还新机器或者还原系统，才需要开启这两个方法了
     //[[DataCenter sharedCenter] onceInitMyUserID:@"00000"];  //宝用,只写这个就够了，因为我自己可以真机调试安装
     //[[DataCenter sharedCenter] onceInitMyUserID:@"00001"];  //我自己用
 }
 //-----------------------------------------------------------------------------------------------------------------------
+
 
 
 
