@@ -71,7 +71,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     
     
     //左上角添加自己头像和好友头像
-    UIView *peoplesV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 350, 44)];
+    UIView *peoplesV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH-74, 44)];
     peoplesV.backgroundColor = [UIColor clearColor];
     
     UIBarButtonItem *friendItem = [[UIBarButtonItem alloc] initWithCustomView:peoplesV];
@@ -110,11 +110,9 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     _connectStatusDots.duration = 0.2;
     [peoplesV addSubview:_connectStatusDots];
     
-    
-    
     //右上角添加写推送按钮
-    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMsgAction:)];
-    self.navigationItem.rightBarButtonItem = addItem;
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(moreAction:)];
+    self.navigationItem.rightBarButtonItem = moreItem;
 
     //添加聊天列表
     self.listTable = [[DDTableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT-64)];
@@ -137,9 +135,9 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
     
     
     //添加写信息按钮
-    self.writeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _writeBtn.frame = CGRectMake(SCR_WIDTH-write_button_width, SCR_HEIGHT-64-write_button_width, write_button_width, write_button_width);
-    [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png" forme:self] forState:UIControlStateNormal];
+    [_writeBtn setBackgroundImage:[UIImage imageNamed:@"face_star.png"] forState:UIControlStateNormal];
     [_writeBtn addTarget:self action:@selector(writeMsgAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_writeBtn];
     
@@ -229,10 +227,10 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
 }
 
 
-- (void)addMsgAction:(id)sender
+- (void)moreAction:(id)sender
 {    
-    RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
-    [self.navigationController pushViewController:simuVC animated:YES];
+    //先进入二维码扫描器
+    
 }
 
 - (void)writeMsgAction:(id)sender

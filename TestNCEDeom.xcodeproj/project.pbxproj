@@ -21,8 +21,6 @@
 		0C3522451DF5586800D9DBEF /* attach_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3522441DF5586800D9DBEF /* attach_image.png */; };
 		0C4F05F31EDA560400240092 /* Purr.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F05F21EDA560400240092 /* Purr.aiff */; };
 		0C7B9404206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
-		0C7B9405206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
-		0C7B9406206783D700B4B296 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B9403206783D700B4B296 /* SettingViewController.m */; };
 		0C7B941E2068BCDF00B4B296 /* face_wang.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C7B94162068BCDE00B4B296 /* face_wang.png */; };
 		0C7B941F2068BCDF00B4B296 /* face_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C7B94172068BCDE00B4B296 /* face_star.png */; };
 		0C7B94202068BCDF00B4B296 /* face_ma.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C7B94182068BCDE00B4B296 /* face_ma.png */; };
@@ -814,7 +812,6 @@
 			files = (
 				0C879BDE1DD4692900C3E86E /* NotificationViewController.m in Sources */,
 				0C7B942A2068C2AA00B4B296 /* MyQRCodeVC.m in Sources */,
-				0C7B9406206783D700B4B296 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,7 +821,6 @@
 			files = (
 				0C8B17BB1DED5E3800FC3305 /* NotificationService.m in Sources */,
 				0C7B94292068C2AA00B4B296 /* MyQRCodeVC.m in Sources */,
-				0C7B9405206783D700B4B296 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

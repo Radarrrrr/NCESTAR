@@ -116,6 +116,12 @@
         SettingViewController *settingVC = [[SettingViewController alloc] init];
         [navController pushViewController:settingVC animated:YES];
     }
+    else if([linkURL hasPrefix:@"pushsimulator://"]) //打开推送模拟器
+    {
+        //pushsimulator://
+        RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
+        [navController pushViewController:simuVC animated:YES];
+    }
 
     
 }

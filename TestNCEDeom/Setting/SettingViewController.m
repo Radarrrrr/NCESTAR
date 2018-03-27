@@ -96,7 +96,7 @@
             break;
         case 2: //其他
         {
-            cell.textLabel.text = @"其他";
+            cell.textLabel.text = @"推送调试模拟器";
         }
             break;
         default:
@@ -120,8 +120,9 @@
             [self.navigationController pushViewController:myqrVC animated:YES];
         }
             break;
-        case 2: //其他
+        case 2: //推送调试模拟器
         {
+            [DDRouter actionForLinkURL:@"pushsimulator://"];
         }
             break;
         default:

@@ -160,7 +160,7 @@
 //    }
     
     //传给首页
-    if(_homeVC && _mainNav.topViewController == _homeVC)
+    if(_homeVC)
     {
         [_homeVC changeConnectStatus:report.status];
     }
