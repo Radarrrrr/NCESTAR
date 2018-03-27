@@ -180,6 +180,15 @@
         
     } completion:^(BOOL finished) {
         
+        //完成一个圆点闪动，就检测一次是否还要继续闪动
+        //如果需要停止闪动
+        if(!_dotsFlashing)
+        {
+            [self showAllDots];
+            return;
+        }
+        
+        //还需要继续闪动
         if(index+1 < _amount)
         {
             //如果还有下一个,继续动画
@@ -188,7 +197,7 @@
         else
         {
             //如果是最后一个完成了
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:0.0 animations:^{
                     
                 //先全部隐藏
                 [self hideAllDots];
@@ -201,9 +210,7 @@
                 }
                 else
                 {
-                    [UIView animateWithDuration:0.5 animations:^{
-                        [self showAllDots];
-                    }];
+                    [self showAllDots];
                 }
                     
             }];
