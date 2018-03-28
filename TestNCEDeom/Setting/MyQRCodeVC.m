@@ -34,7 +34,7 @@
     }
     
     //添加二维码容器
-    self.codeView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 30, SCR_WIDTH-60, SCR_WIDTH-60)];
+    self.codeView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, SCR_WIDTH-100, SCR_WIDTH-100)];
     [self.view addSubview:_codeView];
     
     //设定二维码
@@ -55,9 +55,7 @@
     */
     
     //获取头像
-    NSString *faceid   = [_myInfoDic objectForKey:@"face_id"];
-    NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-    UIImage *faceImage = [UIImage imageNamed:facepicN];
+    UIImage *faceImage = [[DataCenter sharedCenter] faceImageForMine];
     
     //获取二维码串
     NSString *codeString = [DDFunction jsonStringFormData:_myInfoDic];

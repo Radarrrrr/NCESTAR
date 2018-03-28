@@ -338,6 +338,38 @@
 }
 
 
+- (UIImage *)faceImageForMine
+{
+    NSString *myUserid = [self myInfoOnItem:@"user_id"];
+    UIImage *faceImg = [self createFaceImageForUserId:myUserid];
+    return faceImg;
+}
+- (UIImage *)faceImageForUser:(NSString *)userid
+{
+    UIImage *faceImg = [self createFaceImageForUserId:userid];
+    return faceImg;
+}
+
+
+//根据userid获取对应的头像image
+- (UIImage*)createFaceImageForUserId:(NSString*)userid
+{
+    NSString *faceid = @"star";
+    
+    if(STRVALID(userid)) 
+    {
+        NSString *ufaceid = [[DataCenter sharedCenter] userInfoForId:userid onitem:@"face_id"];
+        if(STRVALID(ufaceid)) 
+        {
+            faceid = ufaceid;
+        }
+    }
+    
+    NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
+    return [UIImage imageNamed:facepicN];
+}
+
+
 
 
 @end

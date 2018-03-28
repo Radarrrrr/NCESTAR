@@ -160,11 +160,7 @@
     //修改发送人的头像
     if(STRVALID(fromUserId))
     {
-        NSString *faceid = [[DataCenter sharedCenter] userInfoForId:fromUserId onitem:@"face_id"];
-        if(!STRVALID(faceid)) faceid = @"star";
-        
-        NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-        _faceView.image = [UIImage imageNamed:facepicN];
+        _faceView.image = [[DataCenter sharedCenter] faceImageForUser:fromUserId];
     }
     else
     {

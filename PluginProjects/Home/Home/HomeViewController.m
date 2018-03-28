@@ -483,36 +483,17 @@ static BOOL stateViewShowing = NO;
 
 
 #pragma mark - 修改导航条头像
-- (UIImage*)faceImageForUserId:(NSString*)userid
-{
-    NSString *faceid = @"star";
-    
-    if(STRVALID(userid)) 
-    {
-        NSString *ufaceid = [[DataCenter sharedCenter] userInfoForId:userid onitem:@"face_id"];
-        if(STRVALID(ufaceid)) 
-        {
-            faceid = ufaceid;
-        }
-    }
-    
-    NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-    return [UIImage imageNamed:facepicN];
-}
-
 - (void)changeMyInfomation
 {
     //改变自己信息
-    NSString *myuserid = [[DataCenter sharedCenter] myInfoOnItem:@"user_id"];
-    
-    UIImage *faceImg = [self faceImageForUserId:myuserid];
+    UIImage *faceImg = [[DataCenter sharedCenter] faceImageForMine];
     [_myfaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal]; 
 }
 
 - (void)changeToUserInfomation
 {
     //改变发送对象信息    
-    UIImage *faceImg = [self faceImageForUserId:_pushToUserID];
+    UIImage *faceImg = [[DataCenter sharedCenter] faceImageForUser:_pushToUserID];
     [_tofaceBtn setBackgroundImage:faceImg forState:UIControlStateNormal];
     
     NSString *nick = [[DataCenter sharedCenter] userInfoForId:_pushToUserID onitem:@"nick_name"];

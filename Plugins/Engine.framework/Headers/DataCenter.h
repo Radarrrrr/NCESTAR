@@ -105,6 +105,9 @@
 - (id)userInfoForId:(NSString*)userid onitem:(NSString*)itemName;//根据user_id获取用户的个人信息, 如果itemName为nil，则取出全部用户信息，如果不为空则取分项信息，例如：@"nick_name"
 
 
+- (UIImage *)faceImageForMine;                      //获取自己的头像图片
+- (UIImage *)faceImageForUser:(NSString *)userid;   //据user_id获取用户的头像图片
+
 
 @end
 

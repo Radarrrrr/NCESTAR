@@ -81,9 +81,7 @@
     switch (indexPath.row) {
         case 0: //头像+昵称+签名
             {
-                NSString *faceid = [_myInfoDic objectForKey:@"face_id"];
-                NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
-                cell.imageView.image = [UIImage imageNamed:facepicN];
+                cell.imageView.image = [[DataCenter sharedCenter] faceImageForMine];
                 
                 cell.textLabel.text = [_myInfoDic objectForKey:@"nick_name"];
                 cell.detailTextLabel.text = [_myInfoDic objectForKey:@"introduce"];
