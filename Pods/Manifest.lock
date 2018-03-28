@@ -17,6 +17,7 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - RDQRCodeTools (1.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -24,13 +25,15 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - FMDB
+  - RDQRCodeTools
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  RDQRCodeTools: 1ddcfc5309125de2571dcb9c108d735d5c8d7b30
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 700e6b867816def5d219348388a6a2aa2523f083
+PODFILE CHECKSUM: 75d132f236c766171f58f4cabbb6ed618c89a1c6
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0

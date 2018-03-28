@@ -1,0 +1,1 @@
+../../../RDQRCodeTools/RDQRCodeTools/RDQRCodeScaner.h

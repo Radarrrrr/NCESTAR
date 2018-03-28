@@ -26,6 +26,6 @@ target 'TestNCEDeom' do
 pod 'AFNetworking'
 pod 'FMDB'
 pod 'SDWebImage'
-pod 'MBProgressHUD'
+pod 'RDQRCodeTools'
 
 end
