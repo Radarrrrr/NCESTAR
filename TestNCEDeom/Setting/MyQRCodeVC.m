@@ -57,8 +57,12 @@
     //获取头像
     UIImage *faceImage = [[DataCenter sharedCenter] faceImageForMine];
     
+    //获取信息串
+    NSString *infoString = [DDFunction jsonStringFormData:_myInfoDic];
+    if(!STRVALID(infoString)) return;
+    
     //获取二维码串
-    NSString *codeString = [DDFunction jsonStringFormData:_myInfoDic];
+    NSString *codeString = [NSString stringWithFormat:@"friendcode://info=%@", infoString];
     
     //创建二维码
     UIImage *codeImage = [RDQRCodeCreator createQRCode:codeString withFace:faceImage];

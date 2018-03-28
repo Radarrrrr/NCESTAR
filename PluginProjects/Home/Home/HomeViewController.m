@@ -230,7 +230,7 @@ static BOOL needTriggerWating = NO;      //需要触发连接状态waiting 给ap
 - (void)moreAction:(id)sender
 {    
     //先进入二维码扫描器
-    
+    [DDRouter actionForLinkURL:@"qrscaner://"];
 }
 
 - (void)writeMsgAction:(id)sender

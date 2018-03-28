@@ -9,13 +9,13 @@
 #import "DDRouter.h"
 #import "AppDelegate.h"
 #import "SettingViewController.h"
+#import "RDQRCodeScaner.h"
 
 
 @implementation DDRouter
 
 
 #pragma mark - 配套方法
-
 + (NSString*)valueForKey:(NSString *)key ofURL:(NSString*)url
 {
     if(!key || [key compare:@""] == NSOrderedSame) return nil;
@@ -87,6 +87,22 @@
     return property;
 }
 
++ (void)handleQRCode:(NSString*)qrcode
+{
+    if(!STRVALID(qrcode)) return;
+    
+    NSString *linkUrl = qrcode;
+    
+    //如果没有://的字样，则当作普通文字串处理，放到一个空白页面中显示
+    NSRange range = [qrcode rangeOfString:@"://"];
+    if(range.length == 0)
+    {
+        linkUrl = [NSString stringWithFormat:@"plaintext://text=%@", qrcode];
+    }
+    
+    [DDRouter actionForLinkURL:linkUrl];
+}
+
 
 
 #pragma mark - 控制器方法
@@ -122,7 +138,33 @@
         RDPushSimuVC *simuVC = [[RDPushSimuVC alloc] init];
         [navController pushViewController:simuVC animated:YES];
     }
-
+    else if([linkURL hasPrefix:@"qrscaner://"]) //打开二维码扫描器
+    {
+        //qrscaner://
+        [RDQRCodeScaner pushToOpenScanner:navController completion:^(NSString *qrcode) {
+            NSLog(@"二维码：%@", qrcode);
+            [self handleQRCode:qrcode];
+        }];
+    }
+    else if([linkURL hasPrefix:@"http://"] || [linkURL hasPrefix:@"https://"]) //http和https都直接开启web页面显示
+    {
+        //http:// & https://
+        //TO DO: //http和https都直接开启web页面显示
+        
+    }
+    else if([linkURL hasPrefix:@"plaintext://"]) //进入空白文字页面，用于二维码扫描以后直接显示二维码中的内容
+    {
+        //plaintext://text=xxxx
+        //TO DO: 进入空白文字页面，用于二维码扫描以后直接显示二维码中的内容
+        
+    }
+    else if([linkURL hasPrefix:@"friendcode://"]) //扫描二维码获得的好友信息，如果是已经添加的好友，则覆盖修改本地存储的信息
+    {
+        //friendcode://info=xxxx
+        //TO DO: ///扫描二维码获得的好友信息，如果是已经添加的好友，则覆盖修改本地存储的信息
+        
+    }
+     
     
 }
 
