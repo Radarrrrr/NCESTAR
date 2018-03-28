@@ -7,10 +7,12 @@
 //
 
 #import "MyQRCodeVC.h"
+#import "RDQRCodeCreator.h"
 
 @interface MyQRCodeVC ()
 
 @property (nonatomic, copy)   NSDictionary *myInfoDic; //自己的个人信息
+@property (nonatomic, strong) UIImageView *codeView; //二维码
 
 @end
 
@@ -31,8 +33,44 @@
         self.myInfoDic = [[NSDictionary alloc] init];
     }
     
+    //添加二维码容器
+    self.codeView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 30, SCR_WIDTH-60, SCR_WIDTH-60)];
+    [self.view addSubview:_codeView];
+    
+    //设定二维码
+    [self setMyCode];
+}
+
+- (void)setMyCode
+{
+    /*
+    @{
+      @"user_id":@"00000",
+      @"device_token":@"", 
+      @"nick_name":@"", 
+      @"face_id":@"", 
+      @"introduce":@"",
+      @"relation":@""
+      },
+    */
+    
+    //获取头像
+    NSString *faceid   = [_myInfoDic objectForKey:@"face_id"];
+    NSString *facepicN = [NSString stringWithFormat:@"face_%@.png", faceid];
+    UIImage *faceImage = [UIImage imageNamed:facepicN];
+    
+    //获取二维码串
+    NSString *codeString = [DDFunction jsonStringFormData:_myInfoDic];
+    
+    //创建二维码
+    UIImage *codeImage = [RDQRCodeCreator createQRCode:codeString withFace:faceImage];
+    
+    //设定
+    _codeView.image = codeImage;
     
 }
+
+
 
 
 @end

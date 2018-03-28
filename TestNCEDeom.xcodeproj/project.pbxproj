@@ -27,8 +27,6 @@
 		0C7B94212068BCDF00B4B296 /* face_miao2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C7B94192068BCDE00B4B296 /* face_miao2.png */; };
 		0C7B94222068BCDF00B4B296 /* face_miao1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C7B941A2068BCDE00B4B296 /* face_miao1.png */; };
 		0C7B94282068C2AA00B4B296 /* MyQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B94272068C2AA00B4B296 /* MyQRCodeVC.m */; };
-		0C7B94292068C2AA00B4B296 /* MyQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B94272068C2AA00B4B296 /* MyQRCodeVC.m */; };
-		0C7B942A2068C2AA00B4B296 /* MyQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B94272068C2AA00B4B296 /* MyQRCodeVC.m */; };
 		0C879BBC1DD468CF00C3E86E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBB1DD468CF00C3E86E /* main.m */; };
 		0C879BBF1DD468CF00C3E86E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BBE1DD468CF00C3E86E /* AppDelegate.m */; };
 		0C879BC21DD468CF00C3E86E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C879BC11DD468CF00C3E86E /* ViewController.m */; };
@@ -820,7 +818,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C879BDE1DD4692900C3E86E /* NotificationViewController.m in Sources */,
-				0C7B942A2068C2AA00B4B296 /* MyQRCodeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,7 +826,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8B17BB1DED5E3800FC3305 /* NotificationService.m in Sources */,
-				0C7B94292068C2AA00B4B296 /* MyQRCodeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
